@@ -123,6 +123,7 @@
       <DependentUpon>CBS_CLIDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="common\Access.cs" />
+    <Compile Include="common\clsCsvData.cs" />
     <Compile Include="common\clsDayItems.cs" />
     <Compile Include="common\clsKeyTab.cs" />
     <Compile Include="common\clsMyCar.cs" />

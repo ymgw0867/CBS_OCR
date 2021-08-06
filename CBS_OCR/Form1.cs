@@ -720,6 +720,9 @@ namespace CBS_OCR
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // キャプションにバージョンを追加 : 2021/08/06
+            this.Text += "   ver " + Application.ProductVersion;
+
             // フォーム最大値
             Utility.WindowsMaxSize(this, this.Width, this.Height);
 
@@ -743,14 +746,20 @@ namespace CBS_OCR
                 button15.Enabled = false;
             }
 
-            if (!IsConfigCsv())
+            if (!IsConfigCsv(out global.csvShainPath, out global.csvGenbaPath, out global.csvBmnPath))
             {
                 MessageBox.Show("CSVマスターのパスが環境設定に登録されていません。環境設定画面で登録してください", "マスターパス未登録", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
+            // CSVデータをDataSetに読み込む : 2021/08/06
+            global.dtShain = Utility.readCSV(global.csvShainPath, global.csvShainColumn);
+            global.dtGenba = Utility.readCSV(global.csvGenbaPath, global.csvGenbaColumn);
+            global.dtBmn   = Utility.readCSV(global.csvBmnPath,   global.csvBmnColumn);
+
             // 2021/08/05
             mdbAlter();
+            mdbAlter_local();   // 2021/0806
 
         }
 
@@ -1083,12 +1092,7 @@ namespace CBS_OCR
 
         ///---------------------------------------------------------------------
         /// <summary>
-        ///     2021/08/05 ローカルMDB 
-        ///     勤怠データ@その他休暇休職合計日数
-        ///     勤怠データ@看護休暇日数
-        ///     勤怠データ@介護休暇日数
-        ///     勤怠データ@その他の特別休暇日数
-        ///     倍精度浮動小数点型に変更 </summary>
+        ///     2021/08/05 共通MDB </summary>
         ///--------------------------------------------------------------------- 
         private void mdbAlter()
         {
@@ -1100,6 +1104,16 @@ namespace CBS_OCR
 
             try
             {
+                // 共通勤務票テーブルに「有休区分」フィールドを追加する : 2021/08/06
+                sqlSTRING = "ALTER TABLE 共通勤務票 ADD COLUMN 有休区分 INTEGER DEFAULT 0";
+                sCom.CommandText = sqlSTRING;
+                sCom.ExecuteNonQuery();
+
+                // 共通勤務票テーブルの「現場コード」を9桁に変更する : 2021/08/06
+                sqlSTRING = "ALTER TABLE 共通勤務票 ALTER COLUMN 現場コード TEXT(9)";
+                sCom.CommandText = sqlSTRING;
+                sCom.ExecuteNonQuery();
+
                 // 環境設定テーブルに「社員CSVデータパス」フィールドを追加する : 2021/08/05
                 sqlSTRING = "ALTER TABLE 環境設定 ADD COLUMN 社員CSVデータパス TEXT(255)";
                 sCom.CommandText = sqlSTRING;
@@ -1117,6 +1131,47 @@ namespace CBS_OCR
             }
             catch (Exception e)
             {
+                //MessageBox.Show(e.Message);
+                // 何もしない
+            }
+            finally
+            {
+                sCom.Connection.Close();
+            }
+        }
+
+        ///---------------------------------------------------------------------
+        /// <summary>
+        ///     2021/08/05 ローカルMDB </summary>
+        ///--------------------------------------------------------------------- 
+        private void mdbAlter_local()
+        {
+            // ローカルデータベース接続
+            OleDbCommand sCom = new OleDbCommand();
+            sCom.Connection = Utility.dbConnect_local();
+
+            string sqlSTRING = string.Empty;
+
+            try
+            {
+                // 勤務票明細テーブルの「現場コード」を9桁に変更する : 2021/08/06
+                sqlSTRING = "ALTER TABLE 勤務票明細 ALTER COLUMN 現場コード TEXT(9)";
+                sCom.CommandText = sqlSTRING;
+                sCom.ExecuteNonQuery();
+
+                // 勤務票明細テーブルに「有休区分」フィールドを追加する : 2021/08/06
+                sqlSTRING = "ALTER TABLE 勤務票明細 ADD COLUMN 有休区分 INTEGER DEFAULT 0";
+                sCom.CommandText = sqlSTRING;
+                sCom.ExecuteNonQuery();
+
+                // 警備報告書ヘッダテーブルの「現場コード」を9桁に変更する : 2021/08/06
+                sqlSTRING = "ALTER TABLE 警備報告書ヘッダ ALTER COLUMN 現場コード TEXT(9)";
+                sCom.CommandText = sqlSTRING;
+                sCom.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message);
                 // 何もしない
             }
             finally
@@ -1131,50 +1186,50 @@ namespace CBS_OCR
         /// <returns>
         ///     true: 登録済み, false: 未登録</returns>
         ///---------------------------------------------------------------------------------
-        private bool IsConfigCsv()
+        private bool IsConfigCsv(out string shainPath, out string genbaPath, out string bmnPath)
         {
             CBSDataSet1 dts = new CBSDataSet1();
             CBSDataSet1TableAdapters.環境設定TableAdapter adp = new CBSDataSet1TableAdapters.環境設定TableAdapter();
             adp.Fill(dts.環境設定);
 
-            string s_Csv = "";
-            string g_Csv = "";
-            string b_Csv = "";
+            shainPath = "";
+            genbaPath = "";
+            bmnPath   = "";
 
             foreach (var item in dts.環境設定.Where(a => a.ID == global.configKEY))
 	        {
                 // 社員CSVデータパス
                 if (item.Is社員CSVデータパスNull())
                 {
-                    s_Csv = "";
+                    shainPath = "";
                 }
                 else
                 {
-                    s_Csv = item.社員CSVデータパス;
+                    shainPath = item.社員CSVデータパス;
                 }
 
                 // 現場CSVデータパス
                 if (item.Is現場CSVデータパスNull())
                 {
-                    g_Csv = "";
+                    genbaPath = "";
                 }
                 else
                 {
-                    g_Csv = item.現場CSVデータパス;
+                    genbaPath = item.現場CSVデータパス;
                 }
 
                 // 部門CSVデータパス
                 if (item.Is部門CSVデータパスNull())
                 {
-                    b_Csv = "";
+                    bmnPath = "";
                 }
                 else
                 {
-                    b_Csv = item.部門CSVデータパス;
+                    bmnPath = item.部門CSVデータパス;
                 }
 	        }
 
-            if (!System.IO.File.Exists(s_Csv) || !System.IO.File.Exists(g_Csv) || !System.IO.File.Exists(b_Csv))
+            if (!System.IO.File.Exists(shainPath) || !System.IO.File.Exists(genbaPath) || !System.IO.File.Exists(bmnPath))
             {
                 return false;
             }

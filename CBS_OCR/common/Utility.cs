@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
+using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -983,6 +984,211 @@ namespace CBS_OCR.common
             return Cn;
         }
 
+        public static OleDbConnection dbConnect_local()
+        {
+            // データベース接続文字列
+            OleDbConnection Cn = new OleDbConnection();
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+            sb.Append("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=");
+            sb.Append(Properties.Settings.Default.CBS_CLIConnectionString);
+            Cn.ConnectionString = sb.ToString();
+            Cn.Open();
 
+            return Cn;
+        }
+
+
+
+        ///---------------------------------------------------------
+        /// <summary>
+        ///     ＣＳＶデータからデータテーブルを生成する </summary>
+        /// <param name="sPath">
+        ///     CSVデータファイルパス</param>
+        /// <param name="colArray">
+        ///     取り込みカラム配列</param>
+        /// <returns>
+        ///     データテーブル</returns>
+        ///---------------------------------------------------------
+        public static System.Data.DataTable readCSV(string sPath, int [] colArray)
+        {
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString());
+
+            ////パスの設定
+            //string path = "CSVファイルのパス";
+
+            //StreamReaderクラスのインスタンスの作成
+            System.IO.StreamReader sr = new System.IO.StreamReader(sPath, Encoding.Default);
+
+            //DataTableクラスのインスタンスの作成
+            System.Data.DataTable dt = new System.Data.DataTable();
+
+            //1行目を区切り文字(カンマ)で分割し列名を取得
+            string[] items = sr.ReadLine().Split(',');
+
+            int col = 0;
+
+            //列の作成
+            foreach (string item in items)
+            {
+                foreach (var t in colArray)
+                {
+                    if (t == col)
+                    {
+                        // 取り込みカラムのとき
+                        dt.Columns.Add(item.Replace("\"", ""), typeof(string));
+                        break;
+                    }
+                }
+
+                col++;
+            }
+
+            //int itemCol = 0;
+
+            //各行を読込み、テーブルを作成
+            while (sr.Peek() != -1)
+            {
+                string[] values = sr.ReadLine().Split(',');
+
+                DataRow dr = dt.NewRow();
+
+                for (int ii = 0; ii < items.Length; ii++)
+                {
+                    foreach (var t in colArray)
+                    {
+                        if (t == ii)
+                        {
+                            dr[items[ii].Replace("\"", "")] = values[ii].Replace("\"", "");
+                            //itemCol++;
+                            break;
+                        }
+                    }
+                }
+
+                dt.Rows.Add(dr);
+            }
+
+            //StreamReaderクラスのインスタンスの破棄
+            sr.Close();
+
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString());
+
+            return dt;
+        }
+
+
+        ///-----------------------------------------------------------------------------
+        /// <summary>
+        ///     社員情報をDataTableからclsCsvData.clsCsvShainクラスに取得 : 2021/08/06 </summary>
+        /// <param name="tID">
+        ///     社員コード</param>
+        /// <returns>
+        ///     clsCsvData.clsCsvShainクラス</returns>
+        ///-----------------------------------------------------------------------------
+        public static clsCsvData.ClsCsvShain GetShainFromDataTable(string tID, System.Data.DataTable data)
+        {
+            // 返り値クラス初期化
+            clsCsvData.ClsCsvShain cls = new clsCsvData.ClsCsvShain
+            {
+                SHAIN_CD = "",
+                SHAIN_FURIGANA = "",
+                SHAIN_NAME = "",
+                SHAIN_ZAISEKI_CD = "",
+                SHAIN_ZAISEKI = "",
+                SHAIN_KOYOU_CD = "",
+                SHAIN_KOYOU = "",
+                SHAIN_SHOZOKU_CD = "",
+                SHAIN_SHOZOKU = ""
+            };
+
+            DataRow[] rows = data.AsEnumerable().Where(a => a["SHAIN_CD"].ToString().PadLeft(6, '0') == tID).ToArray();
+
+            foreach (var t in rows)
+            {
+                cls.SHAIN_CD         = t["SHAIN_CD"].ToString();            // 社員コード
+                cls.SHAIN_FURIGANA   = t["SHAIN_FURIGANA"].ToString();      // フリガナ
+                cls.SHAIN_NAME       = t["SHAIN_NAME"].ToString();          // 社員名
+                cls.SHAIN_ZAISEKI_CD = t["SHAIN_ZAISEKI_CD"].ToString();    // 在籍区分
+                cls.SHAIN_ZAISEKI    = t["SHAIN_ZAISEKI"].ToString();       // 在籍区分名称
+                cls.SHAIN_KOYOU_CD   = t["SHAIN_KOYOU_CD"].ToString();      // 雇用区分
+                cls.SHAIN_KOYOU      = t["SHAIN_KOYOU"].ToString();         // 雇用区分名称
+                cls.SHAIN_SHOZOKU_CD = t["SHAIN_SHOZOKU_CD"].ToString();    // 所属コード
+                cls.SHAIN_SHOZOKU    = t["SHAIN_SHOZOKU"].ToString();       // 所属名
+
+                break;
+            }
+
+            return cls;
+        }
+
+
+        ///-----------------------------------------------------------------------------
+        /// <summary>
+        ///     現場情報をDataTableからclsCsvData.ClsCsvGenbaクラスに取得 : 2021/08/06</summary>
+        /// <param name="tID">
+        ///     社員コード</param>
+        /// <returns>
+        ///     clsCsvData.clsCsvGenbaクラス</returns>
+        ///-----------------------------------------------------------------------------
+        public static clsCsvData.ClsCsvGenba GetGenbaFromDataTable(string tID, System.Data.DataTable data)
+        {
+            // 返り値クラス初期化
+            clsCsvData.ClsCsvGenba cls = new clsCsvData.ClsCsvGenba
+            {
+                GENBA_CD        = "",
+                GENBA_NAME      = "",
+                GENBA_NAME_SM   = "",
+                START_DATE      = "",
+                END_DATE        = "",
+                COMPLETION_DATE = "",
+                DELIVERY_DATE   = ""
+            };
+
+            DataRow[] rows = data.AsEnumerable().Where(a => a["GENBA_CD"].ToString().PadLeft(9, '0') == tID).ToArray();
+
+            foreach (var t in rows)
+            {
+                cls.GENBA_CD        = t["GENBA_CD"].ToString();         // 現場コード
+                cls.GENBA_NAME      = t["GENBA_NAME"].ToString();       // 現場名
+                cls.GENBA_NAME_SM   = t["GENBA_NAME_SM"].ToString();    // 現場名略称
+                cls.START_DATE      = t["START_DATE"].ToString();       // 開始日
+                cls.END_DATE        = t["END_DATE"].ToString();         // 終了日
+                cls.COMPLETION_DATE = t["COMPLETION_DATE"].ToString();  // 完了日
+                cls.DELIVERY_DATE   = t["DELIVERY_DATE"].ToString();    // 引渡日
+                break;
+            }
+
+            return cls;
+        }
+
+        ///-----------------------------------------------------------------------------
+        /// <summary>
+        ///     部門情報をDataTableからclsCsvData.ClsCsvBmnクラスに取得 : 2021/08/06 </summary>
+        /// <param name="tID">
+        ///     部門コード</param>
+        /// <returns>
+        ///     clsCsvData.clsCsvBmnクラス</returns>
+        ///-----------------------------------------------------------------------------
+        public static clsCsvData.ClsCsvBmn GetBmnFromDataTable(string tID, System.Data.DataTable data)
+        {
+            // 返り値クラス初期化
+            clsCsvData.ClsCsvBmn cls = new clsCsvData.ClsCsvBmn
+            {
+                BMN_CD = "",
+                BMN_NAME = ""
+            };
+
+            DataRow[] rows = data.AsEnumerable().Where(a => a["BMN_CD"].ToString().PadLeft(4, '0') == tID).ToArray();
+
+            foreach (var t in rows)
+            {
+                cls.BMN_CD   = t["BMN_CD"].ToString();      // 部門コード
+                cls.BMN_NAME = t["BMN_NAME"].ToString();    // 部門名
+                break;
+            }
+
+            return cls;
+        }
     }
 }

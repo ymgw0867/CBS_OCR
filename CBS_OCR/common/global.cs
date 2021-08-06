@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace CBS_OCR.common
 {
@@ -227,5 +228,20 @@ namespace CBS_OCR.common
 
         // 基準となる一日の所定時間 2018/06/18
         public static int SHOTEI_8 = 8;
+
+        // データテーブル：2021/08/06
+        public static DataTable dtShain;    // 社員テーブル
+        public static DataTable dtGenba;    // 現場テーブル
+        public static DataTable dtBmn;      // 部門テーブル
+
+        // CSVデータパス：2021/08/06
+        public static string csvShainPath;  // 社員CSVデータパス
+        public static string csvGenbaPath;  // 現場CSVデータパス
+        public static string csvBmnPath;    // 部門CSVデータパス
+
+        // CSVデータ取り込みカラム配列：2021/08/06
+        public static int[] csvShainColumn = { 0, 1, 2, 3, 4, 5, 6, 60, 61 };   // 社員CSVデータ
+        public static int[] csvGenbaColumn = { 1, 2, 3, 7, 8, 9, 10 };          // 現場CSVデータ
+        public static int[] csvBmnColumn   = { 0, 1 };                          // 部門CSVデータ
     }
 }
