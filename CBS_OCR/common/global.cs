@@ -89,12 +89,6 @@ namespace CBS_OCR.common
         public static string cnfMsPath = string.Empty;  // スタッフマスターパス
         #endregion
 
-        #region コード桁数定数
-        public const int ShozokuLength = 0;                 // 所属コード桁数
-        public const int ShainLength = 0;                   // 社員コード桁数
-        public const int ShozokuMaxLength = 4;              // 所属コードＭＡＸ桁数
-        public const int ShainMaxLength = 4;                // 社員コードＭＡＸ桁数
-        #endregion  
 
         #region 勤怠記号定数
         public const string K_SHUKIN = "1";                 // 休日出勤（デイリー）
@@ -243,5 +237,10 @@ namespace CBS_OCR.common
         public static int[] csvShainColumn = { 0, 1, 2, 3, 4, 5, 6, 60, 61 };   // 社員CSVデータ
         public static int[] csvGenbaColumn = { 1, 2, 3, 7, 8, 9, 10 };          // 現場CSVデータ
         public static int[] csvBmnColumn   = { 0, 1 };                          // 部門CSVデータ
+
+        // 桁数定義 : 2021/08/10
+        public const int SHAIN_CD_LENGTH = 6;  // 社員コード
+        public const int GENBA_CD_LENGTH = 9;  // 現場コード
+        public const int BMN_CD_LENGTH   = 4;  // 部門コード
     }
 }

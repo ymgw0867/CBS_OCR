@@ -126,6 +126,7 @@
     <Compile Include="common\clsCsvData.cs" />
     <Compile Include="common\clsDayItems.cs" />
     <Compile Include="common\clsKeyTab.cs" />
+    <Compile Include="common\clsMaster.cs" />
     <Compile Include="common\clsMyCar.cs" />
     <Compile Include="common\clsShop.cs" />
     <Compile Include="common\clsShukkinbo.cs" />
@@ -144,6 +145,7 @@
       <DependentUpon>frmPrg.cs</DependentUpon>
     </Compile>
     <Compile Include="common\global.cs" />
+    <Compile Include="common\Interface1.cs" />
     <Compile Include="common\OCRData.cs" />
     <Compile Include="common\OCROutput.cs" />
     <Compile Include="common\sqlControl.cs" />

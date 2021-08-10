@@ -202,10 +202,10 @@ namespace CBS_OCR.common
         // 部門コンボボックスクラス
         public class ComboBumon
         {
-            public string ID { get; set; }
+            public string ID          { get; set; }
             public string DisplayName { get; set; }
-            public string Name { get; set; }
-            public string code { get; set; }
+            public string Name        { get; set; }
+            public string code        { get; set; }
 
             ///----------------------------------------------------------------
             /// <summary>
@@ -223,7 +223,7 @@ namespace CBS_OCR.common
 
                     tempObj.Items.Clear();
                     tempObj.DisplayMember = "DisplayName";
-                    tempObj.ValueMember = "code";
+                    tempObj.ValueMember   = "code";
 
                     // 奉行SQLServer接続文字列取得
                     string sc = sqlControl.obcConnectSting.get(dbName);
@@ -269,7 +269,6 @@ namespace CBS_OCR.common
                     MessageBox.Show(ex.Message, "部門コンボボックスロード");
                 }
             }
-
 
             ///----------------------------------------------------------------
             /// <summary>
@@ -333,6 +332,44 @@ namespace CBS_OCR.common
                 {
                     MessageBox.Show(ex.Message, "部門コンボボックスロード");
                 }
+            }
+        }
+
+        public class ComboBumonCSV : ComboBumon
+        {
+            public static void loadBmn(ComboBox tempObj)
+            {
+                try
+                {
+                    ComboBumon cmb1;
+
+                    tempObj.Items.Clear();
+                    tempObj.DisplayMember = "DisplayName";
+                    tempObj.ValueMember   = "code";
+
+                    clsMaster ms = new clsMaster();
+                    List<clsCsvData.ClsCsvBmn> bmns = ms.Read<clsCsvData.ClsCsvBmn>();
+                    foreach (var t in bmns)
+                    {
+                        string dCode = t.BMN_CD;
+
+                        // コンボボックスにセット
+                        cmb1 = new ComboBumon
+                        {
+                            ID          = string.Empty,
+                            DisplayName = dCode + " " + t.BMN_NAME,
+                            Name        = t.BMN_NAME,
+                            code        = dCode
+                        };
+
+                        tempObj.Items.Add(cmb1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
         }
 
@@ -402,8 +439,6 @@ namespace CBS_OCR.common
                 }
             }
         }
-
-
 
         ///------------------------------------------------------------------------
         /// <summary>
@@ -1102,7 +1137,7 @@ namespace CBS_OCR.common
                 SHAIN_SHOZOKU = ""
             };
 
-            DataRow[] rows = data.AsEnumerable().Where(a => a["SHAIN_CD"].ToString().PadLeft(6, '0') == tID).ToArray();
+            DataRow[] rows = data.AsEnumerable().Where(a => a["SHAIN_CD"].ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') == tID).ToArray();
 
             foreach (var t in rows)
             {
@@ -1125,45 +1160,6 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-        ///     現場情報をDataTableからclsCsvData.ClsCsvGenbaクラスに取得 : 2021/08/06</summary>
-        /// <param name="tID">
-        ///     社員コード</param>
-        /// <returns>
-        ///     clsCsvData.clsCsvGenbaクラス</returns>
-        ///-----------------------------------------------------------------------------
-        public static clsCsvData.ClsCsvGenba GetGenbaFromDataTable(string tID, System.Data.DataTable data)
-        {
-            // 返り値クラス初期化
-            clsCsvData.ClsCsvGenba cls = new clsCsvData.ClsCsvGenba
-            {
-                GENBA_CD        = "",
-                GENBA_NAME      = "",
-                GENBA_NAME_SM   = "",
-                START_DATE      = "",
-                END_DATE        = "",
-                COMPLETION_DATE = "",
-                DELIVERY_DATE   = ""
-            };
-
-            DataRow[] rows = data.AsEnumerable().Where(a => a["GENBA_CD"].ToString().PadLeft(9, '0') == tID).ToArray();
-
-            foreach (var t in rows)
-            {
-                cls.GENBA_CD        = t["GENBA_CD"].ToString();         // 現場コード
-                cls.GENBA_NAME      = t["GENBA_NAME"].ToString();       // 現場名
-                cls.GENBA_NAME_SM   = t["GENBA_NAME_SM"].ToString();    // 現場名略称
-                cls.START_DATE      = t["START_DATE"].ToString();       // 開始日
-                cls.END_DATE        = t["END_DATE"].ToString();         // 終了日
-                cls.COMPLETION_DATE = t["COMPLETION_DATE"].ToString();  // 完了日
-                cls.DELIVERY_DATE   = t["DELIVERY_DATE"].ToString();    // 引渡日
-                break;
-            }
-
-            return cls;
-        }
-
-        ///-----------------------------------------------------------------------------
-        /// <summary>
         ///     部門情報をDataTableからclsCsvData.ClsCsvBmnクラスに取得 : 2021/08/06 </summary>
         /// <param name="tID">
         ///     部門コード</param>
@@ -1179,13 +1175,12 @@ namespace CBS_OCR.common
                 BMN_NAME = ""
             };
 
-            DataRow[] rows = data.AsEnumerable().Where(a => a["BMN_CD"].ToString().PadLeft(4, '0') == tID).ToArray();
+            DataRow[] rows = data.AsEnumerable().OrderBy(a => a["BMN_CD"].ToString().PadLeft(global.BMN_CD_LENGTH, '0') == tID).ToArray();
 
             foreach (var t in rows)
             {
                 cls.BMN_CD   = t["BMN_CD"].ToString();      // 部門コード
                 cls.BMN_NAME = t["BMN_NAME"].ToString();    // 部門名
-                break;
             }
 
             return cls;

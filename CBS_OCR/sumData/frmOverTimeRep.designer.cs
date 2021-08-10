@@ -49,7 +49,7 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("游ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label2.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.label2.Location = new System.Drawing.Point(373, 11);
+            this.label2.Location = new System.Drawing.Point(354, 11);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 28);
@@ -76,7 +76,7 @@
             // 
             this.label3.BackColor = System.Drawing.Color.PowderBlue;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Font = new System.Drawing.Font("游ゴシック", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Font = new System.Drawing.Font("游ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label3.ForeColor = System.Drawing.SystemColors.MenuText;
             this.label3.Location = new System.Drawing.Point(14, 11);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
@@ -106,10 +106,10 @@
             // 
             this.cmbBumonS.Font = new System.Drawing.Font("游ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbBumonS.FormattingEnabled = true;
-            this.cmbBumonS.Location = new System.Drawing.Point(432, 11);
+            this.cmbBumonS.Location = new System.Drawing.Point(413, 11);
             this.cmbBumonS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbBumonS.Name = "cmbBumonS";
-            this.cmbBumonS.Size = new System.Drawing.Size(246, 28);
+            this.cmbBumonS.Size = new System.Drawing.Size(323, 28);
             this.cmbBumonS.TabIndex = 4;
             // 
             // button1
@@ -168,9 +168,9 @@
             // 
             // dg1
             // 
-            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dg1.Location = new System.Drawing.Point(14, 47);
             this.dg1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

@@ -110,7 +110,7 @@
             this.cmbBumonS.Location = new System.Drawing.Point(329, 13);
             this.cmbBumonS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbBumonS.Name = "cmbBumonS";
-            this.cmbBumonS.Size = new System.Drawing.Size(246, 28);
+            this.cmbBumonS.Size = new System.Drawing.Size(422, 28);
             this.cmbBumonS.TabIndex = 2;
             // 
             // button1
@@ -141,9 +141,9 @@
             // 
             // dg1
             // 
-            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dg1.Location = new System.Drawing.Point(14, 47);
             this.dg1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

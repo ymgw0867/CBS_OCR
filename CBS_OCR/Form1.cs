@@ -794,29 +794,33 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // 2021/08/10 コメント化
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 時間外・休日出勤集計
-                sumData.frmOverTimeRep frmC = new sumData.frmOverTimeRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 時間外・休日出勤集計
+            //    sumData.frmOverTimeRep frmC = new sumData.frmOverTimeRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 時間外・休日出勤集計：2021/08/10
+            sumData.frmOverTimeRep frmC = new sumData.frmOverTimeRep();
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -824,29 +828,33 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化 2021/08/10
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 時間外・休日出勤集計（月別）
-                sumData.frmOverTimeByMonthRep frmC = new sumData.frmOverTimeByMonthRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 時間外・休日出勤集計（月別）
+            //    sumData.frmOverTimeByMonthRep frmC = new sumData.frmOverTimeByMonthRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 時間外・休日出勤集計（月別）：2021/08/10
+            sumData.frmOverTimeByMonthRep frmC = new sumData.frmOverTimeByMonthRep();
+            frmC.ShowDialog();
             this.Show();
         }
 
