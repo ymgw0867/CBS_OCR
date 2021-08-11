@@ -19,15 +19,22 @@ namespace CBS_OCR.sumData
 
         CBSDataSet1 dts = new CBSDataSet1();
         CBSDataSet1TableAdapters.共通勤務票TableAdapter adp = new CBSDataSet1TableAdapters.共通勤務票TableAdapter();
-              
-        public frmGenbaByDateRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        
+        // 2021/08/11 コメント化
+        //public frmGenbaByDateRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        //{
+        //    InitializeComponent();
+
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+        //}
+
+        // 2021/08/11
+        public frmGenbaByDateRep()
         {
             InitializeComponent();
-
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,8 +45,11 @@ namespace CBS_OCR.sumData
             //ウィンドウズ最大サイズ
             //Utility.WindowsMaxSize(this, this.Size.Width, this.Size.Height);
 
-            // 現場コンボロード
-            Utility.ComboProject.load(cmbGenbaS, _dbName_AC);
+            // 現場コンボロード : 2021/08/11 コメント化
+            //Utility.ComboProject.load(cmbGenbaS, _dbName_AC);
+
+            // 現場CSVデータコンボロード : 2021/08/11
+            Utility.ComboProjectCSV.loadGenba_csv(cmbGenbaS);
             cmbGenbaS.MaxDropDownItems = 20;
             cmbGenbaS.SelectedIndex = -1;
 

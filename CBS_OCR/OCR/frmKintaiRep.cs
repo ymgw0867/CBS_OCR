@@ -20,15 +20,22 @@ namespace CBS_OCR.OCR
 
         CBSDataSet1 dts = new CBSDataSet1();
         CBSDataSet1TableAdapters.共通勤務票TableAdapter adp = new CBSDataSet1TableAdapters.共通勤務票TableAdapter();
-              
-        public frmKintaiRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        
+        // コメント化：2021/08/11
+        //public frmKintaiRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        //{
+        //    InitializeComponent();
+
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+        //}
+
+        // 2021/08/11
+        public frmKintaiRep()
         {
             InitializeComponent();
-
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,37 +47,39 @@ namespace CBS_OCR.OCR
             //Utility.WindowsMaxSize(this, this.Size.Width, this.Size.Height);
 
             txtSYear.AutoSize = false;
-            txtSYear.Height = 28;
+            txtSYear.Height   = 28;
 
             txtSMonth.AutoSize = false;
-            txtSMonth.Height = 28;
+            txtSMonth.Height   = 28;
             
             txtSNum.AutoSize = false;
-            txtSNum.Height = 28;
+            txtSNum.Height   = 28;
 
-            txtSYear.Text = string.Empty;
+            txtSYear.Text  = string.Empty;
             txtSMonth.Text = string.Empty;
-            txtSNum.Text = string.Empty;
-            lblSName.Text = string.Empty;
+            txtSNum.Text   = string.Empty;
+            lblSName.Text  = string.Empty;
 
             // DataGridViewの設定
             GridViewSetting(dg1);
 
             // 対象年月を取得
-            txtSYear.Text = DateTime.Today.Year.ToString();
+            txtSYear.Text  = DateTime.Today.Year.ToString();
             txtSMonth.Text = DateTime.Today.Month.ToString();
             
             button1.Enabled = false;    // CSV出力ボタン
-            lblCnt.Visible = false;
+            lblCnt.Visible  = false;
 
+            // コメント化：2021/08/11
             // 給与奉行接続文字列取得
-            sc = sqlControl.obcConnectSting.get(_dbName);
-            sdCon = new common.sqlControl.DataControl(sc);
+            //sc = sqlControl.obcConnectSting.get(_dbName);
+            //sdCon = new common.sqlControl.DataControl(sc);
         }
 
+        // コメント化：2021/08/11
         // 奉行SQLServer接続
-        string sc = string.Empty;
-        sqlControl.DataControl sdCon;
+        //string sc = string.Empty;
+        //sqlControl.DataControl sdCon;
 
         string _dbName = string.Empty;          // 会社領域データベース識別番号
         string _comNo = string.Empty;           // 会社番号
@@ -278,7 +287,7 @@ namespace CBS_OCR.OCR
                 {
                     g.Rows.Add();
 
-                    g[colDate, g.Rows.Count - 1].Value = t.日付.ToShortDateString();
+                    g[colDate, g.Rows.Count - 1].Value      = t.日付.ToShortDateString();
                     g[colGenbaCode, g.Rows.Count - 1].Value = t.現場コード;
                     g[colGenbaName, g.Rows.Count - 1].Value = t.現場名;
 
@@ -287,12 +296,12 @@ namespace CBS_OCR.OCR
                     //g[colRestTime, g.Rows.Count - 1].Value = t.休憩時.PadLeft(2, '0') + ":" + t.休憩分.PadLeft(2, '0');
                     //g[colWorkTime, g.Rows.Count - 1].Value = t.実働時.PadLeft(2, '0') + ":" + t.実働分.PadLeft(2, '0');
 
-                    g[colSTime, g.Rows.Count - 1].Value = getHhMm(t.開始時, t.開始分);
-                    g[colETime, g.Rows.Count - 1].Value = getHhMm(t.終業時, t.終業分);
+                    g[colSTime, g.Rows.Count - 1].Value    = getHhMm(t.開始時, t.開始分);
+                    g[colETime, g.Rows.Count - 1].Value    = getHhMm(t.終業時, t.終業分);
                     g[colRestTime, g.Rows.Count - 1].Value = getHhMm(t.休憩時, t.休憩分);
                     g[colWorkTime, g.Rows.Count - 1].Value = getHhMm(t.実働時, t.実働分);
 
-                    g[colKm, g.Rows.Count - 1].Value = t.走行距離;
+                    g[colKm, g.Rows.Count - 1].Value      = t.走行距離;
                     g[colDoujyou, g.Rows.Count - 1].Value = t.同乗人数;
 
                     if (t.交通手段社用車 == global.flgOn)
@@ -461,7 +470,7 @@ namespace CBS_OCR.OCR
 
         private void btnRtn_Click(object sender, EventArgs e)
         {
-            sdCon.Close();
+            //sdCon.Close(); // コメント化：2021/08/11
 
             this.Close();
         }
@@ -632,34 +641,50 @@ namespace CBS_OCR.OCR
         private void txtSNum_TextChanged(object sender, EventArgs e)
         {
             // 氏名を初期化
-            lblSName.Text = string.Empty;
-            lblBmnCode.Text = string.Empty;
-            lblBmnName.Text = string.Empty;
+            lblSName.Text    = string.Empty;
+            lblBmnCode.Text  = string.Empty;
+            lblBmnName.Text  = string.Empty;
             lblKoyoukbn.Text = string.Empty;
 
             // 奉行データベースより社員名を取得して表示します
             if (txtSNum.Text != string.Empty)
             {
-                // 社員情報取得
-                string bCode = Utility.NulltoStr(Utility.StrtoInt(txtSNum.Text).ToString().PadLeft(10, '0'));
-                SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+                // 社員情報取得（奉行データベースより）コメント化：2021/08/11
+                //string bCode = Utility.NulltoStr(Utility.StrtoInt(txtSNum.Text).ToString().PadLeft(10, '0'));
+                //SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
 
-                while (dR.Read())
+                //while (dR.Read())
+                //{
+                //    lblKoyoukbn.Text = Utility.StrtoInt(dR["koyoukbn"].ToString()).ToString();
+                //    lblBmnCode.Text = dR["DepartmentCode"].ToString();
+                //    lblBmnName.Text = dR["DepartmentName"].ToString();
+                //    lblSName.Text = dR["Name"].ToString();
+                //}
+
+                //dR.Close();
+
+                // 社員CSVデータより社員名を取得して表示します：2021/08/11
+                clsMaster ms = new clsMaster();
+                clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(6, '0'));
+                if (shain != null)
                 {
-                    lblKoyoukbn.Text = Utility.StrtoInt(dR["koyoukbn"].ToString()).ToString();
-                    lblBmnCode.Text = dR["DepartmentCode"].ToString();
-                    lblBmnName.Text = dR["DepartmentName"].ToString();
-                    lblSName.Text = dR["Name"].ToString();
+                    lblKoyoukbn.Text = shain.SHAIN_KOYOU_CD;
+                    lblBmnCode.Text  = shain.SHAIN_SHOZOKU_CD;
+                    lblBmnName.Text  = shain.SHAIN_SHOZOKU;
+                    lblSName.Text    = shain.SHAIN_NAME;
                 }
-
-                dR.Close();
             }
         }
 
         private void dg1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int sID = Utility.StrtoInt(dg1[colID, dg1.SelectedRows[0].Index].Value.ToString());
-            OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(_dbName, _comName, _dbName_AC, _comName_AC, sID, dts);
+
+            // コメント化：2021/08/11
+            //OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(_dbName, _comName, _dbName_AC, _comName_AC, sID, dts);
+
+            // 2021/08/11
+            OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(sID, dts);
             frmC.ShowDialog();
 
             //データ表示
@@ -669,7 +694,7 @@ namespace CBS_OCR.OCR
         private void button2_Click(object sender, EventArgs e)
         {
             int sID = global.flgOff;
-            OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(_dbName, _comName, _dbName_AC, _comName_AC, sID, dts);
+            OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(sID, dts);
             frmC.ShowDialog();
 
             //データ表示

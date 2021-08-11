@@ -335,9 +335,13 @@ namespace CBS_OCR.common
             }
         }
 
+        ///--------------------------------------------------------------------------
+        /// <summary>
+        ///     部門CSVデータをコンボボックスに読み込む：2021/08/10 </summary>
+        ///--------------------------------------------------------------------------
         public class ComboBumonCSV : ComboBumon
         {
-            public static void loadBmn(ComboBox tempObj)
+            public static void loadBmn_csv(ComboBox tempObj)
             {
                 try
                 {
@@ -439,6 +443,49 @@ namespace CBS_OCR.common
                 }
             }
         }
+
+        ///-----------------------------------------------------------------------
+        /// <summary>
+        ///     現場CSVマスターをコンボボックスに読み込む：2021/08/11 </summary>
+        ///-----------------------------------------------------------------------
+        public class ComboProjectCSV : ComboProject
+        {
+            public static void loadGenba_csv(ComboBox tempObj)
+            {
+                try
+                {
+                    ComboProject cmb1;
+
+                    tempObj.Items.Clear();
+                    tempObj.DisplayMember = "DisplayName";
+                    tempObj.ValueMember   = "code";
+
+                    clsMaster ms = new clsMaster();
+                    List<clsCsvData.ClsCsvGenba> genbas = ms.Read<clsCsvData.ClsCsvGenba>();
+                    foreach (var t in genbas)
+                    {
+                        string dCode = t.GENBA_CD;
+
+                        // コンボボックスにセット
+                        cmb1 = new ComboProject
+                        {
+                            ID          = string.Empty,
+                            DisplayName = dCode + " " + t.GENBA_NAME_SM,
+                            Name        = t.GENBA_NAME_SM,
+                            code        = dCode
+                        };
+
+                        tempObj.Items.Add(cmb1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
 
         ///------------------------------------------------------------------------
         /// <summary>

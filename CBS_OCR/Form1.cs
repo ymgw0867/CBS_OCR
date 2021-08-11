@@ -862,29 +862,33 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // 2021/08/11 コメント化
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 現場別日付別勤務実績表
-                sumData.frmGenbaByDateRep frmC = new sumData.frmGenbaByDateRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 現場別日付別勤務実績表
+            //    sumData.frmGenbaByDateRep frmC = new sumData.frmGenbaByDateRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 現場別日付別勤務実績表：2021/08/11
+            sumData.frmGenbaByDateRep frmC = new sumData.frmGenbaByDateRep();
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -892,29 +896,33 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // 2021/08/11 コメント化
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 現場別日付別勤務実績表
-                sumData.frmDayByGenbaRep frmC = new sumData.frmDayByGenbaRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 現場別日付別勤務実績表
+            //    sumData.frmDayByGenbaRep frmC = new sumData.frmDayByGenbaRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 現場別日付別勤務実績表：2021/0811
+            sumData.frmDayByGenbaRep frmC = new sumData.frmDayByGenbaRep();
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -1041,29 +1049,33 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化 2021/08/11
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 時間外命令書突合表
-                sumData.frmJikangaiRep frmC = new sumData.frmJikangaiRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 時間外命令書突合表
+            //    sumData.frmJikangaiRep frmC = new sumData.frmJikangaiRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 時間外命令書突合表：2021/08/11
+            sumData.frmJikangaiRep frmC = new sumData.frmJikangaiRep();
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -1071,30 +1083,34 @@ namespace CBS_OCR
         {
             this.Hide();
 
-            // 奉行会社領域選択
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化：2021/08/11
+            //// 奉行会社領域選択
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 勤怠データ保守
-                OCR.frmKintaiRep frmC = new OCR.frmKintaiRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                //OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
-                frmC.ShowDialog();
-            }
-            else
-            {
-                frm.Dispose();
-            }
+            //    // 勤怠データ保守
+            //    OCR.frmKintaiRep frmC = new OCR.frmKintaiRep(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    //OCR.frmKintaiMnt frmC = new OCR.frmKintaiMnt(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            // 勤怠データ保守：2021/08/11
+            OCR.frmKintaiRep frmC = new OCR.frmKintaiRep();
+            frmC.ShowDialog();
             this.Show();
         }
 

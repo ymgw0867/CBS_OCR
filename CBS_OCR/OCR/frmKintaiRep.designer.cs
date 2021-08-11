@@ -111,9 +111,9 @@
             // 
             // dg1
             // 
-            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dg1.Location = new System.Drawing.Point(14, 47);
             this.dg1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -270,7 +270,7 @@
             this.lblBmnCode.Name = "lblBmnCode";
             this.lblBmnCode.Size = new System.Drawing.Size(40, 28);
             this.lblBmnCode.TabIndex = 120;
-            this.lblBmnCode.Text = "001";
+            this.lblBmnCode.Text = "0001";
             this.lblBmnCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6

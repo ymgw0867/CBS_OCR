@@ -59,23 +59,23 @@ namespace CBS_OCR.common
         ///-----------------------------------------------------------------------------
         private List<clsCsvData.ClsCsvGenba> GetGenbaListFromDataTable(System.Data.DataTable data)
         {
-            List<clsCsvData.ClsCsvGenba> clsGenbas = null;
+            List<clsCsvData.ClsCsvGenba> clsGenbas = new List<clsCsvData.ClsCsvGenba>();
 
             try
             {
-                DataRow[] rows = data.AsEnumerable().OrderBy(a => a["GENBA_CD"].ToString()).ToArray();
+                DataRow[] rows = data.AsEnumerable().OrderBy(a => a["プロジェクトコード"].ToString()).ToArray();
 
                 foreach (var t in rows)
                 {
                     clsCsvData.ClsCsvGenba cls = new clsCsvData.ClsCsvGenba
                     {
-                        GENBA_CD        = t["GENBA_CD"].ToString(),
-                        GENBA_NAME      = t["GENBA_NAME"].ToString(),
-                        GENBA_NAME_SM   = t["GENBA_NAME_SM"].ToString(),
-                        START_DATE      = t["START_DATE"].ToString(),
-                        END_DATE        = t["END_DATE"].ToString(),
-                        DELIVERY_DATE   = t["DELIVERY_DATE"].ToString(),
-                        COMPLETION_DATE = t["COMPLETION_DATE"].ToString()
+                        GENBA_CD        = t["プロジェクトコード"].ToString(),
+                        GENBA_NAME      = t["プロジェクト名"].ToString(),
+                        GENBA_NAME_SM   = t["プロジェクト略称"].ToString(),
+                        START_DATE      = t["予定期間（開始）"].ToString(),
+                        END_DATE        = t["予定期間（終了）"].ToString(),
+                        DELIVERY_DATE   = t["引渡日"].ToString(),
+                        COMPLETION_DATE = t["完成日"].ToString()
                     };
 
                     clsGenbas.Add(cls);
@@ -165,19 +165,19 @@ namespace CBS_OCR.common
                 SHAIN_SHOZOKU    = ""
             };
 
-            DataRow[] rows = data.AsEnumerable().Where(a => a["SHAIN_CD"].ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') == tID).ToArray();
+            DataRow[] rows = data.AsEnumerable().Where(a => a["社員番号"].ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') == tID).ToArray();
 
             foreach (var t in rows)
             {
-                cls.SHAIN_CD         = t["SHAIN_CD"].ToString();            // 社員コード
-                cls.SHAIN_FURIGANA   = t["SHAIN_FURIGANA"].ToString();      // フリガナ
-                cls.SHAIN_NAME       = t["SHAIN_NAME"].ToString();          // 社員名
-                cls.SHAIN_ZAISEKI_CD = t["SHAIN_ZAISEKI_CD"].ToString();    // 在籍区分
-                cls.SHAIN_ZAISEKI    = t["SHAIN_ZAISEKI"].ToString();       // 在籍区分名称
-                cls.SHAIN_KOYOU_CD   = t["SHAIN_KOYOU_CD"].ToString();      // 雇用区分
-                cls.SHAIN_KOYOU      = t["SHAIN_KOYOU"].ToString();         // 雇用区分名称
-                cls.SHAIN_SHOZOKU_CD = t["SHAIN_SHOZOKU_CD"].ToString();    // 所属コード
-                cls.SHAIN_SHOZOKU    = t["SHAIN_SHOZOKU"].ToString();       // 所属名
+                cls.SHAIN_CD         = t["社員番号"].ToString();        // 社員コード
+                cls.SHAIN_FURIGANA   = t["氏名(フリガナ)"].ToString();  // フリガナ
+                cls.SHAIN_NAME       = t["氏名"].ToString();           // 社員名
+                cls.SHAIN_ZAISEKI_CD = t["在籍区分コード"].ToString();  // 在籍区分
+                cls.SHAIN_ZAISEKI    = t["在籍区分"].ToString();       // 在籍区分名称
+                cls.SHAIN_KOYOU_CD   = t["雇用区分コード"].ToString(); // 雇用区分
+                cls.SHAIN_KOYOU      = t["雇用区分"].ToString();       // 雇用区分名称
+                cls.SHAIN_SHOZOKU_CD = t["所属コード"].ToString();    // 所属コード
+                cls.SHAIN_SHOZOKU    = t["所属"].ToString();          // 所属名
 
                 break;
             }
@@ -207,17 +207,17 @@ namespace CBS_OCR.common
                 DELIVERY_DATE   = ""
             };
 
-            DataRow[] rows = data.AsEnumerable().Where(a => a["GENBA_CD"].ToString().PadLeft(global.GENBA_CD_LENGTH, '0') == tID).ToArray();
+            DataRow[] rows = data.AsEnumerable().Where(a => a["プロジェクトコード"].ToString().PadLeft(global.GENBA_CD_LENGTH, '0') == tID).ToArray();
 
             foreach (var t in rows)
             {
-                cls.GENBA_CD        = t["GENBA_CD"].ToString();         // 現場コード
-                cls.GENBA_NAME      = t["GENBA_NAME"].ToString();       // 現場名
-                cls.GENBA_NAME_SM   = t["GENBA_NAME_SM"].ToString();    // 現場名略称
-                cls.START_DATE      = t["START_DATE"].ToString();       // 開始日
-                cls.END_DATE        = t["END_DATE"].ToString();         // 終了日
-                cls.COMPLETION_DATE = t["COMPLETION_DATE"].ToString();  // 完了日
-                cls.DELIVERY_DATE   = t["DELIVERY_DATE"].ToString();    // 引渡日
+                cls.GENBA_CD        = t["プロジェクトコード"].ToString();    // 現場コード
+                cls.GENBA_NAME      = t["プロジェクト名"].ToString();        // 現場名
+                cls.GENBA_NAME_SM   = t["プロジェクト略称"].ToString();    　// 現場名略称
+                cls.START_DATE      = t["予定期間（開始）"].ToString();      // 開始日
+                cls.END_DATE        = t["予定期間（終了）"].ToString();      // 終了日
+                cls.COMPLETION_DATE = t["完成日"].ToString();              // 完了日
+                cls.DELIVERY_DATE   = t["引渡日"].ToString();              // 引渡日
                 break;
             }
 

@@ -49,7 +49,7 @@ namespace CBS_OCR.sumData
             //Utility.ComboBumon.loadBusho(cmbBumonS, _dbName);
 
             // 部門コンボロード：2021/08/10
-            Utility.ComboBumonCSV.loadBmn(cmbBumonS);
+            Utility.ComboBumonCSV.loadBmn_csv(cmbBumonS);
 
             cmbBumonS.MaxDropDownItems = 20;
             cmbBumonS.SelectedIndex = -1;

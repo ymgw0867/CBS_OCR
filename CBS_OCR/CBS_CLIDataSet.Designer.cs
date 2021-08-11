@@ -1370,7 +1370,7 @@ namespace CBS_OCR {
                 this.columnID.Unique = true;
                 this.columnヘッダID.MaxLength = 17;
                 this.column日.MaxLength = 2;
-                this.column現場コード.MaxLength = 8;
+                this.column現場コード.MaxLength = 9;
                 this.column現場名.MaxLength = 255;
                 this.column開始時.MaxLength = 2;
                 this.column開始分.MaxLength = 2;
@@ -2080,7 +2080,7 @@ namespace CBS_OCR {
                 this.columnID.AllowDBNull = false;
                 this.columnID.Unique = true;
                 this.columnID.MaxLength = 17;
-                this.column現場コード.MaxLength = 8;
+                this.column現場コード.MaxLength = 9;
                 this.column現場名.MaxLength = 255;
                 this.column開始時1.MaxLength = 2;
                 this.column開始分1.MaxLength = 2;

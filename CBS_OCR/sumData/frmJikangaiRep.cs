@@ -20,15 +20,22 @@ namespace CBS_OCR.sumData
         CBSDataSet1 dts = new CBSDataSet1();
         CBSDataSet1TableAdapters.共通勤務票TableAdapter adp = new CBSDataSet1TableAdapters.共通勤務票TableAdapter();
         CBSDataSet1TableAdapters.時間外命令書TableAdapter jAdp = new CBSDataSet1TableAdapters.時間外命令書TableAdapter();
-              
-        public frmJikangaiRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        
+        // コメント化：2021/08/11
+        //public frmJikangaiRep(string dbName, string comName, string dbName_AC, string comName_AC)
+        //{
+        //    InitializeComponent();
+
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+        //}
+
+        // 2021/08/11
+        public frmJikangaiRep()
         {
             InitializeComponent();
-
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,8 +46,12 @@ namespace CBS_OCR.sumData
             //ウィンドウズ最大サイズ
             //Utility.WindowsMaxSize(this, this.Size.Width, this.Size.Height);
 
-            // 部門コンボロード
-            Utility.ComboBumon.loadBusho(cmbBumonS, _dbName);
+            // 部門コンボロード：コメント化：2021/0811
+            //Utility.ComboBumon.loadBusho(cmbBumonS, _dbName);
+
+            // 部門CSVデータコンボロード：2021/0811
+            Utility.ComboBumonCSV.loadBmn_csv(cmbBumonS);
+
             cmbBumonS.MaxDropDownItems = 20;
             cmbBumonS.SelectedIndex = -1;
 

@@ -25,25 +25,35 @@ namespace CBS_OCR.OCR
         // データテーブル生成
         CBSDataSet1 _dts = new CBSDataSet1();
 
-        public frmKintaiMnt(string dbName, string comName, string dbName_AC, string comName_AC, int sID, CBSDataSet1 dts)
+        // コメント化：2021/08/11
+        //public frmKintaiMnt(string dbName, string comName, string dbName_AC, string comName_AC, int sID, CBSDataSet1 dts)
+        //{
+        //    InitializeComponent();
+
+        //    _sID = sID;                 // ID
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+
+        //    _dts = dts;
+        //}
+
+        // 2021/08/11
+        public frmKintaiMnt(int sID, CBSDataSet1 dts)
         {
             InitializeComponent();
 
             _sID = sID;                 // ID
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
-
             _dts = dts;
         }
 
-        string _dbName = string.Empty;          // 会社領域データベース識別番号
-        string _comNo = string.Empty;           // 会社番号
-        string _comName = string.Empty;         // 会社名
-
-        string _dbName_AC = string.Empty;       // 会社領域データベース識別番号
-        string _comName_AC = string.Empty;      // 会社名
+        // コメント化：2021/08/11
+        //string _dbName = string.Empty;          // 会社領域データベース識別番号
+        //string _comNo = string.Empty;           // 会社番号
+        //string _comName = string.Empty;         // 会社名
+        //string _dbName_AC = string.Empty;       // 会社領域データベース識別番号
+        //string _comName_AC = string.Empty;      // 会社名
 
         int _sID = 0;
 
@@ -56,49 +66,49 @@ namespace CBS_OCR.OCR
             Utility.WindowsMinSize(this, this.Width, this.Height);
 
             txtMaisu.AutoSize = false;
-            txtMaisu.Height = 28;
+            txtMaisu.Height   = 28;
 
             txtSNum.AutoSize = false;
-            txtSNum.Height = 29;
+            txtSNum.Height   = 29;
 
             txtGenbaCode.AutoSize = false;
-            txtGenbaCode.Height = 29;
+            txtGenbaCode.Height   = 29;
 
             txtMaisu.AutoSize = false;
-            txtMaisu.Height = 29;
+            txtMaisu.Height   = 29;
             
             txtSh.AutoSize = false;
-            txtSh.Height = 26;
+            txtSh.Height   = 26;
 
             txtSm.AutoSize = false;
-            txtSm.Height = 26;
+            txtSm.Height   = 26;
 
             txtEh.AutoSize = false;
-            txtEh.Height = 26;
+            txtEh.Height   = 26;
 
             txtEm.AutoSize = false;
-            txtEm.Height = 26;
+            txtEm.Height   = 26;
 
             txtRh.AutoSize = false;
-            txtRh.Height = 26;
+            txtRh.Height   = 26;
 
             txtRm.AutoSize = false;
-            txtRm.Height = 26;
+            txtRm.Height   = 26;
 
             txtWh.AutoSize = false;
-            txtWh.Height = 26;
+            txtWh.Height   = 26;
 
             txtWm.AutoSize = false;
-            txtWm.Height = 26;
+            txtWm.Height   = 26;
 
             txtKm.AutoSize = false;
-            txtKm.Height = 26;
+            txtKm.Height   = 26;
 
             txtDoujyou.AutoSize = false;
-            txtDoujyou.Height = 26;
+            txtDoujyou.Height   = 26;
 
             txtKoutsuuhi.AutoSize = false;
-            txtKoutsuuhi.Height = 26;
+            txtKoutsuuhi.Height   = 26;
             
             //// データグリッド定義
             //GridViewSetting(dg);
@@ -106,13 +116,14 @@ namespace CBS_OCR.OCR
             // 画面初期化
             DispInitial();
 
-            // 給与奉行接続文字列取得
-            sc = sqlControl.obcConnectSting.get(_dbName);
-            sdCon = new common.sqlControl.DataControl(sc);
+            // コメント化：2021/08/11
+            //// 給与奉行接続文字列取得
+            //sc = sqlControl.obcConnectSting.get(_dbName);
+            //sdCon = new common.sqlControl.DataControl(sc);
 
-            // 勘定奉行SQLServer接続文字列取得
-            sc_ac = sqlControl.obcConnectSting.get(_dbName_AC);
-            sdCon_ac = new sqlControl.DataControl(sc_ac);
+            //// 勘定奉行SQLServer接続文字列取得
+            //sc_ac = sqlControl.obcConnectSting.get(_dbName_AC);
+            //sdCon_ac = new sqlControl.DataControl(sc_ac);
 
             // データ編集
             if (_sID != global.flgOff)
@@ -122,21 +133,22 @@ namespace CBS_OCR.OCR
             }
         }
 
-        // 奉行SQLServer接続
-        string sc = string.Empty;
-        sqlControl.DataControl sdCon;
-        string sc_ac = string.Empty;
-        sqlControl.DataControl sdCon_ac;
+        // コメント化：2021/08/11
+        //// 奉行SQLServer接続
+        //string sc = string.Empty;
+        //sqlControl.DataControl sdCon;
+        //string sc_ac = string.Empty;
+        //sqlControl.DataControl sdCon_ac;
 
         //カラム定義
-        string cDate = "col0";
+        string cDate      = "col0";
         string cGenbaCode = "col1";
         string cGenbaName = "col2";
-        string cSH = "col3";
-        string cEH = "col4";
-        string cRH = "col5";
-        string cWH = "col6";
-        string cID = "col7";
+        string cSH        = "col3";
+        string cEH        = "col4";
+        string cRH        = "col5";
+        string cWH        = "col6";
+        string cID        = "col7";
 
         ///-------------------------------------------------------------------
         /// <summary>
@@ -291,37 +303,40 @@ namespace CBS_OCR.OCR
             fMode.Mode = global.FORM_ADDMODE;
 
             cmbShubetsu.SelectedIndex = -1;
-            cmbShubetsu.Enabled = true;
-            txtSNum.Text = string.Empty;
-            lblSName.Text = string.Empty;
-            lblKoyoukbn.Text = string.Empty;
-            lblBmnCode.Text = string.Empty;
-            lblBmnName.Text = string.Empty;
+            cmbShubetsu.Enabled       = true;
+
+            txtSNum.Text      = string.Empty;
+            lblSName.Text     = string.Empty;
+            lblKoyoukbn.Text  = string.Empty;
+            lblBmnCode.Text   = string.Empty;
+            lblBmnName.Text   = string.Empty;
             txtGenbaCode.Text = string.Empty;
             lblGenbaName.Text = string.Empty;
-            txtSh.Text = string.Empty;
-            txtSm.Text = string.Empty;
-            txtEh.Text = string.Empty;
-            txtEm.Text = string.Empty;
-            txtRh.Text = string.Empty;
-            txtRm.Text = string.Empty;
-            txtWh.Text = string.Empty;
-            txtWm.Text = string.Empty;
+            txtSh.Text        = string.Empty;
+            txtSm.Text        = string.Empty;
+            txtEh.Text        = string.Empty;
+            txtEm.Text        = string.Empty;
+            txtRh.Text        = string.Empty;
+            txtRm.Text        = string.Empty;
+            txtWh.Text        = string.Empty;
+            txtWm.Text        = string.Empty;
+
             cmbTankakbn.SelectedIndex = -1;
 
-            rbShayou.Checked = false;
-            rbJikayousha.Checked = false;
-            rbKoutsuukikan.Checked = false;
+            rbShayou.Checked            = false;
+            rbJikayousha.Checked        = false;
+            rbKoutsuukikan.Checked      = false;
             cmbKoutsuukbn.SelectedIndex = -1;
-            txtKm.Text = string.Empty;
-            txtDoujyou.Text = string.Empty;
+
+            txtKm.Text        = string.Empty;
+            txtDoujyou.Text   = string.Empty;
             txtKoutsuuhi.Text = string.Empty;
 
             chkChushi.Checked = false;
             chkHoshou.Checked = false;
-            chkYakan.Checked = false;
+            chkYakan.Checked  = false;
 
-            txtMaisu.Text = string.Empty;
+            txtMaisu.Text     = string.Empty;
             
             //dg.Rows.Clear();
             //dg.Enabled = false;
@@ -646,9 +661,9 @@ namespace CBS_OCR.OCR
 
         private void btnRtn_Click_1(object sender, EventArgs e)
         {
-            // sqlControl接続解除
-            sdCon.Close();
-            sdCon_ac.Close();
+            // sqlControl接続解除：コメント化：2021/08/11
+            //sdCon.Close();
+            //sdCon_ac.Close();
 
             // 閉じる
             Close();
@@ -694,8 +709,8 @@ namespace CBS_OCR.OCR
             txtSNum.Text = s.社員番号.ToString().PadLeft(6, '0');
 
             cmbShubetsu.SelectedIndex = s.出勤簿区分;
-            cmbShubetsu.Enabled = false;
-            txtGenbaCode.Text = s.現場コード;
+            cmbShubetsu.Enabled       = false;
+            txtGenbaCode.Text         = s.現場コード;
             //lblGenbaName.Text = s.現場名;
             
             txtSh.Text = s.開始時;
@@ -797,7 +812,7 @@ namespace CBS_OCR.OCR
             }
 
             fMode.Mode = global.FORM_EDITMODE;
-            fMode.ID = sID;
+            fMode.ID   = sID;
             //btnClear.Enabled = true;
             btnUpdate.Focus();
         }
@@ -1291,23 +1306,32 @@ namespace CBS_OCR.OCR
                 return;
             }
 
+            // コメント化：2021/08/11
             // プロジェクトデータリーダーを取得する
-            SqlDataReader dR;
-            string sqlSTRING = string.Empty;
-            sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
-            sqlSTRING += "from tbProject ";
-            sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(g).ToString().PadLeft(20, '0') + "'";
+            //SqlDataReader dR;
+            //string sqlSTRING = string.Empty;
+            //sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
+            //sqlSTRING += "from tbProject ";
+            //sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(g).ToString().PadLeft(20, '0') + "'";
 
-            dR = sdCon_ac.free_dsReader(sqlSTRING);
+            //dR = sdCon_ac.free_dsReader(sqlSTRING);
 
             lblGenbaName.Text = string.Empty;
 
-            while (dR.Read())
-            {
-                lblGenbaName.Text = Utility.NulltoStr(dR["ProjectName"]);
-            }
+            //while (dR.Read())
+            //{
+            //    lblGenbaName.Text = Utility.NulltoStr(dR["ProjectName"]);
+            //}
+            //dR.Close();
 
-            dR.Close();
+            // 現場CSVデータよりプロジェクトコードを取得する：2021/08/11
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(g.PadLeft(global.GENBA_CD_LENGTH, '0'));
+
+            if (genba != null)
+            {
+                lblGenbaName.Text = genba.GENBA_NAME;
+            }
         }
 
         private void kintaiAdd()
@@ -1529,23 +1553,36 @@ namespace CBS_OCR.OCR
             // 奉行データベースより社員名を取得して表示します
             if (txtSNum.Text != string.Empty)
             {
-                // 社員情報取得
-                string bCode = Utility.NulltoStr(Utility.StrtoInt(txtSNum.Text).ToString().PadLeft(10, '0'));
-                SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+                // コメント化：2021/08/11
+                //// 社員情報取得
+                //string bCode = Utility.NulltoStr(Utility.StrtoInt(txtSNum.Text).ToString().PadLeft(10, '0'));
+                //SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
 
                 lblKoyoukbn.Text = string.Empty;
                 lblBmnCode.Text = string.Empty;
                 lblBmnName.Text = string.Empty;
 
-                while (dR.Read())
-                {
-                    lblKoyoukbn.Text = Utility.StrtoInt(dR["koyoukbn"].ToString()).ToString();
-                    lblBmnCode.Text = dR["DepartmentCode"].ToString();
-                    lblBmnName.Text = dR["DepartmentName"].ToString();
-                    lblSName.Text = dR["Name"].ToString();
-                }
+                // コメント化：2021/08/11
+                //while (dR.Read())
+                //{
+                //    lblKoyoukbn.Text = Utility.StrtoInt(dR["koyoukbn"].ToString()).ToString();
+                //    lblBmnCode.Text = dR["DepartmentCode"].ToString();
+                //    lblBmnName.Text = dR["DepartmentName"].ToString();
+                //    lblSName.Text = dR["Name"].ToString();
+                //}
+                //dR.Close();
 
-                dR.Close();
+                // 2021/08/11
+                clsMaster ms = new clsMaster();
+                clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(global.SHAIN_CD_LENGTH, '0'));
+
+                if (shain != null)
+                {
+                    lblKoyoukbn.Text = shain.SHAIN_KOYOU_CD;
+                    lblBmnCode.Text  = shain.SHAIN_SHOZOKU_CD;
+                    lblBmnName.Text  = shain.SHAIN_SHOZOKU;
+                    lblSName.Text    = shain.SHAIN_NAME;
+                }
             }
         }
 
@@ -1598,7 +1635,8 @@ namespace CBS_OCR.OCR
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmKintaiRep frm = new frmKintaiRep(_dbName, _comName, _dbName_AC, _comName_AC);
+            //frmKintaiRep frm = new frmKintaiRep(_dbName, _comName, _dbName_AC, _comName_AC);
+            frmKintaiRep frm = new frmKintaiRep();
             frm.ShowDialog();
             this.Show();
         }

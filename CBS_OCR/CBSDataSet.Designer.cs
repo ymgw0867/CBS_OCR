@@ -1868,7 +1868,7 @@ namespace CBS_OCR {
                 this.columnID.AllowDBNull = false;
                 this.columnID.Unique = true;
                 this.column社員名.MaxLength = 255;
-                this.column現場コード.MaxLength = 8;
+                this.column現場コード.MaxLength = 9;
                 this.column現場名.MaxLength = 255;
                 this.column部門コード.MaxLength = 8;
                 this.column部門名.MaxLength = 255;

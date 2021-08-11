@@ -170,11 +170,11 @@
             this.txtGenbaCode.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txtGenbaCode.Location = new System.Drawing.Point(107, 116);
             this.txtGenbaCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtGenbaCode.MaxLength = 8;
+            this.txtGenbaCode.MaxLength = 9;
             this.txtGenbaCode.Name = "txtGenbaCode";
             this.txtGenbaCode.Size = new System.Drawing.Size(80, 31);
             this.txtGenbaCode.TabIndex = 4;
-            this.txtGenbaCode.Text = "12345678";
+            this.txtGenbaCode.Text = "123456789";
             this.txtGenbaCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtGenbaCode.TextChanged += new System.EventHandler(this.txtGenbaCode_TextChanged);
             this.txtGenbaCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
