@@ -139,9 +139,9 @@ namespace CBS_OCR.common
         //public const string CATEGORY_PART = "パート";
         public const string CATEGORY_ARBEIT = "アルバイト";
 
-        public const int CATEGORY_SHAIN = 1;        // 雇用区分：「１」社員   2018/01/25
-        public const int CATEGORY_FULLTIME = 4;     // 雇用区分：「４」フルタイム   2018/01/25
-        public const int CATEGORY_PART = 5;         // 雇用区分：「５」パートタイマー   2018/01/25
+        public const int CATEGORY_SHAIN     = 1;    // 雇用区分：「１」社員   2018/01/25
+        public const int CATEGORY_FULLTIME  = 4;    // 雇用区分：「４」フルタイム   2018/01/25
+        public const int CATEGORY_PART      = 5;    // 雇用区分：「５」パートタイマー   2018/01/25
         public const int CATEGORY_YUDOKEIBI = 6;    // 雇用区分：「６」交通誘導警備   2018/01/25
 
         // ＯＣＲモード

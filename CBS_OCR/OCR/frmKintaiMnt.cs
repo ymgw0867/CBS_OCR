@@ -1328,7 +1328,7 @@ namespace CBS_OCR.OCR
             clsMaster ms = new clsMaster();
             clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(g.PadLeft(global.GENBA_CD_LENGTH, '0'));
 
-            if (genba != null)
+            if (genba.GENBA_CD != "")
             {
                 lblGenbaName.Text = genba.GENBA_NAME;
             }
@@ -1576,7 +1576,7 @@ namespace CBS_OCR.OCR
                 clsMaster ms = new clsMaster();
                 clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(global.SHAIN_CD_LENGTH, '0'));
 
-                if (shain != null)
+                if (shain.SHAIN_CD != "")
                 {
                     lblKoyoukbn.Text = shain.SHAIN_KOYOU_CD;
                     lblBmnCode.Text  = shain.SHAIN_SHOZOKU_CD;

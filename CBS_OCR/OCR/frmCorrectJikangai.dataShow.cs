@@ -61,14 +61,11 @@ namespace CBS_OCR.OCR
             formInitialize(dID, iX);
 
             // ヘッダ情報表示
-            txtYear.Text = r.年.ToString();
+            txtYear.Text  = r.年.ToString();
             txtMonth.Text = r.月.ToString();
-            txtSNum.Text = r.社員番号.ToString();
+            txtSNum.Text  = r.社員番号.ToString();
             
             gl.ChangeValueStatus = false;   // チェンジバリューステータス
-
-            //txtMemo.Text = r.備考;
-
             gl.ChangeValueStatus = true;    // チェンジバリューステータス
 
             // 明細表示
@@ -76,7 +73,7 @@ namespace CBS_OCR.OCR
 
             // エラー情報表示初期化
             lblErrMsg.Visible = false;
-            lblErrMsg.Text = string.Empty;
+            lblErrMsg.Text    = string.Empty;
 
             // 画像表示
             ShowImage(Properties.Settings.Default.dataPath_Jikangai + r.画像名.ToString());

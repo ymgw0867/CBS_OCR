@@ -9,30 +9,41 @@ namespace CBS_OCR.common
 {
     class OCROutput
     {
-        public OCROutput(Form _preFrm, CBS_CLIDataSet _dts, string _dbName)
+        // コメント化：2021/08/12
+        //public OCROutput(Form _preFrm, CBS_CLIDataSet _dts, string _dbName)
+        //{
+        //    dts = _dts;
+        //    pFrm = _preFrm;
+        //    dbName = _dbName;
+
+        //    adp.時間外命令書ヘッダTableAdapter = jhAdp;
+        //    adp.時間外命令書明細TableAdapter = jmAdp;
+        //}
+
+        // 2021/08/12
+        public OCROutput(Form _preFrm, CBS_CLIDataSet _dts)
         {
-            dts = _dts;
+            dts  = _dts;
             pFrm = _preFrm;
-            dbName = _dbName;
 
             adp.時間外命令書ヘッダTableAdapter = jhAdp;
-            adp.時間外命令書明細TableAdapter = jmAdp;
+            adp.時間外命令書明細TableAdapter   = jmAdp;
         }
 
-        CBSDataSet1 dtsM = new CBSDataSet1();
+        CBSDataSet1 dtsM   = new CBSDataSet1();
         CBS_CLIDataSet dts = new CBS_CLIDataSet();
         Form pFrm = new Form();
         string dbName;
 
-        CBSDataSet1TableAdapters.共通勤務票TableAdapter cAdp = new CBSDataSet1TableAdapters.共通勤務票TableAdapter();
-        CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter hAdp = new CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter();
-        CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter mAdp = new CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter();
+        CBSDataSet1TableAdapters.共通勤務票TableAdapter cAdp          = new CBSDataSet1TableAdapters.共通勤務票TableAdapter();
+        CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter hAdp     = new CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter();
+        CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter mAdp       = new CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter();
         CBS_CLIDataSetTableAdapters.警備報告書ヘッダTableAdapter kAdp = new CBS_CLIDataSetTableAdapters.警備報告書ヘッダTableAdapter();
-        CBS_CLIDataSetTableAdapters.警備報告書明細TableAdapter iAdp = new CBS_CLIDataSetTableAdapters.警備報告書明細TableAdapter();
+        CBS_CLIDataSetTableAdapters.警備報告書明細TableAdapter iAdp   = new CBS_CLIDataSetTableAdapters.警備報告書明細TableAdapter();
 
-        CBSDataSet1TableAdapters.TableAdapterManager adp= new CBSDataSet1TableAdapters.TableAdapterManager();
+        CBSDataSet1TableAdapters.TableAdapterManager adp             = new CBSDataSet1TableAdapters.TableAdapterManager();
         CBSDataSet1TableAdapters.時間外命令書ヘッダTableAdapter jhAdp = new CBSDataSet1TableAdapters.時間外命令書ヘッダTableAdapter();
-        CBSDataSet1TableAdapters.時間外命令書明細TableAdapter jmAdp = new CBSDataSet1TableAdapters.時間外命令書明細TableAdapter();
+        CBSDataSet1TableAdapters.時間外命令書明細TableAdapter jmAdp   = new CBSDataSet1TableAdapters.時間外命令書明細TableAdapter();
 
         ///--------------------------------------------------------------------
         /// <summary>
@@ -207,7 +218,7 @@ namespace CBS_OCR.common
         ///--------------------------------------------------------------------
         public bool putComDataJikangai(ref int cnt, ref int sCnt)
         {
-            cnt = 0;
+            cnt  = 0;
             sCnt = 0;
             pFrm.Cursor = Cursors.WaitCursor;
 
@@ -230,27 +241,27 @@ namespace CBS_OCR.common
 
                     CBSDataSet1.時間外命令書ヘッダRow r = dtsM.時間外命令書ヘッダ.New時間外命令書ヘッダRow();
 
-                    r.ID = t.ID;
-                    r.社員番号 = t.社員番号;
-                    r.年 = yy;
-                    r.月 = t.月;
-                    r.画像名 = t.画像名;
-                    r.確認 = t.確認;
-                    r.備考 = t.備考;
+                    r.ID            = t.ID;
+                    r.社員番号      = t.社員番号;
+                    r.年            = yy;
+                    r.月            = t.月;
+                    r.画像名        = t.画像名;
+                    r.確認          = t.確認;
+                    r.備考          = t.備考;
                     r.編集アカウント = t.編集アカウント;
-                    r.更新年月日 = DateTime.Now;
+                    r.更新年月日     = DateTime.Now;
 
                     dtsM.時間外命令書ヘッダ.Add時間外命令書ヘッダRow(r);
 
                     foreach (var m in dts.時間外命令書明細.Where(a => a.ヘッダID == t.ID))
                     {
                         CBSDataSet1.時間外命令書明細Row mr = dtsM.時間外命令書明細.New時間外命令書明細Row();
-                        mr.ヘッダID = m.ヘッダID;
-                        mr.日 = m.日;
-                        mr.命令有無 = m.命令有無;
-                        mr.取消 = m.取消;
+                        mr.ヘッダID       = m.ヘッダID;
+                        mr.日             = m.日;
+                        mr.命令有無       = m.命令有無;
+                        mr.取消           = m.取消;
                         mr.編集アカウント = m.編集アカウント;
-                        mr.更新年月日 = DateTime.Now;
+                        mr.更新年月日     = DateTime.Now;
 
                         dtsM.時間外命令書明細.Add時間外命令書明細Row(mr);
                     }
@@ -280,24 +291,25 @@ namespace CBS_OCR.common
 
         ///--------------------------------------------------------------------
         /// <summary>
-        ///     警備報告書OCRデータを共通勤務票に書き込む </summary>
+        ///     警備報告書OCRデータを共通勤務票に書き込む : 2021/08/12</summary>
         ///--------------------------------------------------------------------
         public bool putComDataKeibi(ref int cnt, ref int sCnt)
         {
             // 同じ年月の勤怠データを読み込む
             cAdp.FillByYYMM(dtsM.共通勤務票, global.cnfYear, global.cnfMonth);
 
-            // 奉行SQLServer接続文字列取得
-            string sc = sqlControl.obcConnectSting.get(dbName);
+            // コメント化：2021/08/12
+            //// 奉行SQLServer接続文字列取得
+            //string sc = sqlControl.obcConnectSting.get(dbName);
 
-            // 奉行SQLServer接続
-            sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
+            //// 奉行SQLServer接続
+            //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
 
-            SqlDataReader dR = null;
+            //SqlDataReader dR = null;
             DateTime dt;
 
             // ログメッセージ
-            string logText = string.Empty;
+            string logText   = string.Empty;
             StringBuilder sb = new StringBuilder();
 
             pFrm.Cursor = Cursors.WaitCursor;
@@ -334,9 +346,9 @@ namespace CBS_OCR.common
                         // 同じ日、社員番号、現場コードの勤怠データは書き込み対象外とする
                         // 開始時間、終了時間を条件に追加 2018/03/05
                         if (dtsM.共通勤務票.Any(a => a.社員番号 == t.社員番号 && a.現場コード == t.警備報告書ヘッダRow.現場コード &&
-                                               a.日付.Day == t.警備報告書ヘッダRow.日 &&
-                                               a.開始時 == sH && a.開始分 == sM && 
-                                               a.終業時 == eH && a.終業分 == eM))
+                                                    a.日付.Day == t.警備報告書ヘッダRow.日 &&
+                                                    a.開始時   == sH && a.開始分 == sM && 
+                                                    a.終業時   == eH && a.終業分 == eM))
                         {
                             // スキップデータ内容ログ出力 : 2018/04/04
                             sb.Clear();
@@ -355,7 +367,8 @@ namespace CBS_OCR.common
                         }
                         else
                         {
-                            addKeibiData(sdCon, t, ref cnt, 1);
+                            //addKeibiData(sdCon, t, ref cnt, 1);   // コメント化：2021/08/12
+                            addKeibiData(t, ref cnt, 1);    // 2021/08/12
                         }
                     }
 
@@ -391,7 +404,8 @@ namespace CBS_OCR.common
                         }
                         else
                         {
-                            addKeibiData(sdCon, t, ref cnt, 2);
+                            //addKeibiData(sdCon, t, ref cnt, 2); // コメント化：2021/08/12
+                            addKeibiData(t, ref cnt, 2);    // 2021/08/12
                         }
                     }
                 }
@@ -420,15 +434,16 @@ namespace CBS_OCR.common
             }
             finally
             {
-                if (dR != null && !dR.IsClosed)
-                {
-                    dR.Close();
-                }
+                // コメント化：2021/08/12
+                //if (dR != null && !dR.IsClosed)
+                //{
+                //    dR.Close();
+                //}
 
-                if (sdCon.Cn.State == System.Data.ConnectionState.Open)
-                {
-                    sdCon.Close();
-                }
+                //if (sdCon.Cn.State == System.Data.ConnectionState.Open)
+                //{
+                //    sdCon.Close();
+                //}
 
                 // ログ出力 : 2018/04/04
                 sb.Clear();
@@ -439,38 +454,55 @@ namespace CBS_OCR.common
             }
         }
 
-        private void addKeibiData(sqlControl.DataControl sdCon, CBS_CLIDataSet.警備報告書明細Row t, ref int cnt, int sStatus)
+        //private void addKeibiData(sqlControl.DataControl sdCon, CBS_CLIDataSet.警備報告書明細Row t, ref int cnt, int sStatus) // コメント化：2021/08/12
+        // 2021/08/12
+        private void addKeibiData(CBS_CLIDataSet.警備報告書明細Row t, ref int cnt, int sStatus)
         {
             SqlDataReader dR = null;
             DateTime dt;
 
             CBSDataSet1.共通勤務票Row r = dtsM.共通勤務票.New共通勤務票Row();
 
-            string bCode = Utility.NulltoStr(t.社員番号.ToString().PadLeft(10, '0'));
-            dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+            //string bCode = Utility.NulltoStr(t.社員番号.ToString().PadLeft(10, '0')); // コメント化：2021/08/12
+            string bCode = Utility.NulltoStr(t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0')); // 2021/08/12
 
-            r.雇用区分 = global.flgOff;
+            //dR = sdCon.free_dsReader(Utility.getEmployee(bCode));  // コメント化：2021/08/12
+
+            r.雇用区分   = global.flgOff;
             r.部門コード = string.Empty;
-            r.部門名 = string.Empty;
+            r.部門名     = string.Empty;
 
-            while (dR.Read())
+            // コメント化：2021/08/12
+            //while (dR.Read())
+            //{
+            //    r.雇用区分 = Utility.StrtoInt(dR["koyoukbn"].ToString());
+            //    r.部門コード = dR["DepartmentCode"].ToString();
+            //    r.部門名 = dR["DepartmentName"].ToString();
+            //    r.社員名 = dR["Name"].ToString();
+            //}
+
+            //dR.Close();
+
+            // 社員ＣＳＶデータより情報を取得する：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(bCode);
+
+            if (shain.SHAIN_CD != "")
             {
-                r.雇用区分 = Utility.StrtoInt(dR["koyoukbn"].ToString());
-                r.部門コード = dR["DepartmentCode"].ToString();
-                r.部門名 = dR["DepartmentName"].ToString();
-                r.社員名 = dR["Name"].ToString();
+                r.雇用区分   = Utility.StrtoInt(shain.SHAIN_KOYOU_CD);
+                r.部門コード = shain.SHAIN_SHOZOKU_CD;
+                r.部門名     = shain.SHAIN_SHOZOKU;
+                r.社員名     = shain.SHAIN_NAME;
             }
-
-            dR.Close();
 
             if (DateTime.TryParse(t.警備報告書ヘッダRow.年 + "/" + t.警備報告書ヘッダRow.月 + "/" + t.警備報告書ヘッダRow.日, out dt))
             {
                 r.日付 = dt;
             }
 
-            r.社員番号 = t.社員番号;
+            r.社員番号   = t.社員番号;
             r.現場コード = t.警備報告書ヘッダRow.現場コード.PadLeft(8, '0');
-            r.現場名 = t.警備報告書ヘッダRow.現場名;
+            r.現場名     = t.警備報告書ヘッダRow.現場名;
             r.出勤簿区分 = global.flgOn;
 
             if (sStatus == 1)
@@ -528,23 +560,23 @@ namespace CBS_OCR.common
                 r.中止 = t.警備報告書ヘッダRow.中止2;
             }
 
-            r.所定時 = string.Empty;
-            r.所定分 = string.Empty;
-            r.時間外 = global.flgOff;
-            r.休日 = global.flgOff;
-            r.深夜 = global.flgOff;
-            r.交通手段社用車 = t.交通手段社用車;
+            r.所定時          = string.Empty;
+            r.所定分          = string.Empty;
+            r.時間外          = global.flgOff;
+            r.休日            = global.flgOff;
+            r.深夜            = global.flgOff;
+            r.交通手段社用車   = t.交通手段社用車;
             r.交通手段自家用車 = t.交通手段自家用車;
-            r.交通手段交通 = t.交通手段交通;
-            r.交通区分 = string.Empty;
-            r.走行距離 = t.走行距離;
-            r.同乗人数 = t.同乗人数;
-            r.交通費 = t.交通費;
-            r.夜間単価 = t.夜間単価;
-            r.保証有無 = t.保証有無;
-            r.単価振分区分 = t.単価振分区分;
-            r.画像名 = t.警備報告書ヘッダRow.画像名;
-            r.更新年月日 = DateTime.Now;
+            r.交通手段交通     = t.交通手段交通;
+            r.交通区分        = string.Empty;
+            r.走行距離        = t.走行距離;
+            r.同乗人数        = t.同乗人数;
+            r.交通費          = t.交通費;
+            r.夜間単価        = t.夜間単価;
+            r.保証有無        = t.保証有無;
+            r.単価振分区分    = t.単価振分区分;
+            r.画像名          = t.警備報告書ヘッダRow.画像名;
+            r.更新年月日      = DateTime.Now;
 
             dtsM.共通勤務票.Add共通勤務票Row(r);
             cnt++;

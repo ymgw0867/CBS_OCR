@@ -61,13 +61,13 @@ namespace CBS_OCR.OCR
             formInitialize(dID, iX);
 
             // ヘッダ情報表示
-            txtYear.BackColor = Color.Empty;
+            txtYear.BackColor  = Color.Empty;
             txtMonth.BackColor = Color.Empty;
-            txtSNum.BackColor = Color.Empty;
+            txtSNum.BackColor  = Color.Empty;
             
-            txtYear.Text = r.年.ToString(); ;
+            txtYear.Text  = r.年.ToString(); ;
             txtMonth.Text = Utility.EmptytoZero(r.月.ToString());
-            txtSNum.Text = r.社員番号.ToString();
+            txtSNum.Text  = r.社員番号.ToString();
             
             // 確認チェック
             if (r.承認印 == global.flgOn)
@@ -86,8 +86,8 @@ namespace CBS_OCR.OCR
             gl.ChangeValueStatus = true;    // チェンジバリューステータス
 
             // 日付配列クラスインスタンス作成
-            clsDayItems dItm = new clsDayItems();
-            clsDayItems[] ddd = new clsDayItems[31];
+            clsDayItems   dItm = new clsDayItems();
+            clsDayItems[] ddd  = new clsDayItems[31];
 
             // 明細表示
             showItem(r.ID, gcMultiRow1, r);
@@ -320,11 +320,11 @@ namespace CBS_OCR.OCR
                     mr[mRow, "chkKo"].Value = false;
                 }
 
-                mr[mRow, "txtKotsuKbn"].Value = t.交通区分.ToString();
-                mr[mRow, "txtKm"].Value = t.走行距離.ToString();
-                mr[mRow, "txtNin"].Value = t.同乗人数.ToString();
+                mr[mRow, "txtKotsuKbn" ].Value = t.交通区分.ToString();
+                mr[mRow, "txtKm"       ].Value = t.走行距離.ToString();
+                mr[mRow, "txtNin"      ].Value = t.同乗人数.ToString();
                 mr[mRow, "txtGenbaCode"].Value = t.現場コード.ToString();
-                mr[mRow, "txtTankaKbn"].Value = t.単価振分区分.ToString();
+                mr[mRow, "txtTankaKbn" ].Value = t.単価振分区分.ToString();
 
                 gl.ChangeValueStatus = true;            // changeValueイベントをtrueに戻す
 

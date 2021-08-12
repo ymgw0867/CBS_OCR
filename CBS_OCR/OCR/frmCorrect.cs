@@ -20,7 +20,7 @@ namespace CBS_OCR.OCR
     {
         /// ------------------------------------------------------------
         /// <summary>
-        ///     コンストラクタ </summary>
+        ///     コンストラクタ ：コメント化：2021/08/12</summary>
         /// <param name="dbName">
         ///     人事給与・会社領域データベース名</param>
         /// <param name="comName">
@@ -34,44 +34,72 @@ namespace CBS_OCR.OCR
         /// <param name="sID">
         ///     処理モード</param>
         /// ------------------------------------------------------------
-        public frmCorrect(string dbName, string comName, string dbName_AC, string comName_AC, string sID)
+        //public frmCorrect(string dbName, string comName, string dbName_AC, string comName_AC, string sID)
+        //{
+        //    InitializeComponent();
+
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+        //    //_xlsFolder = xlsFolder;     // 時間外命令書フォルダ
+
+        //    dID = sID;              // 処理モード
+        //    //_eMode = eMode;         // 処理モード2
+
+        //    /* テーブルアダプターマネージャーに勤務票ヘッダ、明細テーブル、
+        //     * 過去勤務票ヘッダ、過去明細テーブルアダプターを割り付ける */
+        //    adpMn.勤務票ヘッダTableAdapter = hAdp;
+        //    adpMn.勤務票明細TableAdapter = iAdp;
+
+        //    //pAdpMn.過去勤務票ヘッダTableAdapter = phAdp;
+        //    //pAdpMn.過去勤務票明細TableAdapter = piAdp;
+
+        //    //dAdpMn.保留勤務票ヘッダTableAdapter = dhAdp;
+        //    //dAdpMn.保留勤務票明細TableAdapter = diAdp;
+
+        //    // 休日テーブル読み込み
+        //    //kAdp.Fill(dts.休日);
+
+        //    // 環境設定読み込み
+        //    //cAdp.Fill(dts.環境設定);
+
+        //    //// 所定時間エクセルデータを配列に読み込む
+        //    //shoArray = clsXlsShotei.loadShoteiXls(_xlsFolder);            
+        //}
+
+        /// ------------------------------------------------------------
+        /// <summary>
+        ///     コンストラクタ：2021/08/12</summary>
+        /// <param name="dbName">
+        ///     人事給与・会社領域データベース名</param>
+        /// <param name="comName">
+        ///     人事給与・会社名</param>
+        /// <param name="dbName">
+        ///     会計・会社領域データベース名</param>
+        /// <param name="comName">
+        ///     会計・会社名</param>
+        /// <param name="xlsFolder">
+        ///     時間外命令書フォルダ</param>
+        /// <param name="sID">
+        ///     処理モード</param>
+        /// ------------------------------------------------------------
+        public frmCorrect(string sID)
         {
             InitializeComponent();
 
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
-            //_xlsFolder = xlsFolder;     // 時間外命令書フォルダ
-
             dID = sID;              // 処理モード
-            //_eMode = eMode;         // 処理モード2
 
             /* テーブルアダプターマネージャーに勤務票ヘッダ、明細テーブル、
              * 過去勤務票ヘッダ、過去明細テーブルアダプターを割り付ける */
             adpMn.勤務票ヘッダTableAdapter = hAdp;
-            adpMn.勤務票明細TableAdapter = iAdp;
-
-            //pAdpMn.過去勤務票ヘッダTableAdapter = phAdp;
-            //pAdpMn.過去勤務票明細TableAdapter = piAdp;
-
-            //dAdpMn.保留勤務票ヘッダTableAdapter = dhAdp;
-            //dAdpMn.保留勤務票明細TableAdapter = diAdp;
-
-            // 休日テーブル読み込み
-            //kAdp.Fill(dts.休日);
-
-            // 環境設定読み込み
-            //cAdp.Fill(dts.環境設定);
-
-            //// 所定時間エクセルデータを配列に読み込む
-            //shoArray = clsXlsShotei.loadShoteiXls(_xlsFolder);            
+            adpMn.勤務票明細TableAdapter   = iAdp;
         }
 
         // データアダプターオブジェクト
-        CBS_CLIDataSetTableAdapters.TableAdapterManager adpMn = new CBS_CLIDataSetTableAdapters.TableAdapterManager();
+        CBS_CLIDataSetTableAdapters.TableAdapterManager adpMn    = new CBS_CLIDataSetTableAdapters.TableAdapterManager();
         CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter hAdp = new CBS_CLIDataSetTableAdapters.勤務票ヘッダTableAdapter();
-        CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter iAdp = new CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter();
+        CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter iAdp   = new CBS_CLIDataSetTableAdapters.勤務票明細TableAdapter();
 
         //CBSDataSetTableAdapters.休日TableAdapter kAdp = new CBSDataSetTableAdapters.休日TableAdapter();
 
@@ -162,7 +190,7 @@ namespace CBS_OCR.OCR
             Utility.WindowsMinSize(this, this.Width, this.Height);
 
             txtMemo.AutoSize = false;
-            txtMemo.Height = 22;
+            txtMemo.Height   = 22;
 
             // Tabキーの既定のショートカットキーを解除する。
             gcMultiRow1.ShortcutKeyManager.Unregister(Keys.Tab);
@@ -173,16 +201,16 @@ namespace CBS_OCR.OCR
             gcMultiRow1.ShortcutKeyManager.Register(new clsKeyTab.CustomMoveToNextContorol(), Keys.Enter);
 
             textBox2.AutoSize = false;
-            txtYear.AutoSize = false;
+            txtYear.AutoSize  = false;
             txtMonth.AutoSize = false;
-            txtSNum.AutoSize = false;
+            txtSNum.AutoSize  = false;
             txtSName.AutoSize = false;
 
-            textBox2.Height = 22;
-            txtYear.Height = 22;
-            txtMonth.Height = 22;
-            txtSNum.Height = 22;
-            txtSName.Height = 22;            
+            textBox2.Height   = 22;
+            txtYear.Height    = 22;
+            txtMonth.Height   = 22;
+            txtSNum.Height    = 22;
+            txtSName.Height   = 22;            
 
             // 自分のコンピュータの登録がされていないとき終了します
             string pcName = Utility.getPcDir();
@@ -360,8 +388,10 @@ namespace CBS_OCR.OCR
             frmP.Show();
 
             // OCRのCSVデータをMDBへ取り込む
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
-            ocr.CsvToMdb(Properties.Settings.Default.dataPath, frmP, _dbName);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC); // コメント化：2021/08/12
+            OCRData ocr = new OCRData();    // 2021/08/12
+            //ocr.CsvToMdb(Properties.Settings.Default.dataPath, frmP, _dbName);// コメント化：2021/08/12
+            ocr.CsvToMdb(Properties.Settings.Default.dataPath, frmP);   // 2021/08/12
 
             // いったんオーナーをアクティブにする
             this.Activate();
@@ -522,14 +552,14 @@ namespace CBS_OCR.OCR
                 //r.社員番号 = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtSNum"].Value));
                 //r.承認印 = Convert.ToInt32(gcMultiRow2[0, "checkBoxCell1"].Value);
 
-                r.年 = Utility.StrtoInt(txtYear.Text);
-                r.月 = Utility.StrtoInt(txtMonth.Text);
+                r.年       = Utility.StrtoInt(txtYear.Text);
+                r.月       = Utility.StrtoInt(txtMonth.Text);
                 r.社員番号 = Utility.StrtoInt(txtSNum.Text);
-                r.承認印 = Convert.ToInt32(chkShounin.Checked);
+                r.承認印   = Convert.ToInt32(chkShounin.Checked);
                
                 r.更新年月日 = DateTime.Now;
-                r.確認 = Convert.ToInt32(checkBox1.Checked);
-                r.備考 = txtMemo.Text;
+                r.確認       = Convert.ToInt32(checkBox1.Checked);
+                r.備考       = txtMemo.Text;
 
                 // 勤務票明細テーブルセット更新
                 for (int i = 0; i < gcMultiRow1.RowCount; i++)
@@ -816,7 +846,8 @@ namespace CBS_OCR.OCR
             if (MessageBox.Show("勤務票データを作成します。よろしいですか", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
             // OCRDataクラス生成
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC);   // コメント化：2021/08/12
+            OCRData ocr = new OCRData();    // 2021/08/12
 
             // エラーチェックを実行する
             if (getErrData(cI, ocr)) // エラーがなかったとき
@@ -825,7 +856,8 @@ namespace CBS_OCR.OCR
                 adpMn.UpdateAll(dts);
 
                 // OCROutputクラス インスタンス生成
-                OCROutput kd = new OCROutput(this, dts, _dbName);
+                //OCROutput kd = new OCROutput(this, dts, _dbName); //　コメント化：2021/08/12
+                OCROutput kd = new OCROutput(this, dts);    // 2021/08/12
 
                 // 共通勤務票データ作成
                 int cnt = 0;
@@ -1775,91 +1807,91 @@ namespace CBS_OCR.OCR
                 if (gcMultiRow1[e.RowIndex, "chkTorikeshi"].Value.ToString() == "True")
                 {
                     //gcMultiRow1.Rows[e.RowIndex].BackColor = SystemColors.Control;
-                    gcMultiRow1[e.RowIndex, "txtDay"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtSh"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtSm"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtEh"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtEm"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtRh"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtRm"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtWh"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtWm"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "chkSha"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "chkJi"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "chkKo"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtKotsuKbn"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtKm"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtNin"].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtDay"      ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtSh"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtSm"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtEh"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtEm"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtRh"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtRm"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtWh"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtWm"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "chkSha"      ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "chkJi"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "chkKo"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtKotsuKbn" ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtKm"       ].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtNin"      ].ReadOnly = true;
                     gcMultiRow1[e.RowIndex, "txtGenbaCode"].ReadOnly = true;
-                    gcMultiRow1[e.RowIndex, "txtTankaKbn"].ReadOnly = true;
+                    gcMultiRow1[e.RowIndex, "txtTankaKbn" ].ReadOnly = true;
 
-                    gcMultiRow1[e.RowIndex, "txtDay"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "lblWeek"].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtDay"      ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "lblWeek"     ].Style.ForeColor = Color.LightGray;
                     gcMultiRow1[e.RowIndex, "lblGenbaName"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtSh"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtSm"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtEh"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtEm"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtRh"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtRm"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtWh"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtWm"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "chkSha"].Style.BackColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "chkJi"].Style.BackColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "chkKo"].Style.BackColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtKotsuKbn"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtKm"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtNin"].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtSh"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtSm"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtEh"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtEm"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtRh"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtRm"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtWh"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtWm"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "chkSha"      ].Style.BackColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "chkJi"       ].Style.BackColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "chkKo"       ].Style.BackColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtKotsuKbn" ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtKm"       ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtNin"      ].Style.ForeColor = Color.LightGray;
                     gcMultiRow1[e.RowIndex, "txtGenbaCode"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "txtTankaKbn"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "labelCell3"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "labelCell4"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "labelCell19"].Style.ForeColor = Color.LightGray;
-                    gcMultiRow1[e.RowIndex, "labelCell22"].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "txtTankaKbn" ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "labelCell3"  ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "labelCell4"  ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "labelCell19" ].Style.ForeColor = Color.LightGray;
+                    gcMultiRow1[e.RowIndex, "labelCell22" ].Style.ForeColor = Color.LightGray;
                 }
                 else
                 {
-                    gcMultiRow1[e.RowIndex, "txtDay"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtSh"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtSm"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtEh"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtEm"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtRh"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtRm"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtWh"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtWm"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "chkSha"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "chkJi"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "chkKo"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtKotsuKbn"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtKm"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtNin"].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtDay"      ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtSh"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtSm"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtEh"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtEm"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtRh"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtRm"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtWh"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtWm"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "chkSha"      ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "chkJi"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "chkKo"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtKotsuKbn" ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtKm"       ].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtNin"      ].ReadOnly = false;
                     gcMultiRow1[e.RowIndex, "txtGenbaCode"].ReadOnly = false;
-                    gcMultiRow1[e.RowIndex, "txtTankaKbn"].ReadOnly = false;
+                    gcMultiRow1[e.RowIndex, "txtTankaKbn" ].ReadOnly = false;
 
-                    gcMultiRow1[e.RowIndex, "txtDay"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "lblWeek"].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtDay"      ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "lblWeek"     ].Style.ForeColor = global.defaultColor;
                     gcMultiRow1[e.RowIndex, "lblGenbaName"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtSh"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtSm"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtEh"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtEm"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtRh"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtRm"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtWh"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtWm"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "chkSha"].Style.BackColor = Color.Empty;
-                    gcMultiRow1[e.RowIndex, "chkJi"].Style.BackColor = Color.Empty;
-                    gcMultiRow1[e.RowIndex, "chkKo"].Style.BackColor = Color.Empty;
-                    gcMultiRow1[e.RowIndex, "txtKotsuKbn"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtKm"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtNin"].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtSh"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtSm"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtEh"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtEm"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtRh"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtRm"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtWh"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtWm"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "chkSha"      ].Style.BackColor = Color.Empty;
+                    gcMultiRow1[e.RowIndex, "chkJi"       ].Style.BackColor = Color.Empty;
+                    gcMultiRow1[e.RowIndex, "chkKo"       ].Style.BackColor = Color.Empty;
+                    gcMultiRow1[e.RowIndex, "txtKotsuKbn" ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtKm"       ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtNin"      ].Style.ForeColor = global.defaultColor;
                     gcMultiRow1[e.RowIndex, "txtGenbaCode"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "txtTankaKbn"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "labelCell3"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "labelCell4"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "labelCell19"].Style.ForeColor = global.defaultColor;
-                    gcMultiRow1[e.RowIndex, "labelCell22"].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "txtTankaKbn" ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "labelCell3"  ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "labelCell4"  ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "labelCell19" ].Style.ForeColor = global.defaultColor;
+                    gcMultiRow1[e.RowIndex, "labelCell22" ].Style.ForeColor = global.defaultColor;
                 }
             }
             
@@ -1904,30 +1936,43 @@ namespace CBS_OCR.OCR
                     return;
                 }
 
-                // 奉行SQLServer接続文字列取得
-                string sc_ac = sqlControl.obcConnectSting.get(_dbName_AC);
+                // コメント化：2021/08/12
+                //// 奉行SQLServer接続文字列取得
+                //string sc_ac = sqlControl.obcConnectSting.get(_dbName_AC);
 
-                // 奉行SQLServer接続
-                sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
+                //// 奉行SQLServer接続
+                //sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
 
-                // プロジェクトデータリーダーを取得する
-                SqlDataReader dR;
-                string sqlSTRING = string.Empty;
-                sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
-                sqlSTRING += "from tbProject ";
-                sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(g).ToString().PadLeft(20, '0') + "'";
+                //// プロジェクトデータリーダーを取得する
+                //SqlDataReader dR;
+                //string sqlSTRING = string.Empty;
+                //sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
+                //sqlSTRING += "from tbProject ";
+                //sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(g).ToString().PadLeft(20, '0') + "'";
 
-                dR = sdCon_ac.free_dsReader(sqlSTRING);
+                //dR = sdCon_ac.free_dsReader(sqlSTRING);
+
+                //gcMultiRow1.SetValue(e.RowIndex, "lblGenbaName", "");
+                
+                //while (dR.Read())
+                //{
+                //    gcMultiRow1.SetValue(e.RowIndex, "lblGenbaName", Utility.NulltoStr(dR["ProjectName"]));
+                //}
+
+                //dR.Close();
+                //sdCon_ac.Close();
+
 
                 gcMultiRow1.SetValue(e.RowIndex, "lblGenbaName", "");
-                
-                while (dR.Read())
-                {
-                    gcMultiRow1.SetValue(e.RowIndex, "lblGenbaName", Utility.NulltoStr(dR["ProjectName"]));
-                }
 
-                dR.Close();
-                sdCon_ac.Close();
+                // 現場ＣＳＶデータよりプロジェクトデータを取得する：2021/08/12
+                clsMaster ms = new clsMaster();
+                clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(g.PadLeft(global.GENBA_CD_LENGTH, '0'));
+
+                if (genba.GENBA_CD != "")
+                {
+                    gcMultiRow1.SetValue(e.RowIndex, "lblGenbaName", Utility.NulltoStr(genba.GENBA_NAME_SM));
+                }
             }
 
             gl.ChangeValueStatus = true;
@@ -2106,7 +2151,8 @@ namespace CBS_OCR.OCR
             editLogStatus = false;
 
             // OCRDataクラス生成
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC); // コメント化：2021/08/12
+            OCRData ocr = new OCRData();    // 2021/08/12
 
             // エラーチェックを実行
             if (getErrData(cI, ocr))
@@ -2369,34 +2415,56 @@ namespace CBS_OCR.OCR
         {
             // 氏名を初期化
             txtSName.Text = string.Empty;
-                
-            // 奉行データベースより社員名を取得して表示します
-            if (txtSNum.Text != string.Empty)
+            
+            // コメント化：2021/08/12
+            //// 奉行データベースより社員名を取得して表示します
+            //if (txtSNum.Text != string.Empty)
+            //{
+            //    // 接続文字列取得
+            //    string sc = sqlControl.obcConnectSting.get(_dbName);
+            //    sqlControl.DataControl sdCon = new common.sqlControl.DataControl(sc);
+
+            //    string bCode = txtSNum.Text.PadLeft(10, '0');
+            //    SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+
+            //    while (dR.Read())
+            //    {
+            //        // 社員名表示
+            //        txtSName.Text = dR["Name"].ToString().Trim();
+
+            //        if (Utility.StrtoInt(dR["zaisekikbn"].ToString()) == 2)
+            //        {
+            //            txtSName.ForeColor = Color.Red;
+            //        }
+            //        else
+            //        {
+            //            txtSName.ForeColor = global.defaultColor;
+            //        }
+            //    }
+
+            //    dR.Close();
+            //    sdCon.Close();
+            //}
+            
+            string bCode = txtSNum.Text.PadLeft(global.SHAIN_CD_LENGTH, '0');
+
+            // 社員ＣＳＶデータより社員名を取得して表示します：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(bCode);
+
+            if (shain.SHAIN_CD != "")
             {
-                // 接続文字列取得
-                string sc = sqlControl.obcConnectSting.get(_dbName);
-                sqlControl.DataControl sdCon = new common.sqlControl.DataControl(sc);
+                // 社員名表示
+                txtSName.Text = shain.SHAIN_NAME;
 
-                string bCode = txtSNum.Text.PadLeft(10, '0');
-                SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
-
-                while (dR.Read())
+                if (Utility.StrtoInt(shain.SHAIN_ZAISEKI_CD) == 2)
                 {
-                    // 社員名表示
-                    txtSName.Text = dR["Name"].ToString().Trim();
-
-                    if (Utility.StrtoInt(dR["zaisekikbn"].ToString()) == 2)
-                    {
-                        txtSName.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        txtSName.ForeColor = global.defaultColor;
-                    }
+                    txtSName.ForeColor = Color.Red;
                 }
-
-                dR.Close();
-                sdCon.Close();
+                else
+                {
+                    txtSName.ForeColor = global.defaultColor;
+                }
             }
         }
     }

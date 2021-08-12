@@ -569,27 +569,32 @@ namespace CBS_OCR
                 return; // 戻る
             }
 
-            //frmComSelect frm = new frmComSelect();
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化：2021/08/12
+            ////frmComSelect frm = new frmComSelect();
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
-                //string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //    //string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 出勤簿データ作成
-                OCR.frmCorrect frmC = new OCR.frmCorrect(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, string.Empty);
-                frmC.ShowDialog();
-            }
-            else frm.Dispose();
+            //    // 出勤簿データ作成
+            //    OCR.frmCorrect frmC = new OCR.frmCorrect(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, string.Empty);
+            //    frmC.ShowDialog();
+            //}
+            //else frm.Dispose();
 
+            // 2021/08/12
+            // 出勤簿データ作成
+            OCR.frmCorrect frmC = new OCR.frmCorrect(string.Empty);
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -636,26 +641,35 @@ namespace CBS_OCR
                 return; // 戻る
             }
 
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化：2021/08/12
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
-                string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
+            //    string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
 
-                frm.Dispose();
+            //    frm.Dispose();
 
-                // 警備報告書出勤簿データ作成
-                OCR.frmCorrectKeibi frmC = new OCR.frmCorrectKeibi(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, _xlsFolder, string.Empty);
-                frmC.ShowDialog();
-            }
-            else frm.Dispose();
+            //    // 警備報告書出勤簿データ作成
+            //    OCR.frmCorrectKeibi frmC = new OCR.frmCorrectKeibi(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, _xlsFolder, string.Empty);
+            //    frmC.ShowDialog();
+            //}
+            //else
+            //{
+            //    frm.Dispose();
+            //}
 
+            string _xlsFolder = "";      // 時間外命令書フォルダ（不使用のため空データを渡す）：2021/08/12
+
+            // 警備報告書出勤簿データ作成：2021/08/12
+            OCR.frmCorrectKeibi frmC = new OCR.frmCorrectKeibi(_xlsFolder, string.Empty);
+            frmC.ShowDialog();
             this.Show();
         }
 
@@ -1022,26 +1036,33 @@ namespace CBS_OCR
                 return; // 戻る
             }
 
-            frmComSelect_CBS frm = new frmComSelect_CBS();
-            frm.ShowDialog();
+            // コメント化：2021/08/12
+            //frmComSelect_CBS frm = new frmComSelect_CBS();
+            //frm.ShowDialog();
 
-            if (frm._pblDbName != string.Empty)
-            {
-                // 選択領域のデータベース名を取得します
-                string _ComName = frm._pblComName;          // 人事給与・会社名
-                string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
-                string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
-                string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
-                string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
+            //if (frm._pblDbName != string.Empty)
+            //{
+            //    // 選択領域のデータベース名を取得します
+            //    string _ComName = frm._pblComName;          // 人事給与・会社名
+            //    string _ComDBName = frm._pblDbName;         // 人事給与・データベース名 
+            //    string _ComName_AC = frm._pblComName_AC;    // 会計・会社名
+            //    string _ComDBName_AC = frm._pblDbName_AC;   // 会計・データベース名
 
-                frm.Dispose();
+            //string _xlsFolder = frm._pblXlsFolder;      // 時間外命令書フォルダ
 
-                // 時間外命令書データ作成
-                OCR.frmCorrectJikangai frmC = new OCR.frmCorrectJikangai(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, _xlsFolder, string.Empty);
-                frmC.ShowDialog();
-            }
-            else frm.Dispose();
+            //    frm.Dispose();
 
+            //    // 時間外命令書データ作成
+            //    OCR.frmCorrectJikangai frmC = new OCR.frmCorrectJikangai(_ComDBName, _ComName, _ComDBName_AC, _ComName_AC, _xlsFolder, string.Empty);
+            //    frmC.ShowDialog();
+            //}
+            //else frm.Dispose();
+
+            string _xlsFolder = "";      // 時間外命令書フォルダ（不使用のため空データを渡す）：2021/08/12
+
+            // 時間外命令書データ作成：2021/08/12
+            OCR.frmCorrectJikangai frmC = new OCR.frmCorrectJikangai(_xlsFolder, string.Empty);
+            frmC.ShowDialog();
             this.Show();
         }
 

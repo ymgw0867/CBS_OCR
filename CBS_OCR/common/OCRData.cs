@@ -12,15 +12,25 @@ namespace CBS_OCR.common
 {
     class OCRData
     {
-        public OCRData(string dbName, string dbName_AC)
+        // コメント化：2021/08/12
+        //public OCRData(string dbName, string dbName_AC)
+        //{
+        //    //_dbName = dbName;           // 人事給与
+        //    //_dbName_ac = dbName_AC;     // 会計
+        //}
+
+        // 2021/08/12
+        public OCRData()
         {
-            _dbName = dbName;           // 人事給与
-            _dbName_ac = dbName_AC;     // 会計
+            // コメント化：2021/08/12
+            //_dbName = dbName;           // 人事給与
+            //_dbName_ac = dbName_AC;     // 会計
         }
 
-        // 奉行シリーズデータ領域データベース名
-        string _dbName = string.Empty;
-        string _dbName_ac = string.Empty;
+        // コメント化：2021/08/12
+        //// 奉行シリーズデータ領域データベース名
+        //string _dbName = string.Empty;
+        //string _dbName_ac = string.Empty;
 
         //common.xlsData bs;
 
@@ -280,7 +290,7 @@ namespace CBS_OCR.common
         
         ///-----------------------------------------------------------------------
         /// <summary>
-        ///     CSVデータをMDBに登録する：DataSet Version </summary>
+        ///     CSVデータをMDBに登録する：DataSet Version：2021/08/12</summary>
         /// <param name="_InPath">
         ///     CSVデータパス</param>
         /// <param name="frmP">
@@ -290,10 +300,11 @@ namespace CBS_OCR.common
         /// <param name="dbName">
         ///     データ領域データベース名</param>
         ///-----------------------------------------------------------------------
-        public void CsvToMdb(string _inPath, frmPrg frmP, string dbName)
+        //public void CsvToMdb(string _inPath, frmPrg frmP, string dbName)  // コメント化：2021/08/12
+        public void CsvToMdb(string _inPath, frmPrg frmP)
         {
             string headerKey = string.Empty;    // ヘッダキー
-            int shopCode = 0;     // 店舗コード
+            int    shopCode  = 0;               // 店舗コード
 
             // テーブルセットオブジェクト
             CBS_CLIDataSet dts = new CBS_CLIDataSet();
@@ -373,7 +384,7 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------
         /// <summary>
-        ///     CSVデータをMDBに登録する：DataSet Version </summary>
+        ///     CSVデータをMDBに登録する：DataSet Version : 2021/08/12 </summary>
         /// <param name="_InPath">
         ///     CSVデータパス</param>
         /// <param name="frmP">
@@ -383,7 +394,8 @@ namespace CBS_OCR.common
         /// <param name="dbName">
         ///     データ領域データベース名</param>
         ///-----------------------------------------------------------------------
-        public void CsvToMdb_Keibi(string _inPath, frmPrg frmP, string dbName)
+        //public void CsvToMdb_Keibi(string _inPath, frmPrg frmP, string dbName)    コメント化：2021/08/12
+        public void CsvToMdb_Keibi(string _inPath, frmPrg frmP)
         {
             string headerKey = string.Empty;    // ヘッダキー
             int shopCode = 0;     // 店舗コード
@@ -404,8 +416,8 @@ namespace CBS_OCR.common
                 adpMn.警備報告書明細TableAdapter.Fill(dts.警備報告書明細);
 
                 // 対象CSVファイル数を取得
-                string[] t = System.IO.Directory.GetFiles(_inPath, "*.csv");
-                int cLen = t.Length;
+                string[] t    = System.IO.Directory.GetFiles(_inPath, "*.csv");
+                int      cLen = t.Length;
 
                 //CSVデータをMDBへ取込
                 int cCnt = 0;
@@ -466,7 +478,7 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------
         /// <summary>
-        ///     CSVデータをMDBに登録する：DataSet Version </summary>
+        ///     CSVデータをMDBに登録する：DataSet Version : 2021/08/12</summary>
         /// <param name="_InPath">
         ///     CSVデータパス</param>
         /// <param name="frmP">
@@ -476,7 +488,8 @@ namespace CBS_OCR.common
         /// <param name="dbName">
         ///     データ領域データベース名</param>
         ///-----------------------------------------------------------------------
-        public void CsvToMdb_Jikangai(string _inPath, frmPrg frmP, string dbName)
+        //public void CsvToMdb_Jikangai(string _inPath, frmPrg frmP, string dbName) // コメント化：2021/08/12
+        public void CsvToMdb_Jikangai(string _inPath, frmPrg frmP)
         {
             string headerKey = string.Empty;    // ヘッダキー
 
@@ -497,7 +510,7 @@ namespace CBS_OCR.common
 
                 // 対象CSVファイル数を取得
                 string[] t = System.IO.Directory.GetFiles(_inPath, "*.csv");
-                int cLen = t.Length;
+                int   cLen = t.Length;
 
                 //CSVデータをMDBへ取込
                 int cCnt = 0; 
@@ -854,13 +867,14 @@ namespace CBS_OCR.common
             // 出勤簿データ読み出し
             Boolean eCheck = true;
 
-            // 奉行SQLServer接続文字列取得
-            string sc = sqlControl.obcConnectSting.get(_dbName);
-            string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
+            // コメント化：2021/08/12
+            //// 奉行SQLServer接続文字列取得
+            //string sc = sqlControl.obcConnectSting.get(_dbName);
+            //string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
 
-            // 奉行SQLServer接続
-            sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
-            sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
+            //// 奉行SQLServer接続
+            //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
+            //sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
 
             try
             {
@@ -881,7 +895,8 @@ namespace CBS_OCR.common
                         CBS_CLIDataSet.勤務票ヘッダRow r = dts.勤務票ヘッダ.Single(a => a.ID == cID[i]);
 
                         // エラーチェック実施
-                        eCheck = errCheckData(dts, r, sdCon, sdCon_ac);
+                        //eCheck = errCheckData(dts, r, sdCon, sdCon_ac);　// コメント化：2021/08/12
+                        eCheck = errCheckData(dts, r);
 
                         if (!eCheck)　//エラーがあったとき
                         {
@@ -909,9 +924,10 @@ namespace CBS_OCR.common
                 // オーナーのフォームを有効に戻す
                 frm.Enabled = true;
 
-                // 奉行SQLServer接続コネクション閉じる
-                sdCon.Close();
-                sdCon_ac.Close();
+                // コメント化：2021/08/12
+                //// 奉行SQLServer接続コネクション閉じる
+                //sdCon.Close();
+                //sdCon_ac.Close();
             }
         }
 
@@ -948,14 +964,15 @@ namespace CBS_OCR.common
 
             // 警備報告書データ読み出し
             Boolean eCheck = true;
+            
+            // コメント化：2021/08/12
+            //// 奉行SQLServer接続文字列取得
+            //string sc = sqlControl.obcConnectSting.get(_dbName);
+            //string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
 
-            // 奉行SQLServer接続文字列取得
-            string sc = sqlControl.obcConnectSting.get(_dbName);
-            string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
-
-            // 奉行SQLServer接続
-            sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
-            sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
+            //// 奉行SQLServer接続
+            //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
+            //sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
 
             try
             {
@@ -976,7 +993,8 @@ namespace CBS_OCR.common
                         CBS_CLIDataSet.警備報告書ヘッダRow r = dts.警備報告書ヘッダ.Single(a => a.ID == cID[i]);
 
                         // エラーチェック実施
-                        eCheck = errCheckData(dts, r, sdCon, sdCon_ac);
+                        //eCheck = errCheckData(dts, r, sdCon, sdCon_ac); // コメント化：2021/08/12
+                        eCheck = errCheckData(dts, r);  // 2021/08/12
 
                         if (!eCheck)　//エラーがあったとき
                         {
@@ -1004,9 +1022,10 @@ namespace CBS_OCR.common
                 // オーナーのフォームを有効に戻す
                 frm.Enabled = true;
 
+                // コメント化：2021/08/12
                 // 奉行SQLServer接続コネクション閉じる
-                sdCon.Close();
-                sdCon_ac.Close();
+                //sdCon.Close();
+                //sdCon_ac.Close();
             }
         }
 
@@ -1036,7 +1055,7 @@ namespace CBS_OCR.common
 
             // プログレスバーを表示する
             frmPrg frmP = new frmPrg();
-            frmP.Owner = frm;
+            frmP.Owner  = frm;
             frmP.Show();
 
             // レコード件数取得
@@ -1045,13 +1064,14 @@ namespace CBS_OCR.common
             // 警備報告書データ読み出し
             Boolean eCheck = true;
 
-            // 奉行SQLServer接続文字列取得
-            string sc = sqlControl.obcConnectSting.get(_dbName);
-            string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
+            // コメント化：2021/08/12
+            //// 奉行SQLServer接続文字列取得
+            //string sc    = sqlControl.obcConnectSting.get(_dbName);
+            //string sc_ac = sqlControl.obcConnectSting.get(_dbName_ac);
 
-            // 奉行SQLServer接続
-            sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
-            sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
+            //// 奉行SQLServer接続
+            //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
+            //sqlControl.DataControl sdCon_ac = new sqlControl.DataControl(sc_ac);
 
             try
             {
@@ -1072,7 +1092,7 @@ namespace CBS_OCR.common
                         CBS_CLIDataSet.時間外命令書ヘッダRow r = dts.時間外命令書ヘッダ.Single(a => a.ID == cID[i]);
 
                         // エラーチェック実施
-                        eCheck = errCheckData(dts, r, sdCon, sdCon_ac);
+                        eCheck = errCheckData(dts, r);
 
                         if (!eCheck)　//エラーがあったとき
                         {
@@ -1100,9 +1120,10 @@ namespace CBS_OCR.common
                 // オーナーのフォームを有効に戻す
                 frm.Enabled = true;
 
-                // 奉行SQLServer接続コネクション閉じる
-                sdCon.Close();
-                sdCon_ac.Close();
+                // コメント化：2021/08/12
+                //// 奉行SQLServer接続コネクション閉じる
+                //sdCon.Close();
+                //sdCon_ac.Close();
             }
         }
         
@@ -1129,7 +1150,7 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------------------------------
         /// <summary>
-        ///     項目別エラーチェック。
+        ///     項目別エラーチェック。: 2021/08/12
         ///     エラーのときヘッダ行インデックス、フィールド番号、明細行インデックス、エラーメッセージが記録される </summary>
         /// <param name="dts">
         ///     データセット</param>
@@ -1138,7 +1159,8 @@ namespace CBS_OCR.common
         /// <returns>
         ///     エラーなし：true, エラー有り：false</returns>
         ///-----------------------------------------------------------------------------------------------
-        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.勤務票ヘッダRow r, sqlControl.DataControl sdCon, sqlControl.DataControl sdCon_ac)
+        //public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.勤務票ヘッダRow r, sqlControl.DataControl sdCon, sqlControl.DataControl sdCon_ac) // コメント化：2021/08/12
+        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.勤務票ヘッダRow r)
         {
             // 確認チェック
             if (r.確認 == global.flgOff)
@@ -1167,13 +1189,22 @@ namespace CBS_OCR.common
                 return false;
             }
 
-            // 登録済み社員番号マスター検証
-            if (!chkShainCode(r.社員番号.ToString(), sdCon))
+            // コメント化：2021/08/12
+            //// 登録済み社員番号マスター検証
+            //if (!chkShainCode(r.社員番号.ToString(), sdCon))
+            //{
+            //    setErrStatus(eShainNo, 0, "マスター未登録または退職者の社員番号です");
+            //    return false;
+            //}
+
+            // 社員ＣＳＶデータに登録済みの社員番号か調べる：2021/08/12
+            if (!chkShainCode(r.社員番号.ToString()))
             {
                 setErrStatus(eShainNo, 0, "マスター未登録または退職者の社員番号です");
                 return false;
             }
-                  
+
+
             // 承認印 2018/01/23
             if (r.Is承認印Null() || r.承認印 == global.flgOff)
             {
@@ -1249,7 +1280,8 @@ namespace CBS_OCR.common
                 if (!errCheckDoujyou(m, "同乗人数", iX)) return false;
 
                 // 現場コード
-                if (!errCheckGenbaCode(m, "現場コード", iX, sdCon_ac)) return false;
+                //if (!errCheckGenbaCode(m, "現場コード", iX, sdCon_ac)) return false;   // コメント化：2021/08/12
+                if (!errCheckGenbaCode(m, "現場コード", iX)) return false;
 
                 // 単価振分区分
                 if (!errCheckTankaKbn(m, "単価振分区分", iX)) return false;
@@ -1269,7 +1301,8 @@ namespace CBS_OCR.common
         /// <returns>
         ///     エラーなし：true, エラー有り：false</returns>
         ///-----------------------------------------------------------------------------------------------
-        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.警備報告書ヘッダRow r, sqlControl.DataControl sdCon, sqlControl.DataControl sdCon_ac)
+        //public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.警備報告書ヘッダRow r, sqlControl.DataControl sdCon, sqlControl.DataControl sdCon_ac) // コメント化：2021/08/12
+        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.警備報告書ヘッダRow r)
         {
             // 確認チェック
             if (r.確認 == global.flgOff)
@@ -1302,7 +1335,8 @@ namespace CBS_OCR.common
             }
             
             // 現場コード
-            if (!errCheckGenbaCode_Keibi(r, "現場コード", 0, sdCon_ac)) return false;
+            //if (!errCheckGenbaCode_Keibi(r, "現場コード", 0, sdCon_ac)) return false;  // コメント化：2021/08/12
+            if (!errCheckGenbaCode_Keibi(r, "現場コード", 0)) return false;  // 2021/08/12
 
             // 開始時刻・終業時刻チェック
             if (!errCheckTime(r, "出退時間", tanMin1, 0)) return false;
@@ -1336,13 +1370,13 @@ namespace CBS_OCR.common
                 }
 
                 // 無記入の行はチェック対象外とする
-                if (m.社員番号 == global.flgOff &&
-                    m.勤務時間区分1 == global.flgOff && m.勤務時間区分2 == global.flgOff &&
+                if (m.社員番号       == global.flgOff &&
+                    m.勤務時間区分1  == global.flgOff && m.勤務時間区分2    == global.flgOff &&
                     m.交通手段社用車 == global.flgOff && m.交通手段自家用車 == global.flgOff &&
-                    m.交通手段交通 == global.flgOff && m.交通費 == string.Empty &&
-                    m.走行距離 == string.Empty && m.同乗人数 == string.Empty &&
-                    m.単価振分区分 == global.flgOff && m.夜間単価 == global.flgOff && 
-                    m.保証有無 == global.flgOff)
+                    m.交通手段交通   == global.flgOff && m.交通費          == string.Empty  &&
+                    m.走行距離       == string.Empty  && m.同乗人数        == string.Empty  &&
+                    m.単価振分区分   == global.flgOff && m.夜間単価        == global.flgOff && 
+                    m.保証有無       == global.flgOff)
                 {
                     continue;
                 }
@@ -1355,7 +1389,8 @@ namespace CBS_OCR.common
                 }
 
                 // 登録済み社員番号マスター検証
-                if (!chkShainCode(m.社員番号.ToString(), sdCon))
+                //if (!chkShainCode(m.社員番号.ToString(), sdCon))  // コメント化：2021/08/12
+                if (!chkShainCode(m.社員番号.ToString()))
                 {
                     setErrStatus(eShainNo, iX - 1, "マスター未登録または退職者の社員番号です");
                     return false;
@@ -1395,7 +1430,7 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------------------------------
         /// <summary>
-        ///     項目別エラーチェック。
+        ///     項目別エラーチェック。：2021/08/12
         ///     エラーのときヘッダ行インデックス、フィールド番号、明細行インデックス、エラーメッセージが記録される </summary>
         /// <param name="dts">
         ///     データセット</param>
@@ -1404,7 +1439,7 @@ namespace CBS_OCR.common
         /// <returns>
         ///     エラーなし：true, エラー有り：false</returns>
         ///-----------------------------------------------------------------------------------------------
-        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.時間外命令書ヘッダRow r, sqlControl.DataControl sdCon, sqlControl.DataControl sdCon_ac)
+        public Boolean errCheckData(CBS_CLIDataSet dts, CBS_CLIDataSet.時間外命令書ヘッダRow r)
         {
             // 確認チェック
             if (r.確認 == global.flgOff)
@@ -1433,8 +1468,19 @@ namespace CBS_OCR.common
                 return false;
             }
 
-            // 登録済み社員番号マスター検証
-            if (!chkShainCode(r.社員番号.ToString(), sdCon))
+            // コメント化：2021/08/12
+            //// 登録済み社員番号マスター検証
+            //if (!chkShainCode(r.社員番号.ToString(), sdCon))
+            //{
+            //    setErrStatus(eShainNo, 0, "マスター未登録または退職者の社員番号です");
+            //    return false;
+            //}
+
+            // 登録済み社員番号マスター検証（社員CSVデータで検証）：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(r.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0'));
+
+            if (shain.SHAIN_CD == "")
             {
                 setErrStatus(eShainNo, 0, "マスター未登録または退職者の社員番号です");
                 return false;
@@ -2292,7 +2338,7 @@ namespace CBS_OCR.common
 
         ///----------------------------------------------------------------------
         /// <summary>
-        ///     現場コードチェック </summary>
+        ///     現場コードチェック : 2021/08/12</summary>
         /// <param name="m">
         ///     CBS_CLIDataSet.勤務票明細Row</param>
         /// <param name="tittle">
@@ -2302,7 +2348,8 @@ namespace CBS_OCR.common
         /// <returns>
         ///     エラーなし：true, エラーあり：false</returns>
         ///----------------------------------------------------------------------
-        private bool errCheckGenbaCode(CBS_CLIDataSet.勤務票明細Row m, string tittle, int iX, sqlControl.DataControl sdCon_ac)
+        //private bool errCheckGenbaCode(CBS_CLIDataSet.勤務票明細Row m, string tittle, int iX, sqlControl.DataControl sdCon_ac)
+        private bool errCheckGenbaCode(CBS_CLIDataSet.勤務票明細Row m, string tittle, int iX)
         {
             if (Utility.StrtoInt(m.日) != global.flgOff && Utility.StrtoInt(m.現場コード) == global.flgOff)
             {
@@ -2310,31 +2357,45 @@ namespace CBS_OCR.common
                 return false;
             }
             
-            // プロジェクトデータ取得
-            // データリーダーを取得する
-            SqlDataReader dR;
-            string sqlSTRING = string.Empty;
-            sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
-            sqlSTRING += "from tbProject ";
-            sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(m.現場コード).ToString().PadLeft(20, '0') + "'";
+            // コメント化：2021/08/12
+            //// プロジェクトデータ取得
+            //// データリーダーを取得する
+            //SqlDataReader dR;
+            //string sqlSTRING = string.Empty;
+            //sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
+            //sqlSTRING += "from tbProject ";
+            //sqlSTRING += "WHERE ProjectCode = '" + Utility.StrtoInt(m.現場コード).ToString().PadLeft(20, '0') + "'";
 
-            dR = sdCon_ac.free_dsReader(sqlSTRING);
+            //dR = sdCon_ac.free_dsReader(sqlSTRING);
 
-            bool dd = dR.HasRows;
-            dR.Close();
+            //bool dd = dR.HasRows;
+            //dR.Close();
 
-            if (!dd)
+            //if (!dd)
+            //{
+            //    setErrStatus(eGenbaCode, iX - 1, "マスター未登録の現場コードです");
+            //    return false;
+            //}
+
+
+            // 現場ＣＳＶデータよりプロジェクトデータを取得する：
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(m.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'));
+
+            if (genba.GENBA_CD == "")
             {
                 setErrStatus(eGenbaCode, iX - 1, "マスター未登録の現場コードです");
                 return false;
             }
-
-            return true;
+            else
+            {
+                return true;
+            }
         }
 
         ///----------------------------------------------------------------------
         /// <summary>
-        ///     警備報告書・現場コードチェック </summary>
+        ///     警備報告書・現場コードチェック : 2021/08/12</summary>
         /// <param name="m">
         ///     CBS_CLIDataSet.警備報告書ヘッダRow</param>
         /// <param name="tittle">
@@ -2344,7 +2405,8 @@ namespace CBS_OCR.common
         /// <returns>
         ///     エラーなし：true, エラーあり：false</returns>
         ///----------------------------------------------------------------------
-        private bool errCheckGenbaCode_Keibi(CBS_CLIDataSet.警備報告書ヘッダRow m, string tittle, int iX, sqlControl.DataControl sdCon_ac)
+        //private bool errCheckGenbaCode_Keibi(CBS_CLIDataSet.警備報告書ヘッダRow m, string tittle, int iX, sqlControl.DataControl sdCon_ac) // コメント化：2021/08/12
+        private bool errCheckGenbaCode_Keibi(CBS_CLIDataSet.警備報告書ヘッダRow m, string tittle, int iX)
         {
             if (m.現場コード == string.Empty)
             {
@@ -2352,20 +2414,32 @@ namespace CBS_OCR.common
                 return false;
             }
 
+            // コメント化：2021/08/12
             // プロジェクトデータ取得
             // データリーダーを取得する
-            SqlDataReader dR;
-            string sqlSTRING = string.Empty;
-            sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
-            sqlSTRING += "from tbProject ";
-            sqlSTRING += "WHERE ProjectCode = '" + m.現場コード.ToString().PadLeft(20, '0') + "'";
+            //SqlDataReader dR;
+            //string sqlSTRING = string.Empty;
+            //sqlSTRING += "SELECT ProjectCode,ProjectName,ValidDate,InValidDate ";
+            //sqlSTRING += "from tbProject ";
+            //sqlSTRING += "WHERE ProjectCode = '" + m.現場コード.ToString().PadLeft(20, '0') + "'";
 
-            dR = sdCon_ac.free_dsReader(sqlSTRING);
+            //dR = sdCon_ac.free_dsReader(sqlSTRING);
 
-            bool dd = dR.HasRows;
-            dR.Close();
+            //bool dd = dR.HasRows;
+            //dR.Close();
 
-            if (!dd)
+            //if (!dd)
+            //{
+            //    setErrStatus(eGenbaCode, 0, "マスター未登録の現場コードです");
+            //    return false;
+            //}
+
+
+            // プロジェクトデータ（現場コード）取得：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(m.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'));
+
+            if (genba.GENBA_CD == "")
             {
                 setErrStatus(eGenbaCode, 0, "マスター未登録の現場コードです");
                 return false;
@@ -3428,38 +3502,48 @@ namespace CBS_OCR.common
 
         ///------------------------------------------------------------
         /// <summary>
-        ///     社員コードチェック </summary>
+        ///     社員コードチェック : 2021/08/12</summary>
         /// <param name="sdCon">
         ///     sqlControl.DataControl オブジェクト </param>
         /// <param name="s">
         ///     社員番号</param>
-        /// <param name="sDt">
-        ///     基準年月日</param>
         /// <returns>
-        ///     true:エラーなし、false:エラー</returns>
+        ///     true:データ登録済み、false:データ未登録</returns>
         ///------------------------------------------------------------
-        private bool chkShainCode(string s, sqlControl.DataControl sdCon)
+        //private bool chkShainCode(string s, sqlControl.DataControl sdCon) // コメント化：2021/08/12
+        private bool chkShainCode(string s)
         {
-            bool dm = false;
+            //bool dm = false;
 
-            // 社員コード取得
-            StringBuilder sb = new StringBuilder();
-            sb.Clear();
-            sb.Append("select EmployeeNo,RetireCorpDate from tbEmployeeBase ");
-            sb.Append("where EmployeeNo = '" + s.PadLeft(10, '0') + "' ");
-            sb.Append(" and BeOnTheRegisterDivisionID != 9");
+            // コメント化 2021/08/12
+            //// 社員コード取得
+            //StringBuilder sb = new StringBuilder();
+            //sb.Clear();
+            //sb.Append("select EmployeeNo,RetireCorpDate from tbEmployeeBase ");
+            //sb.Append("where EmployeeNo = '" + s.PadLeft(10, '0') + "' ");
+            //sb.Append(" and BeOnTheRegisterDivisionID != 9");
 
-            SqlDataReader dR = sdCon.free_dsReader(sb.ToString());
+            //SqlDataReader dR = sdCon.free_dsReader(sb.ToString());
 
-            while (dR.Read())
+            //while (dR.Read())
+            //{
+            //    dm = true;
+            //    break;
+            //}
+
+            //dR.Close();
+
+            // 社員情報ＣＳＶデータより取得：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(s.PadLeft(global.SHAIN_CD_LENGTH, '0'));
+            if (shain.SHAIN_CD == "")
             {
-                dm = true;
-                break;
+                return false;
             }
-
-            dR.Close();
-
-            return dm;
+            else
+            {
+                return true;
+            }
         }
     }
 }

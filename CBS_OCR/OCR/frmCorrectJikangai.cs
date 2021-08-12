@@ -20,7 +20,7 @@ namespace CBS_OCR.OCR
     {
         /// ------------------------------------------------------------
         /// <summary>
-        ///     コンストラクタ </summary>
+        ///     コンストラクタ ：コメント化 2021/08/12</summary>
         /// <param name="dbName">
         ///     人事給与・会社領域データベース名</param>
         /// <param name="comName">
@@ -34,43 +34,71 @@ namespace CBS_OCR.OCR
         /// <param name="sID">
         ///     処理モード</param>
         /// ------------------------------------------------------------
-        public frmCorrectJikangai(string dbName, string comName, string dbName_AC, string comName_AC, string xlsFolder, string sID)
+        //public frmCorrectJikangai(string dbName, string comName, string dbName_AC, string comName_AC, string xlsFolder, string sID)
+        //{
+        //    InitializeComponent();
+
+        //    _dbName = dbName;           // データベース名
+        //    _comName = comName;         // 会社名
+        //    _dbName_AC = dbName_AC;     // データベース名
+        //    _comName_AC = comName_AC;   // 会社名
+        //    _xlsFolder = xlsFolder;     // 時間外命令書フォルダ
+
+        //    dID = sID;              // 処理モード
+        //    //_eMode = eMode;         // 処理モード2
+
+        //    /* テーブルアダプターマネージャーに時間外命令書ヘッダ、明細テーブル、
+        //     * 過去時間外命令書ヘッダ、過去明細テーブルアダプターを割り付ける */
+        //    adpMn.時間外命令書ヘッダTableAdapter = hAdp;
+        //    adpMn.時間外命令書明細TableAdapter = iAdp;
+
+        //    // 環境設定読み込み
+        //    //cAdp.Fill(dts.環境設定);
+
+        //    //// 所定時間エクセルデータを配列に読み込む
+        //    //shoArray = clsXlsShotei.loadShoteiXls(_xlsFolder);            
+        //}
+        
+        /// ------------------------------------------------------------
+        /// <summary>
+        ///     コンストラクタ ：2021/08/12</summary>
+        /// <param name="dbName">
+        ///     人事給与・会社領域データベース名</param>
+        /// <param name="comName">
+        ///     人事給与・会社名</param>
+        /// <param name="dbName">
+        ///     会計・会社領域データベース名</param>
+        /// <param name="comName">
+        ///     会計・会社名</param>
+        /// <param name="xlsFolder">
+        ///     時間外命令書フォルダ</param>
+        /// <param name="sID">
+        ///     処理モード</param>
+        /// ------------------------------------------------------------
+        public frmCorrectJikangai(string xlsFolder, string sID)
         {
             InitializeComponent();
-
-            _dbName = dbName;           // データベース名
-            _comName = comName;         // 会社名
-            _dbName_AC = dbName_AC;     // データベース名
-            _comName_AC = comName_AC;   // 会社名
-            _xlsFolder = xlsFolder;     // 時間外命令書フォルダ
-
+            _xlsFolder = xlsFolder; // 時間外命令書フォルダ
             dID = sID;              // 処理モード
-            //_eMode = eMode;         // 処理モード2
 
             /* テーブルアダプターマネージャーに時間外命令書ヘッダ、明細テーブル、
              * 過去時間外命令書ヘッダ、過去明細テーブルアダプターを割り付ける */
             adpMn.時間外命令書ヘッダTableAdapter = hAdp;
-            adpMn.時間外命令書明細TableAdapter = iAdp;
-
-            // 環境設定読み込み
-            //cAdp.Fill(dts.環境設定);
-
-            //// 所定時間エクセルデータを配列に読み込む
-            //shoArray = clsXlsShotei.loadShoteiXls(_xlsFolder);            
+            adpMn.時間外命令書明細TableAdapter   = iAdp;
         }
 
         // データアダプターオブジェクト
-        CBS_CLIDataSetTableAdapters.TableAdapterManager adpMn = new CBS_CLIDataSetTableAdapters.TableAdapterManager();
+        CBS_CLIDataSetTableAdapters.TableAdapterManager adpMn          = new CBS_CLIDataSetTableAdapters.TableAdapterManager();
         CBS_CLIDataSetTableAdapters.時間外命令書ヘッダTableAdapter hAdp = new CBS_CLIDataSetTableAdapters.時間外命令書ヘッダTableAdapter();
-        CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter iAdp = new CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter();
+        CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter iAdp   = new CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter();
 
         // データセットオブジェクト
         CBS_CLIDataSet dts = new CBS_CLIDataSet();
 
         // セル値
-        private string cellName = string.Empty;         // セル名
+        private string cellName        = string.Empty;  // セル名
         private string cellBeforeValue = string.Empty;  // 編集前
-        private string cellAfterValue = string.Empty;   // 編集後
+        private string cellAfterValue  = string.Empty;  // 編集後
 
         #region 編集ログ・項目名 2015/09/08
         private const string LOG_YEAR = "年";
@@ -103,17 +131,16 @@ namespace CBS_OCR.OCR
         const string END_NODATA = "non Data";
         #endregion
 
-        string dID = string.Empty;              // 表示する過去データのID
-        string sDBNM = string.Empty;            // データベース名
+        // コメント化：2021/08/12
+        //string sDBNM       = string.Empty;  // データベース名
+        //string _dbName     = string.Empty;  // 会社領域データベース識別番号
+        //string _comNo      = string.Empty;  // 会社番号
+        //string _comName    = string.Empty;  // 会社名
+        //string _dbName_AC  = string.Empty;  // 会社領域データベース識別番号
+        //string _comName_AC = string.Empty;  // 会社名
 
-        string _dbName = string.Empty;          // 会社領域データベース識別番号
-        string _comNo = string.Empty;           // 会社番号
-        string _comName = string.Empty;         // 会社名
-
-        string _dbName_AC = string.Empty;       // 会社領域データベース識別番号
-        string _comName_AC = string.Empty;      // 会社名
-
-        string _xlsFolder = string.Empty;       // 時間外命令書フォルダ
+        string dID         = string.Empty;  // 表示する過去データのID
+        string _xlsFolder  = string.Empty;  // 時間外命令書フォルダ
 
         bool _eMode = true;
 
@@ -125,7 +152,7 @@ namespace CBS_OCR.OCR
 
         // カレントデータRowsインデックス
         string [] cID = null;
-        int cI = 0;
+        int    cI     = 0;
 
         // グローバルクラス
         global gl = new global();
@@ -133,8 +160,8 @@ namespace CBS_OCR.OCR
         System.Collections.ArrayList al = new System.Collections.ArrayList();
 
         clsStaff[] stf = null;              // スタッフクラス配列
-        clsStaff sStf = new clsStaff();     // 画面表示したスタッフクラス
-        clsShop[] shp = null;               // 店舗マスタークラス
+        clsStaff sStf  = new clsStaff();    // 画面表示したスタッフクラス
+        clsShop[] shp  = null;              // 店舗マスタークラス
 
         //clsXlsShotei[] shoArray = null;     // 所定時間配列
 
@@ -159,16 +186,16 @@ namespace CBS_OCR.OCR
             gcMultiRow1.ShortcutKeyManager.Register(new clsKeyTab.CustomMoveToNextContorol(), Keys.Enter);
 
             txtYear.AutoSize = false;
-            txtYear.Height = 24;
+            txtYear.Height   = 24;
 
             txtMonth.AutoSize = false;
-            txtMonth.Height = 24;
+            txtMonth.Height   = 24;
 
             txtSNum.AutoSize = false;
-            txtSNum.Height = 24;
+            txtSNum.Height   = 24;
 
             lblSName.AutoSize = false;
-            lblSName.Height = 24;
+            lblSName.Height   = 24;
 
             // 自分のコンピュータの登録がされていないとき終了します
             string pcName = Utility.getPcDir();
@@ -354,8 +381,10 @@ namespace CBS_OCR.OCR
             frmP.Show();
 
             // OCRのCSVデータをMDBへ取り込む
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
-            ocr.CsvToMdb_Jikangai(Properties.Settings.Default.dataPath_Jikangai, frmP, _dbName);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC);   // コメント化：2021/08/12
+            OCRData ocr = new OCRData();    // 2021/08/12
+            //ocr.CsvToMdb_Jikangai(Properties.Settings.Default.dataPath_Jikangai, frmP, _dbName); // コメント化：2021/08/12
+            ocr.CsvToMdb_Jikangai(Properties.Settings.Default.dataPath_Jikangai, frmP); // 2021/08/12
 
             // いったんオーナーをアクティブにする
             this.Activate();
@@ -768,16 +797,18 @@ namespace CBS_OCR.OCR
             if (MessageBox.Show("時間外命令書データを作成します。よろしいですか", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
             // OCRDataクラス生成
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC); // コメント化：2021/08/12
+            OCRData ocr = new OCRData(); // 2021/08/12
 
             // エラーチェックを実行する
             if (getErrData(cI, ocr)) // エラーがなかったとき
             {
                 // OCROutputクラス インスタンス生成
-                OCROutput kd = new OCROutput(this, dts, _dbName);
+                //OCROutput kd = new OCROutput(this, dts, _dbName);   // コメント化：2021/08/12
+                OCROutput kd = new OCROutput(this, dts);   // 2021/08/12
                 
                 // 共通勤務票データ作成
-                int cnt = 0;
+                int cnt  = 0;
                 int sCnt = 0;
 
                 if (kd.putComDataJikangai(ref cnt, ref sCnt))
@@ -881,7 +912,7 @@ namespace CBS_OCR.OCR
             }
 
             string fromImg = string.Empty;
-            string toImg = string.Empty;
+            string toImg   = string.Empty;
 
             // 時間外命令書ヘッダデータを取得する
             foreach (var t in dts.時間外命令書ヘッダ.OrderBy(a => a.ID))
@@ -890,7 +921,7 @@ namespace CBS_OCR.OCR
                 fromImg = Properties.Settings.Default.dataPath_Jikangai + t.画像名;
 
                 // 出勤簿移動先ファイルパス ; 2018/01/25
-                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + "-" + t.社員番号.ToString().PadLeft(6, '0');
+                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + "-" + t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
                 toImg = tifPath + @"\" + toFileName;
 
                 // 同名ファイルが既に登録済みのときはファイル名の末尾に番号を付加 2018/01/25
@@ -970,7 +1001,7 @@ namespace CBS_OCR.OCR
 
             CBSDataSet1 dts = new CBSDataSet1();
             CBSDataSet1TableAdapters.時間外命令書ヘッダTableAdapter hAdp = new CBSDataSet1TableAdapters.時間外命令書ヘッダTableAdapter();
-            CBSDataSet1TableAdapters.時間外命令書明細TableAdapter mAdp = new CBSDataSet1TableAdapters.時間外命令書明細TableAdapter();
+            CBSDataSet1TableAdapters.時間外命令書明細TableAdapter mAdp   = new CBSDataSet1TableAdapters.時間外命令書明細TableAdapter();
 
             try
             {
@@ -1629,7 +1660,7 @@ namespace CBS_OCR.OCR
 
             CBS_CLIDataSet dts = new CBS_CLIDataSet();
             CBS_CLIDataSetTableAdapters.時間外命令書ヘッダTableAdapter adp = new CBS_CLIDataSetTableAdapters.時間外命令書ヘッダTableAdapter();
-            CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter iAdp = new CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter();
+            CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter iAdp  = new CBS_CLIDataSetTableAdapters.時間外命令書明細TableAdapter();
 
             // 時間外命令書ヘッダ全行削除
             adp.DeleteQuery();
@@ -1892,7 +1923,8 @@ namespace CBS_OCR.OCR
             editLogStatus = false;
 
             // OCRDataクラス生成
-            OCRData ocr = new OCRData(_dbName, _dbName_AC);
+            //OCRData ocr = new OCRData(_dbName, _dbName_AC); // コメント化：2021/08/12
+            OCRData ocr = new OCRData(); // 2021/08/12
 
             // エラーチェックを実行
             if (getErrData(cI, ocr))
@@ -1919,7 +1951,9 @@ namespace CBS_OCR.OCR
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("表示中の時間外命令書を削除します。よろしいですか", "削除確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
                 return;
+            }
 
             // 非ログ書き込み状態とする
             editLogStatus = false;
@@ -1963,34 +1997,55 @@ namespace CBS_OCR.OCR
             // 氏名を初期化
             lblSName.Text = string.Empty;
 
-            // 奉行データベースより社員名を取得して表示します
-            if (Utility.NulltoStr(txtSNum.Text) != string.Empty)
+            // コメント化：2021/08/12
+            //// 奉行データベースより社員名を取得して表示します
+            //if (Utility.NulltoStr(txtSNum.Text) != string.Empty)
+            //{
+            //    // 接続文字列取得
+            //    string sc = sqlControl.obcConnectSting.get(_dbName);
+            //    sqlControl.DataControl sdCon = new common.sqlControl.DataControl(sc);
+
+            //    string bCode = Utility.NulltoStr(txtSNum.Text).PadLeft(10, '0');
+            //    SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+
+            //    while (dR.Read())
+            //    {
+            //        // 社員名表示
+            //        lblSName.Text = dR["Name"].ToString();
+
+            //        // 在籍区分
+            //        if (Utility.StrtoInt(dR["zaisekikbn"].ToString()) == 2)
+            //        {
+            //            lblSName.ForeColor = Color.Red;
+            //        }
+            //        else
+            //        {
+            //            lblSName.ForeColor = global.defaultColor;
+            //        }
+            //    }
+
+            //    dR.Close();
+            //    sdCon.Close();
+            //}
+
+            // 社員CSVデータから社員情報を取得する：2021/08/12
+            clsMaster ms = new clsMaster();
+            clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(global.SHAIN_CD_LENGTH, '0'));
+
+            if (shain.SHAIN_CD != "")
             {
-                // 接続文字列取得
-                string sc = sqlControl.obcConnectSting.get(_dbName);
-                sqlControl.DataControl sdCon = new common.sqlControl.DataControl(sc);
+                // 社員名表示
+                lblSName.Text = shain.SHAIN_NAME;
 
-                string bCode = Utility.NulltoStr(txtSNum.Text).PadLeft(10, '0');
-                SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
-
-                while (dR.Read())
+                // 在籍区分
+                if (Utility.StrtoInt(shain.SHAIN_ZAISEKI_CD) == 2)
                 {
-                    // 社員名表示
-                    lblSName.Text = dR["Name"].ToString();
-
-                    // 在籍区分
-                    if (Utility.StrtoInt(dR["zaisekikbn"].ToString()) == 2)
-                    {
-                        lblSName.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        lblSName.ForeColor = global.defaultColor;
-                    }
+                    lblSName.ForeColor = Color.Red;
                 }
-
-                dR.Close();
-                sdCon.Close();
+                else
+                {
+                    lblSName.ForeColor = global.defaultColor;
+                }
             }
         }
 
