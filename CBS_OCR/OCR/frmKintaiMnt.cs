@@ -1351,7 +1351,7 @@ namespace CBS_OCR.OCR
                 r.部門コード = lblBmnCode.Text;
                 r.部門名 = lblBmnName.Text;
 
-                r.現場コード = txtGenbaCode.Text.PadLeft(8, '0');
+                r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
                 r.現場名 = lblGenbaName.Text;
                 r.出勤簿区分 = cmbShubetsu.SelectedIndex;
                 r.開始時 = txtSh.Text.Trim();
@@ -1458,7 +1458,7 @@ namespace CBS_OCR.OCR
                 var r = _dts.共通勤務票.Single(a => a.ID == fMode.ID);
 
                 r.日付 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());
-                r.現場コード = txtGenbaCode.Text.PadLeft(8, '0');
+                r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
                 r.現場名 = lblGenbaName.Text;
                 r.開始時 = txtSh.Text.Trim();
                 r.開始分 = txtSm.Text.Trim();

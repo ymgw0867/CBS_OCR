@@ -593,7 +593,7 @@ namespace CBS_OCR.OCR
 
                     if (Utility.NulltoStr(gcMultiRow1[i, "txtGenbaCode"].Value) != string.Empty)
                     {
-                        m.現場コード = Utility.NulltoStr(gcMultiRow1[i, "txtGenbaCode"].Value).PadLeft(8, '0');
+                        m.現場コード = Utility.NulltoStr(gcMultiRow1[i, "txtGenbaCode"].Value).PadLeft(global.GENBA_CD_LENGTH, '0');  // 2021/08/16
                     }
                     else
                     {

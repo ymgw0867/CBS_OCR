@@ -661,7 +661,7 @@
             // txtGenbaCode
             // 
             this.txtGenbaCode.Location = new System.Drawing.Point(884, 0);
-            this.txtGenbaCode.MaxLength = 8;
+            this.txtGenbaCode.MaxLength = 9;
             this.txtGenbaCode.Name = "txtGenbaCode";
             this.txtGenbaCode.Size = new System.Drawing.Size(90, 19);
             border23.Left = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.Black);

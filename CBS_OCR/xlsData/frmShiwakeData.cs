@@ -617,14 +617,14 @@ namespace CBS_OCR.xlsData
                 return;
             }
 
-            bool firstDen = true;
-            string kmCode = string.Empty;
-            string bmnCode = string.Empty;
-            string denDate = global.cnfYear.ToString() + "/" + global.cnfMonth.ToString() + "/" + DateTime.DaysInMonth(global.cnfYear, global.cnfMonth);
+            bool   firstDen = true;
+            string kmCode   = string.Empty;
+            string bmnCode  = string.Empty;
+            string denDate  = global.cnfYear.ToString() + "/" + global.cnfMonth.ToString() + "/" + DateTime.DaysInMonth(global.cnfYear, global.cnfMonth);
 
             // 社員別、現場種別毎実働時間集計
             var s = dts.共通勤務票.Where(a => a.社員番号 == sNum)
-                .GroupBy(a => a.現場コード.PadLeft(8, '0').Substring(4, 4))
+                .GroupBy(a => a.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0').Substring(4, 4))     // 2021/08/16
                 .Select(g => new { 
                     gCode = g.Key, 
                     //tm = g.Sum(d => Utility.StrtoInt(d.実働時) * 60 + Utility.StrtoInt(d.実働分))

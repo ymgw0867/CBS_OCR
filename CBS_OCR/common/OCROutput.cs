@@ -136,7 +136,7 @@ namespace CBS_OCR.common
                     }
 
                     r.社員番号 = t.勤務票ヘッダRow.社員番号;
-                    r.現場コード = t.現場コード.PadLeft(8, '0');
+                    r.現場コード = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'); // 2021/08/16
                     r.現場名 = t.現場名;
                     r.出勤簿区分 = global.flgOff;
                     r.開始時 = t.開始時;
@@ -501,7 +501,7 @@ namespace CBS_OCR.common
             }
 
             r.社員番号   = t.社員番号;
-            r.現場コード = t.警備報告書ヘッダRow.現場コード.PadLeft(8, '0');
+            r.現場コード = t.警備報告書ヘッダRow.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16
             r.現場名     = t.警備報告書ヘッダRow.現場名;
             r.出勤簿区分 = global.flgOn;
 

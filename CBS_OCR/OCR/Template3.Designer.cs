@@ -318,17 +318,17 @@
             // txtGenbaCode
             // 
             this.txtGenbaCode.Location = new System.Drawing.Point(451, 0);
-            this.txtGenbaCode.MaxLength = 8;
+            this.txtGenbaCode.MaxLength = 9;
             this.txtGenbaCode.Name = "txtGenbaCode";
             this.txtGenbaCode.Size = new System.Drawing.Size(87, 32);
             border12.Outline = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
             cellStyle12.Border = border12;
-            cellStyle12.Font = new System.Drawing.Font("游ゴシック", 12.75F);
+            cellStyle12.Font = new System.Drawing.Font("游ゴシック", 11.75F);
             cellStyle12.ForeColor = System.Drawing.Color.Navy;
             cellStyle12.TextAlign = GrapeCity.Win.MultiRow.MultiRowContentAlignment.MiddleCenter;
             this.txtGenbaCode.Style = cellStyle12;
             this.txtGenbaCode.TabIndex = 14;
-            this.txtGenbaCode.Value = "00987654";
+            this.txtGenbaCode.Value = "009876542";
             // 
             // labelCell5
             // 

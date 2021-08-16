@@ -541,11 +541,11 @@ namespace CBS_OCR.OCR
                 CBS_CLIDataSet.警備報告書ヘッダRow r = dts.警備報告書ヘッダ.Single(a => a.ID == iX);
 
                 // 警備報告書ヘッダテーブルセット更新
-                r.年 = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtYear"].Value));
-                r.月 = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtMonth"].Value));
-                r.日 = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtDay"].Value));
-                r.現場コード = Utility.NulltoStr(gcMultiRow2[0, "txtGenbaCode"].Value).PadLeft(8, '0');
-                r.現場名 = Utility.NulltoStr(gcMultiRow2[0, "lblGenbaName"].Value);
+                r.年          = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtYear"].Value));
+                r.月          = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtMonth"].Value));
+                r.日          = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow2[0, "txtDay"].Value));
+                r.現場コード  = Utility.NulltoStr(gcMultiRow2[0, "txtGenbaCode"].Value).PadLeft(global.GENBA_CD_LENGTH, '0'); // 2021/08/16
+                r.現場名      = Utility.NulltoStr(gcMultiRow2[0, "lblGenbaName"].Value);
                 r.報告書確認印 = Convert.ToInt32(gcMultiRow2[0, "checkBoxCell1"].Value);
 
                 r.開始時1 = Utility.NulltoStr(gcMultiRow1[0, "txtSh"].Value);
@@ -959,7 +959,7 @@ namespace CBS_OCR.OCR
 
                 // 警備報告書移動先ファイルパス
                 //toImg = tifPath + @"\" + t.画像名;
-                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + t.日.ToString().PadLeft(2, '0') + "-" + t.現場コード.PadLeft(8, '0');
+                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + t.日.ToString().PadLeft(2, '0') + "-" + t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');  // 2021/08/16
                 toImg = tifPath + @"\" + toFileName;
 
                 //// 同名ファイルが既に登録済みのときは削除する
@@ -2591,6 +2591,11 @@ namespace CBS_OCR.OCR
                     gcMultiRow3.Refresh();
                 }
             }
+        }
+
+        private void gcMultiRow3_CellContentClick(object sender, CellEventArgs e)
+        {
+
         }
     }
 }

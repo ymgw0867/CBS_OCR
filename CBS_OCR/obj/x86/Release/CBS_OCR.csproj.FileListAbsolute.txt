@@ -49,4 +49,3 @@ C:\セントラルビルサービス\CBS_OCR\CBS_OCR\obj\x86\Release\CBS_OCR.csp
 C:\セントラルビルサービス\CBS_OCR\CBS_OCR\obj\x86\Release\CBS_OCR.exe.licenses
 C:\セントラルビルサービス\CBS_OCR\CBS_OCR\obj\x86\Release\CBS_OCR.exe
 C:\セントラルビルサービス\CBS_OCR\CBS_OCR\obj\x86\Release\CBS_OCR.pdb
-C:\セントラルビルサービス\CBS_OCR\CBS_OCR\obj\x86\Release\CBS_OCR.csprojResolveAssemblyReference.cache

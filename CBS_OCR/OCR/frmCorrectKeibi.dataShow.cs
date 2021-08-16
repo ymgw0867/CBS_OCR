@@ -61,16 +61,16 @@ namespace CBS_OCR.OCR
             formInitialize(dID, iX);
 
             // ヘッダ情報表示1
-            gcMultiRow2[0, "txtYear"].Style.BackColor = Color.Empty;
-            gcMultiRow2[0, "txtMonth"].Style.BackColor = Color.Empty;
-            gcMultiRow2[0, "txtDay"].Style.BackColor = Color.Empty;
-            gcMultiRow2[0, "txtGenbaCode"].Style.BackColor = Color.Empty;
+            gcMultiRow2[0, "txtYear"      ].Style.BackColor = Color.Empty;
+            gcMultiRow2[0, "txtMonth"     ].Style.BackColor = Color.Empty;
+            gcMultiRow2[0, "txtDay"       ].Style.BackColor = Color.Empty;
+            gcMultiRow2[0, "txtGenbaCode" ].Style.BackColor = Color.Empty;
             gcMultiRow2[0, "checkBoxCell1"].Style.BackColor = Color.Empty;
 
-            gcMultiRow2.SetValue(0, "txtYear", r.年.ToString());
-            gcMultiRow2.SetValue(0, "txtMonth", r.月.ToString());
-            gcMultiRow2.SetValue(0, "txtDay", r.日.ToString());
-            gcMultiRow2.SetValue(0, "txtGenbaCode", r.現場コード.ToString());
+            gcMultiRow2.SetValue(0, "txtYear"      , r.年.ToString());
+            gcMultiRow2.SetValue(0, "txtMonth"     , r.月.ToString());
+            gcMultiRow2.SetValue(0, "txtDay"       , r.日.ToString());
+            gcMultiRow2.SetValue(0, "txtGenbaCode" , r.現場コード.ToString());
             gcMultiRow2.SetValue(0, "checkBoxCell1", Convert.ToBoolean(r.報告書確認印));
 
             // ヘッダ情報表示2

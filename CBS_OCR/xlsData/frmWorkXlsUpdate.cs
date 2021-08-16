@@ -247,15 +247,15 @@ namespace CBS_OCR.xlsData
                                 sheet.Cell(20 + r, 4).Value = "";
                             }
 
-                            sheet.Cell(20 + r, 5).Style.NumberFormat.Format = "00000000";   // 書式 2017/12/26
-                            sheet.Cell(20 + r, 5).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;  // セル横位置 2017/12/26
+                            sheet.Cell(20 + r,  5).Style.NumberFormat.Format = "00000000";   // 書式 2017/12/26
+                            sheet.Cell(20 + r,  5).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;  // セル横位置 2017/12/26
 
-                            sheet.Cell(20 + r, 5).Value = t.現場コード.PadLeft(8, '0');
-                            sheet.Cell(20 + r, 6).Value = t.現場名;
-                            sheet.Cell(20 + r, 7).Value = t.交通区分;
+                            sheet.Cell(20 + r,  5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16
+                            sheet.Cell(20 + r,  6).Value = t.現場名;
+                            sheet.Cell(20 + r,  7).Value = t.交通区分;
 
-                            sheet.Cell(20 + r, 8).Value = getSETime(Utility.NulltoStr(t.開始時), Utility.NulltoStr(t.開始分));
-                            sheet.Cell(20 + r, 9).Value = getSETime(Utility.NulltoStr(t.終業時), Utility.NulltoStr(t.終業分));
+                            sheet.Cell(20 + r,  8).Value = getSETime(Utility.NulltoStr(t.開始時), Utility.NulltoStr(t.開始分));
+                            sheet.Cell(20 + r,  9).Value = getSETime(Utility.NulltoStr(t.終業時), Utility.NulltoStr(t.終業分));
                             sheet.Cell(20 + r, 10).Value = getSETime(Utility.NulltoStr(t.休憩時), Utility.NulltoStr(t.休憩分));
                             sheet.Cell(20 + r, 11).Value = getSETime(Utility.NulltoStr(t.実働時), Utility.NulltoStr(t.実働分));
                             sheet.Cell(20 + r, 12).Value = getSETime(Utility.NulltoStr(t.所定時), Utility.NulltoStr(t.所定分));
