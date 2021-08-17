@@ -568,23 +568,24 @@ namespace CBS_OCR.OCR
                     CBS_CLIDataSet.勤務票明細Row m = (CBS_CLIDataSet.勤務票明細Row)dts.勤務票明細.FindByID(sID);
 
                     // 無効なデータ
-                    if (Utility.NulltoStr(gcMultiRow1[i, "txtDay"].Value) == string.Empty &&
-                        Utility.NulltoStr(gcMultiRow1[i, "txtSh"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtSm"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtEh"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtEm"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtRh"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtRm"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtWh"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtWm"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "chkSha"].Value) == "false" && 
-                        Utility.NulltoStr(gcMultiRow1[i, "chkJi"].Value) == "false" && 
-                        Utility.NulltoStr(gcMultiRow1[i, "chkKo"].Value) == "false" && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtKotsuKbn"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtKm"].Value) == string.Empty && 
-                        Utility.NulltoStr(gcMultiRow1[i, "txtNin"].Value) == string.Empty && 
+                    if (Utility.NulltoStr(gcMultiRow1[i, "txtDay"      ].Value) == string.Empty &&
+                        Utility.NulltoStr(gcMultiRow1[i, "txtSh"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtSm"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtEh"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtEm"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtRh"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtRm"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtWh"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtWm"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "chkSha"      ].Value) == "false" && 
+                        Utility.NulltoStr(gcMultiRow1[i, "chkJi"       ].Value) == "false" && 
+                        Utility.NulltoStr(gcMultiRow1[i, "chkKo"       ].Value) == "false" && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtKotsuKbn" ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtKm"       ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "txtNin"      ].Value) == string.Empty && 
                         Utility.NulltoStr(gcMultiRow1[i, "txtGenbaCode"].Value) == string.Empty &&  
-                        Utility.NulltoStr(gcMultiRow1[i, "txtTankaKbn"].Value) == string.Empty)
+                        Utility.NulltoStr(gcMultiRow1[i, "txtTankaKbn" ].Value) == string.Empty && 
+                        Utility.NulltoStr(gcMultiRow1[i, "chkYukyu"    ].Value) == "false") // 2021/08/17 有休区分
                     {
                         continue;
                     }
@@ -621,6 +622,25 @@ namespace CBS_OCR.OCR
                     m.単価振分区分 = Utility.StrtoInt(Utility.NulltoStr(gcMultiRow1[i, "txtTankaKbn"].Value));
                     m.編集アカウント = global.loginUserID;
                     m.更新年月日 = DateTime.Now;
+
+                    // 有休区分：2021/08/17
+                    bool yukyuStatus = Convert.ToBoolean(gcMultiRow1[i, "chkYukyu"].Value);
+                    if (yukyuStatus)
+                    {
+                        if (m.開始時 == string.Empty && m.開始分 == string.Empty &&
+                            m.終業時 == string.Empty && m.終業分 == string.Empty)
+                        {
+                            m.有休区分 = global.YUKYU_ZEN;  // 全日有休(1.0)
+                        }
+                        else
+                        {
+                            m.有休区分 = global.YUKYU_HAN;  // 半日有休(0.5)
+                        }
+                    }
+                    else
+                    {
+                        m.有休区分 = global.flgOff;
+                    }
                 }
             }
             catch (Exception ex)

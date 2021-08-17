@@ -7,26 +7,26 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="60" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:勤務票ヘッダ" ZOrder="9" X="70" Y="70" Height="305" Width="206" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
-    <Shape ID="DesignTable:勤務票明細" ZOrder="8" X="346" Y="70" Height="324" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:警備報告書ヘッダ" ZOrder="7" X="618" Y="70" Height="324" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:警備報告書明細" ZOrder="6" X="969" Y="64" Height="345" Width="226" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="275" />
-    <Shape ID="DesignTable:時間外命令書ヘッダ" ZOrder="5" X="1215" Y="70" Height="267" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
-    <Shape ID="DesignTable:時間外命令書明細" ZOrder="4" X="1528" Y="70" Height="229" Width="239" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:勤務票明細" ZOrder="1" X="346" Y="70" Height="324" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="254" />
+    <Shape ID="DesignTable:警備報告書ヘッダ" ZOrder="8" X="618" Y="70" Height="324" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:警備報告書明細" ZOrder="7" X="969" Y="64" Height="345" Width="226" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="275" />
+    <Shape ID="DesignTable:時間外命令書ヘッダ" ZOrder="6" X="1215" Y="70" Height="267" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
+    <Shape ID="DesignTable:時間外命令書明細" ZOrder="5" X="1528" Y="70" Height="229" Width="239" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:勤務票ヘッダ_勤務票明細" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:勤務票ヘッダ_勤務票明細" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>276</X>
-          <Y>213</Y>
+          <Y>164</Y>
         </Point>
         <Point>
           <X>346</X>
-          <Y>213</Y>
+          <Y>164</Y>
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:警備報告書ヘッダ_警備報告書明細" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:警備報告書ヘッダ_警備報告書明細" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>849</X>
@@ -38,7 +38,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:時間外命令書ヘッダ_時間外命令書明細" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:時間外命令書ヘッダ_時間外命令書明細" ZOrder="2" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>1458</X>

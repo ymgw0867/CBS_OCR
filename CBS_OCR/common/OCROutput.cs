@@ -165,7 +165,8 @@ namespace CBS_OCR.common
                     r.単価振分区分 = t.単価振分区分;
                     r.画像名 = t.勤務票ヘッダRow.画像名;
                     r.更新年月日 = DateTime.Now;
-                    r.枚数 = Utility.StrtoInt(t.勤務票ヘッダRow.枚数);  // 2018/01/23                  
+                    r.枚数 = Utility.StrtoInt(t.勤務票ヘッダRow.枚数);  // 2018/01/23
+                    r.有休区分 = t.有休区分;    // 2021/08/17
 
                     dtsM.共通勤務票.Add共通勤務票Row(r);
                     cnt++;
@@ -577,6 +578,8 @@ namespace CBS_OCR.common
             r.単価振分区分    = t.単価振分区分;
             r.画像名          = t.警備報告書ヘッダRow.画像名;
             r.更新年月日      = DateTime.Now;
+
+            r.有休区分 = global.flgOff; // 2021/08/17
 
             dtsM.共通勤務票.Add共通勤務票Row(r);
             cnt++;

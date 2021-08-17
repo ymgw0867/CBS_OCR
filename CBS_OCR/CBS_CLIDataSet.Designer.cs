@@ -927,6 +927,8 @@ namespace CBS_OCR {
             
             private global::System.Data.DataColumn column更新年月日;
             
+            private global::System.Data.DataColumn column有休区分;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public 勤務票明細DataTable() {
@@ -1162,6 +1164,14 @@ namespace CBS_OCR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn 有休区分Column {
+                get {
+                    return this.column有休区分;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1221,7 +1231,8 @@ namespace CBS_OCR {
                         int 取消, 
                         int 単価振分区分, 
                         int 編集アカウント, 
-                        System.DateTime 更新年月日) {
+                        System.DateTime 更新年月日, 
+                        double 有休区分) {
                 勤務票明細Row row勤務票明細Row = ((勤務票明細Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1248,7 +1259,8 @@ namespace CBS_OCR {
                         取消,
                         単価振分区分,
                         編集アカウント,
-                        更新年月日};
+                        更新年月日,
+                        有休区分};
                 if ((parent勤務票ヘッダRowBy勤務票ヘッダ_勤務票明細 != null)) {
                     columnValuesArray[1] = parent勤務票ヘッダRowBy勤務票ヘッダ_勤務票明細[0];
                 }
@@ -1306,6 +1318,7 @@ namespace CBS_OCR {
                 this.column単価振分区分 = base.Columns["単価振分区分"];
                 this.column編集アカウント = base.Columns["編集アカウント"];
                 this.column更新年月日 = base.Columns["更新年月日"];
+                this.column有休区分 = base.Columns["有休区分"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1361,6 +1374,8 @@ namespace CBS_OCR {
                 base.Columns.Add(this.column編集アカウント);
                 this.column更新年月日 = new global::System.Data.DataColumn("更新年月日", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.column更新年月日);
+                this.column有休区分 = new global::System.Data.DataColumn("有休区分", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column有休区分);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -4199,6 +4214,22 @@ namespace CBS_OCR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double 有休区分 {
+                get {
+                    try {
+                        return ((double)(this[this.table勤務票明細.有休区分Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'勤務票明細\' にある列 \'有休区分\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.table勤務票明細.有休区分Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public 勤務票ヘッダRow 勤務票ヘッダRow {
                 get {
                     return ((勤務票ヘッダRow)(this.GetParentRow(this.Table.ParentRelations["勤務票ヘッダ_勤務票明細"])));
@@ -4494,6 +4525,18 @@ namespace CBS_OCR {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Set更新年月日Null() {
                 this[this.table勤務票明細.更新年月日Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is有休区分Null() {
+                return this.IsNull(this.table勤務票明細.有休区分Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set有休区分Null() {
+                this[this.table勤務票明細.有休区分Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -7407,10 +7450,11 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("単価振分区分", "単価振分区分");
             tableMapping.ColumnMappings.Add("編集アカウント", "編集アカウント");
             tableMapping.ColumnMappings.Add("更新年月日", "更新年月日");
+            tableMapping.ColumnMappings.Add("有休区分", "有休区分");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `勤務票明細` WHERE ((`ID` = ?) AND ((? = 1 AND `ヘッダID` IS NULL) OR (`ヘッダID` = ?)) AND ((? = 1 AND `日` IS NULL) OR (`日` = ?)) AND ((? = 1 AND `現場コード` IS NULL) OR (`現場コード` = ?)) AND ((? = 1 AND `現場名` IS NULL) OR (`現場名` = ?)) AND ((? = 1 AND `開始時` IS NULL) OR (`開始時` = ?)) AND ((? = 1 AND `開始分` IS NULL) OR (`開始分` = ?)) AND ((? = 1 AND `終業時` IS NULL) OR (`終業時` = ?)) AND ((? = 1 AND `終業分` IS NULL) OR (`終業分` = ?)) AND ((? = 1 AND `休憩時` IS NULL) OR (`休憩時` = ?)) AND ((? = 1 AND `休憩分` IS NULL) OR (`休憩分` = ?)) AND ((? = 1 AND `実働時` IS NULL) OR (`実働時` = ?)) AND ((? = 1 AND `実働分` IS NULL) OR (`実働分` = ?)) AND ((? = 1 AND `所定時` IS NULL) OR (`所定時` = ?)) AND ((? = 1 AND `所定分` IS NULL) OR (`所定分` = ?)) AND ((? = 1 AND `交通手段社用車` IS NULL) OR (`交通手段社用車` = ?)) AND ((? = 1 AND `交通手段自家用車` IS NULL) OR (`交通手段自家用車` = ?)) AND ((? = 1 AND `交通手段交通` IS NULL) OR (`交通手段交通` = ?)) AND ((? = 1 AND `交通区分` IS NULL) OR (`交通区分` = ?)) AND ((? = 1 AND `走行距離` IS NULL) OR (`走行距離` = ?)) AND ((? = 1 AND `同乗人数` IS NULL) OR (`同乗人数` = ?)) AND ((? = 1 AND `取消` IS NULL) OR (`取消` = ?)) AND ((? = 1 AND `単価振分区分` IS NULL) OR (`単価振分区分` = ?)) AND ((? = 1 AND `編集アカウント` IS NULL) OR (`編集アカウント` = ?)) AND ((? = 1 AND `更新年月日` IS NULL) OR (`更新年月日` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `勤務票明細` WHERE ((`ID` = ?) AND ((? = 1 AND `ヘッダID` IS NULL) OR (`ヘッダID` = ?)) AND ((? = 1 AND `日` IS NULL) OR (`日` = ?)) AND ((? = 1 AND `現場コード` IS NULL) OR (`現場コード` = ?)) AND ((? = 1 AND `現場名` IS NULL) OR (`現場名` = ?)) AND ((? = 1 AND `開始時` IS NULL) OR (`開始時` = ?)) AND ((? = 1 AND `開始分` IS NULL) OR (`開始分` = ?)) AND ((? = 1 AND `終業時` IS NULL) OR (`終業時` = ?)) AND ((? = 1 AND `終業分` IS NULL) OR (`終業分` = ?)) AND ((? = 1 AND `休憩時` IS NULL) OR (`休憩時` = ?)) AND ((? = 1 AND `休憩分` IS NULL) OR (`休憩分` = ?)) AND ((? = 1 AND `実働時` IS NULL) OR (`実働時` = ?)) AND ((? = 1 AND `実働分` IS NULL) OR (`実働分` = ?)) AND ((? = 1 AND `所定時` IS NULL) OR (`所定時` = ?)) AND ((? = 1 AND `所定分` IS NULL) OR (`所定分` = ?)) AND ((? = 1 AND `交通手段社用車` IS NULL) OR (`交通手段社用車` = ?)) AND ((? = 1 AND `交通手段自家用車` IS NULL) OR (`交通手段自家用車` = ?)) AND ((? = 1 AND `交通手段交通` IS NULL) OR (`交通手段交通` = ?)) AND ((? = 1 AND `交通区分` IS NULL) OR (`交通区分` = ?)) AND ((? = 1 AND `走行距離` IS NULL) OR (`走行距離` = ?)) AND ((? = 1 AND `同乗人数` IS NULL) OR (`同乗人数` = ?)) AND ((? = 1 AND `取消` IS NULL) OR (`取消` = ?)) AND ((? = 1 AND `単価振分区分` IS NULL) OR (`単価振分区分` = ?)) AND ((? = 1 AND `編集アカウント` IS NULL) OR (`編集アカウント` = ?)) AND ((? = 1 AND `更新年月日` IS NULL) OR (`更新年月日` = ?)) AND ((? = 1 AND `有休区分` IS NULL) OR (`有休区分` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ヘッダID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ヘッダID", global::System.Data.DataRowVersion.Original, true, null));
@@ -7461,9 +7505,11 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_編集アカウント", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "編集アカウント", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_更新年月日", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_更新年月日", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_有休区分", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_有休区分", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `勤務票明細` (`ヘッダID`, `日`, `現場コード`, `現場名`, `開始時`, `開始分`, `終業時`, `終業分`, `休憩時`, `休憩分`, `実働時`, `実働分`, `所定時`, `所定分`, `交通手段社用車`, `交通手段自家用車`, `交通手段交通`, `交通区分`, `走行距離`, `同乗人数`, `取消`, `単価振分区分`, `編集アカウント`, `更新年月日`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `勤務票明細` (`ヘッダID`, `日`, `現場コード`, `現場名`, `開始時`, `開始分`, `終業時`, `終業分`, `休憩時`, `休憩分`, `実働時`, `実働分`, `所定時`, `所定分`, `交通手段社用車`, `交通手段自家用車`, `交通手段交通`, `交通区分`, `走行距離`, `同乗人数`, `取消`, `単価振分区分`, `編集アカウント`, `更新年月日`, `有休区分`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ヘッダID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ヘッダID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("日", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "日", global::System.Data.DataRowVersion.Current, false, null));
@@ -7489,27 +7535,29 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("単価振分区分", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "単価振分区分", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("編集アカウント", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "編集アカウント", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("更新年月日", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("有休区分", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE `勤務票明細` SET `ヘッダID` = ?, `日` = ?, `現場コード` = ?, `現場名` = ?, `開始時` = ?, `開始分`" +
                 " = ?, `終業時` = ?, `終業分` = ?, `休憩時` = ?, `休憩分` = ?, `実働時` = ?, `実働分` = ?, `所定時` = " +
                 "?, `所定分` = ?, `交通手段社用車` = ?, `交通手段自家用車` = ?, `交通手段交通` = ?, `交通区分` = ?, `走行距離` = " +
-                "?, `同乗人数` = ?, `取消` = ?, `単価振分区分` = ?, `編集アカウント` = ?, `更新年月日` = ? WHERE ((`ID` =" +
-                " ?) AND ((? = 1 AND `ヘッダID` IS NULL) OR (`ヘッダID` = ?)) AND ((? = 1 AND `日` IS NU" +
-                "LL) OR (`日` = ?)) AND ((? = 1 AND `現場コード` IS NULL) OR (`現場コード` = ?)) AND ((? = 1" +
-                " AND `現場名` IS NULL) OR (`現場名` = ?)) AND ((? = 1 AND `開始時` IS NULL) OR (`開始時` = ?" +
-                ")) AND ((? = 1 AND `開始分` IS NULL) OR (`開始分` = ?)) AND ((? = 1 AND `終業時` IS NULL)" +
-                " OR (`終業時` = ?)) AND ((? = 1 AND `終業分` IS NULL) OR (`終業分` = ?)) AND ((? = 1 AND " +
-                "`休憩時` IS NULL) OR (`休憩時` = ?)) AND ((? = 1 AND `休憩分` IS NULL) OR (`休憩分` = ?)) AN" +
-                "D ((? = 1 AND `実働時` IS NULL) OR (`実働時` = ?)) AND ((? = 1 AND `実働分` IS NULL) OR (" +
-                "`実働分` = ?)) AND ((? = 1 AND `所定時` IS NULL) OR (`所定時` = ?)) AND ((? = 1 AND `所定分`" +
-                " IS NULL) OR (`所定分` = ?)) AND ((? = 1 AND `交通手段社用車` IS NULL) OR (`交通手段社用車` = ?))" +
-                " AND ((? = 1 AND `交通手段自家用車` IS NULL) OR (`交通手段自家用車` = ?)) AND ((? = 1 AND `交通手段交" +
-                "通` IS NULL) OR (`交通手段交通` = ?)) AND ((? = 1 AND `交通区分` IS NULL) OR (`交通区分` = ?)) " +
-                "AND ((? = 1 AND `走行距離` IS NULL) OR (`走行距離` = ?)) AND ((? = 1 AND `同乗人数` IS NULL)" +
-                " OR (`同乗人数` = ?)) AND ((? = 1 AND `取消` IS NULL) OR (`取消` = ?)) AND ((? = 1 AND `" +
-                "単価振分区分` IS NULL) OR (`単価振分区分` = ?)) AND ((? = 1 AND `編集アカウント` IS NULL) OR (`編集アカ" +
-                "ウント` = ?)) AND ((? = 1 AND `更新年月日` IS NULL) OR (`更新年月日` = ?)))";
+                "?, `同乗人数` = ?, `取消` = ?, `単価振分区分` = ?, `編集アカウント` = ?, `更新年月日` = ?, `有休区分` = ? WH" +
+                "ERE ((`ID` = ?) AND ((? = 1 AND `ヘッダID` IS NULL) OR (`ヘッダID` = ?)) AND ((? = 1 A" +
+                "ND `日` IS NULL) OR (`日` = ?)) AND ((? = 1 AND `現場コード` IS NULL) OR (`現場コード` = ?))" +
+                " AND ((? = 1 AND `現場名` IS NULL) OR (`現場名` = ?)) AND ((? = 1 AND `開始時` IS NULL) O" +
+                "R (`開始時` = ?)) AND ((? = 1 AND `開始分` IS NULL) OR (`開始分` = ?)) AND ((? = 1 AND `終" +
+                "業時` IS NULL) OR (`終業時` = ?)) AND ((? = 1 AND `終業分` IS NULL) OR (`終業分` = ?)) AND " +
+                "((? = 1 AND `休憩時` IS NULL) OR (`休憩時` = ?)) AND ((? = 1 AND `休憩分` IS NULL) OR (`休" +
+                "憩分` = ?)) AND ((? = 1 AND `実働時` IS NULL) OR (`実働時` = ?)) AND ((? = 1 AND `実働分` I" +
+                "S NULL) OR (`実働分` = ?)) AND ((? = 1 AND `所定時` IS NULL) OR (`所定時` = ?)) AND ((? =" +
+                " 1 AND `所定分` IS NULL) OR (`所定分` = ?)) AND ((? = 1 AND `交通手段社用車` IS NULL) OR (`交通" +
+                "手段社用車` = ?)) AND ((? = 1 AND `交通手段自家用車` IS NULL) OR (`交通手段自家用車` = ?)) AND ((? = " +
+                "1 AND `交通手段交通` IS NULL) OR (`交通手段交通` = ?)) AND ((? = 1 AND `交通区分` IS NULL) OR (`" +
+                "交通区分` = ?)) AND ((? = 1 AND `走行距離` IS NULL) OR (`走行距離` = ?)) AND ((? = 1 AND `同乗" +
+                "人数` IS NULL) OR (`同乗人数` = ?)) AND ((? = 1 AND `取消` IS NULL) OR (`取消` = ?)) AND (" +
+                "(? = 1 AND `単価振分区分` IS NULL) OR (`単価振分区分` = ?)) AND ((? = 1 AND `編集アカウント` IS NUL" +
+                "L) OR (`編集アカウント` = ?)) AND ((? = 1 AND `更新年月日` IS NULL) OR (`更新年月日` = ?)) AND ((" +
+                "? = 1 AND `有休区分` IS NULL) OR (`有休区分` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ヘッダID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ヘッダID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("日", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "日", global::System.Data.DataRowVersion.Current, false, null));
@@ -7535,6 +7583,7 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("単価振分区分", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "単価振分区分", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("編集アカウント", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "編集アカウント", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("更新年月日", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("有休区分", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ヘッダID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ヘッダID", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ヘッダID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ヘッダID", global::System.Data.DataRowVersion.Original, false, null));
@@ -7584,13 +7633,15 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_編集アカウント", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "編集アカウント", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_更新年月日", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_更新年月日", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "更新年月日", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_有休区分", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_有休区分", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "有休区分", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::CBS_OCR.Properties.Settings.Default.CBS_CLIConnectionString;
+            this._connection.ConnectionString = global::CBS_OCR.Properties.Settings.Default.mdbOlePath;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7600,11 +7651,11 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, ヘッダID, 日, 現場コード, 現場名, 開始時, 開始分, 終業時, 終業分, 休憩時, 休憩分, 実働時, 実働分, 所定時, 所定分" +
-                ", 交通手段社用車, 交通手段自家用車, 交通手段交通, 交通区分, 走行距離, 同乗人数, 取消, 単価振分区分, 編集アカウント, 更新年月日 FROM 勤" +
-                "務票明細";
+                ", 交通手段社用車, 交通手段自家用車, 交通手段交通, 交通区分, 走行距離, 同乗人数, 取消, 単価振分区分, 編集アカウント, 更新年月日,有休区分 F" +
+                "ROM 勤務票明細";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
-            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].Connection = new global::System.Data.OleDb.OleDbConnection(global::CBS_OCR.Properties.Settings.Default.CBS_CLIConnectionString);
             this._commandCollection[1].CommandText = "DELETE FROM `勤務票明細`";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
@@ -7691,7 +7742,8 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
                     global::System.Nullable<int> Original_取消, 
                     global::System.Nullable<int> Original_単価振分区分, 
                     global::System.Nullable<int> Original_編集アカウント, 
-                    global::System.Nullable<global::System.DateTime> Original_更新年月日) {
+                    global::System.Nullable<global::System.DateTime> Original_更新年月日, 
+                    global::System.Nullable<double> Original_有休区分) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_ヘッダID == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -7885,6 +7937,14 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[47].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[48].Value = global::System.DBNull.Value;
             }
+            if ((Original_有休区分.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[49].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[50].Value = ((double)(Original_有休区分.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[49].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[50].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7929,7 +7989,8 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
                     global::System.Nullable<int> 取消, 
                     global::System.Nullable<int> 単価振分区分, 
                     global::System.Nullable<int> 編集アカウント, 
-                    global::System.Nullable<global::System.DateTime> 更新年月日) {
+                    global::System.Nullable<global::System.DateTime> 更新年月日, 
+                    global::System.Nullable<double> 有休区分) {
             if ((ヘッダID == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -8074,6 +8135,12 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
+            if ((有休区分.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[24].Value = ((double)(有休区分.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8119,6 +8186,7 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
                     global::System.Nullable<int> 単価振分区分, 
                     global::System.Nullable<int> 編集アカウント, 
                     global::System.Nullable<global::System.DateTime> 更新年月日, 
+                    global::System.Nullable<double> 有休区分, 
                     int Original_ID, 
                     string Original_ヘッダID, 
                     string Original_日, 
@@ -8143,7 +8211,8 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
                     global::System.Nullable<int> Original_取消, 
                     global::System.Nullable<int> Original_単価振分区分, 
                     global::System.Nullable<int> Original_編集アカウント, 
-                    global::System.Nullable<global::System.DateTime> Original_更新年月日) {
+                    global::System.Nullable<global::System.DateTime> Original_更新年月日, 
+                    global::System.Nullable<double> Original_有休区分) {
             if ((ヘッダID == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -8288,198 +8357,212 @@ namespace CBS_OCR.CBS_CLIDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_ID));
-            if ((Original_ヘッダID == null)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            if ((有休区分.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(有休区分.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_ヘッダID));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_ID));
+            if ((Original_ヘッダID == null)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(Original_ヘッダID));
             }
             if ((Original_日 == null)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_日));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_日));
             }
             if ((Original_現場コード == null)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_現場コード));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_現場コード));
             }
             if ((Original_現場名 == null)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Original_現場名));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_現場名));
             }
             if ((Original_開始時 == null)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(Original_開始時));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_開始時));
             }
             if ((Original_開始分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(Original_開始分));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(Original_開始分));
             }
             if ((Original_終業時 == null)) {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((string)(Original_終業時));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((string)(Original_終業時));
             }
             if ((Original_終業分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((string)(Original_終業分));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((string)(Original_終業分));
             }
             if ((Original_休憩時 == null)) {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[43].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((string)(Original_休憩時));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((string)(Original_休憩時));
             }
             if ((Original_休憩分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[45].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((string)(Original_休憩分));
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((string)(Original_休憩分));
             }
             if ((Original_実働時 == null)) {
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[47].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[46].Value = ((string)(Original_実働時));
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((string)(Original_実働時));
             }
             if ((Original_実働分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[49].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[48].Value = ((string)(Original_実働分));
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[49].Value = ((string)(Original_実働分));
             }
             if ((Original_所定時 == null)) {
-                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[50].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[51].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((string)(Original_所定時));
+                this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[51].Value = ((string)(Original_所定時));
             }
             if ((Original_所定分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[52].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[52].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[53].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[52].Value = ((string)(Original_所定分));
+                this.Adapter.UpdateCommand.Parameters[52].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[53].Value = ((string)(Original_所定分));
             }
             if ((Original_交通手段社用車.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[54].Value = ((int)(Original_交通手段社用車.Value));
+                this.Adapter.UpdateCommand.Parameters[54].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[55].Value = ((int)(Original_交通手段社用車.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[54].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[54].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[55].Value = global::System.DBNull.Value;
             }
             if ((Original_交通手段自家用車.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[56].Value = ((int)(Original_交通手段自家用車.Value));
+                this.Adapter.UpdateCommand.Parameters[56].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[57].Value = ((int)(Original_交通手段自家用車.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[56].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[56].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[57].Value = global::System.DBNull.Value;
             }
             if ((Original_交通手段交通.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[58].Value = ((int)(Original_交通手段交通.Value));
+                this.Adapter.UpdateCommand.Parameters[58].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[59].Value = ((int)(Original_交通手段交通.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[58].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[58].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[59].Value = global::System.DBNull.Value;
             }
             if ((Original_交通区分 == null)) {
-                this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[60].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[60].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[61].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[60].Value = ((string)(Original_交通区分));
+                this.Adapter.UpdateCommand.Parameters[60].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((string)(Original_交通区分));
             }
             if ((Original_走行距離 == null)) {
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[62].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[63].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[62].Value = ((string)(Original_走行距離));
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[63].Value = ((string)(Original_走行距離));
             }
             if ((Original_同乗人数 == null)) {
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[64].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[65].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[64].Value = ((string)(Original_同乗人数));
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[65].Value = ((string)(Original_同乗人数));
             }
             if ((Original_取消.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[66].Value = ((int)(Original_取消.Value));
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[67].Value = ((int)(Original_取消.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[66].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[67].Value = global::System.DBNull.Value;
             }
             if ((Original_単価振分区分.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[68].Value = ((int)(Original_単価振分区分.Value));
+                this.Adapter.UpdateCommand.Parameters[68].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[69].Value = ((int)(Original_単価振分区分.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[68].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[68].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[69].Value = global::System.DBNull.Value;
             }
             if ((Original_編集アカウント.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[70].Value = ((int)(Original_編集アカウント.Value));
+                this.Adapter.UpdateCommand.Parameters[70].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[71].Value = ((int)(Original_編集アカウント.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[70].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[70].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[71].Value = global::System.DBNull.Value;
             }
             if ((Original_更新年月日.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[72].Value = ((System.DateTime)(Original_更新年月日.Value));
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[73].Value = ((System.DateTime)(Original_更新年月日.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[72].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[73].Value = global::System.DBNull.Value;
+            }
+            if ((Original_有休区分.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[75].Value = ((double)(Original_有休区分.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[75].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 

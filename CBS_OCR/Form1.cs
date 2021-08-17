@@ -1150,7 +1150,7 @@ namespace CBS_OCR
             try
             {
                 // 共通勤務票テーブルに「有休区分」フィールドを追加する : 2021/08/06
-                sqlSTRING = "ALTER TABLE 共通勤務票 ADD COLUMN 有休区分 INTEGER DEFAULT 0";
+                sqlSTRING = "ALTER TABLE 共通勤務票 ADD COLUMN 有休区分 double DEFAULT 0";
                 sCom.CommandText = sqlSTRING;
                 sCom.ExecuteNonQuery();
 
@@ -1205,7 +1205,7 @@ namespace CBS_OCR
                 sCom.ExecuteNonQuery();
 
                 // 勤務票明細テーブルに「有休区分」フィールドを追加する : 2021/08/06
-                sqlSTRING = "ALTER TABLE 勤務票明細 ADD COLUMN 有休区分 INTEGER DEFAULT 0";
+                sqlSTRING = "ALTER TABLE 勤務票明細 ADD COLUMN 有休区分 double DEFAULT 0";
                 sCom.CommandText = sqlSTRING;
                 sCom.ExecuteNonQuery();
 

@@ -326,6 +326,20 @@ namespace CBS_OCR.OCR
                 mr[mRow, "txtGenbaCode"].Value = t.現場コード.ToString();
                 mr[mRow, "txtTankaKbn" ].Value = t.単価振分区分.ToString();
 
+                // 有休区分：2021/08/17
+                if (t.Is有休区分Null())
+                {
+                    mr[mRow, "chkYukyu"].Value = false;
+                }
+                else if (t.有休区分 != global.flgOff)
+                {
+                    mr[mRow, "chkYukyu"].Value = true;
+                }
+                else
+                {
+                    mr[mRow, "chkYukyu"].Value = false;
+                }
+
                 gl.ChangeValueStatus = true;            // changeValueイベントをtrueに戻す
 
                 // 行インデックス加算
@@ -351,7 +365,7 @@ namespace CBS_OCR.OCR
             {
                 foreach (var file in System.IO.Directory.GetFiles(_xlsFolder, "*.xlsx"))
                 {
-                    int fNum = Utility.StrtoInt(System.IO.Path.GetFileNameWithoutExtension(file).Substring(0, 6));
+                    int fNum = Utility.StrtoInt(System.IO.Path.GetFileNameWithoutExtension(file).Substring(0, global.SHAIN_CD_LENGTH)); // 2021/08/17 global.SHAIN_CD_LENGTH
 
                     if (fNum == sNum)
                     {

@@ -134,7 +134,7 @@ namespace CBS_OCR.xlsData
         ///------------------------------------------------------------------------
         private void xlsShukkinboUpdate(string sPath, clsXlsShotei[] cs, int yy, int mm)
         {
-            this.Cursor = Cursors.WaitCursor;
+            this.Cursor    = Cursors.WaitCursor;
             string xlsName = string.Empty;
 
             CBS_OCR.CBSDataSet1 dts = new CBSDataSet1();
@@ -143,7 +143,7 @@ namespace CBS_OCR.xlsData
             // 当月データ
             adp.FillByYYMM(dts.共通勤務票, yy, mm);
             toolStripProgressBar1.Visible = true;
-            label2.Text = "";
+            label2.Text    = "";
             label2.Visible = true;
 
             // 指定フォルダから出勤簿エクセルファイルを取得
@@ -189,13 +189,13 @@ namespace CBS_OCR.xlsData
                         Application.DoEvents();
 
                         // 名前が６文字未満のシートは読み飛ばす
-                        if (bk.Worksheet(i).Name.Length < 6)
+                        if (bk.Worksheet(i).Name.Length < global.SHAIN_CD_LENGTH)   // 2021/08/17 global.SHAIN_CD_LENGTH
                         {
                             continue;
                         }
 
                         // シート名から社員番号を取得
-                        string sNum = bk.Worksheet(i).Name.Substring(0, 6);
+                        string sNum = bk.Worksheet(i).Name.Substring(0, global.SHAIN_CD_LENGTH);    // 2021/08/17 global.SHAIN_CD_LENGTH
 
                         // 名前の先頭６文字が数字ではないシートは読み飛ばす
                         if (Utility.StrtoInt(sNum) == global.flgOff)
@@ -221,7 +221,8 @@ namespace CBS_OCR.xlsData
                         var sheet = bk.Worksheet(i);
 
                         // 出勤簿シートの明細行を初期化
-                        rng = sheet.Range("B20", "X241");
+                        //rng = sheet.Range("B20", "X241"); // コメント化：2021/08/17
+                        rng = sheet.Range("B20", "Y241");   // 有休欄追加のため：2021/08/17
                         rng.Value = string.Empty;
 
                         int r = 0;
@@ -231,11 +232,11 @@ namespace CBS_OCR.xlsData
                         foreach (var t in dts.共通勤務票.Where(a => a.社員番号 == Utility.StrtoInt(sNum)).OrderBy(a => a.日付).ThenBy(a => a.ID).Take(222))
                         {
                             sheet.Cell(2, 2).Style.NumberFormat.Format = "000000";  // 書式 2017/12/26
-                            sheet.Cell(2, 2).Value = t.社員番号.ToString().PadLeft(6, '0');
+                            sheet.Cell(2, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');    // 2021/08/17 global.SHAIN_CD_LENGTH
                             sheet.Cell(2, 3).Value = t.社員名;
 
                             sheet.Cell(20 + r, 2).Style.NumberFormat.Format = "0000000";  // 書式 2017/12/26
-                            sheet.Cell(20 + r, 2).Value = t.社員番号.ToString().PadLeft(6, '0') + t.単価振分区分;
+                            sheet.Cell(20 + r, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') + t.単価振分区分;     // 2021/08/17 global.SHAIN_CD_LENGTH
                             sheet.Cell(20 + r, 3).Value = t.日付.ToShortDateString();
 
                             if (dt != t.日付)
@@ -250,7 +251,7 @@ namespace CBS_OCR.xlsData
                             sheet.Cell(20 + r,  5).Style.NumberFormat.Format = "00000000";   // 書式 2017/12/26
                             sheet.Cell(20 + r,  5).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;  // セル横位置 2017/12/26
 
-                            sheet.Cell(20 + r,  5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16
+                            sheet.Cell(20 + r,  5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16 global.GENBA_CD_LENGTH
                             sheet.Cell(20 + r,  6).Value = t.現場名;
                             sheet.Cell(20 + r,  7).Value = t.交通区分;
 
@@ -284,19 +285,34 @@ namespace CBS_OCR.xlsData
                                     break;
                             }
 
+                            //// 有休列追加：2021/08/17 -------------------------------------------------------------
+                            if (t.有休区分 == global.YUKYU_ZEN)
+                            {
+                                sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_ZEN_MARK;
+                            }
+                            else if (t.有休区分 == global.YUKYU_HAN)
+                            {
+                                sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_HAN_MARK;
+                            }
+                            else
+                            {
+                                sheet.Cell(20 + r, global.col_Yukyu).Value = "";
+                            }
+
+                            // 有休列追加でカラム変更：2021/08/17
                             if (t.中止 == global.flgOn)
                             {
-                                sheet.Cell(20 + r, 24).Value = "中止";
+                                sheet.Cell(20 + r, global.col_Bikou).Value = "中止";    // 2021/08/17
                             }
                             else
                             {
                                 if (Utility.StrtoInt(t.交通費) > 0)
                                 {
-                                    sheet.Cell(20 + r, 24).Value = "交通費：" + t.交通費;
+                                    sheet.Cell(20 + r, global.col_Bikou).Value = "交通費：" + t.交通費;  // 2021/08/17
                                 }
                                 else
                                 {
-                                    sheet.Cell(20 + r, 24).Value = string.Empty;
+                                    sheet.Cell(20 + r, global.col_Bikou).Value = string.Empty;    // 2021/08/17
                                 }
                             }
 
