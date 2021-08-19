@@ -261,7 +261,7 @@ namespace CBS_OCR.OCR
                 }
                 else
                 {
-                    mr.SetValue(mRow, "txtSNum", Utility.NulltoStr(t.社員番号).PadLeft(6, '0'));
+                    mr.SetValue(mRow, "txtSNum", Utility.NulltoStr(t.社員番号).PadLeft(global.SHAIN_CD_LENGTH, '0'));
                 }
 
                 // 取消欄チェック

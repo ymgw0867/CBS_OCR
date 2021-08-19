@@ -288,7 +288,7 @@ namespace CBS_OCR.xlsData
                             {
                                 string[] v = vArray[iX].Split(',');
 
-                                if (v[0].PadLeft(6, '0') == sNum)
+                                if (v[0].PadLeft(global.SHAIN_CD_LENGTH, '0') == sNum)
                                 {
                                     sheet.Cell("K8").Value = v[3];
                                     upStatus = true;

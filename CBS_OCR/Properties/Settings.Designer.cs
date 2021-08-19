@@ -25,7 +25,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\CBS_OCR\\SCAN\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\cbs_ocr\\SCAN\\")]
         public string scanPath {
             get {
                 return ((string)(this["scanPath"]));
@@ -34,7 +34,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\CBS_OCR\\TRAY\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\cbs_ocr\\TRAY\\")]
         public string trayPath {
             get {
                 return ((string)(this["trayPath"]));
@@ -52,7 +52,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\FRP\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\WinReaderHandSV6\\")]
         public string wrHands_Path {
             get {
                 return ((string)(this["wrHands_Path"]));
@@ -70,7 +70,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\CBS_OCR\\READ\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\cbs_ocr\\READ\\")]
         public string readPath {
             get {
                 return ((string)(this["readPath"]));
@@ -528,7 +528,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\nakayoshi_pc\\seisou\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\ymgw\\seisou\\")]
         public string sPCSeisouPath {
             get {
                 return ((string)(this["sPCSeisouPath"]));
@@ -537,7 +537,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\nakayoshi_pc\\keibi\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\ymgw\\keibi\\")]
         public string sPCKeibiPath {
             get {
                 return ((string)(this["sPCKeibiPath"]));
@@ -546,7 +546,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\nakayoshi_pc\\jikangai\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\CBS_OCR\\PC\\ymgw\\jikangai\\")]
         public string sPCJikangaiPath {
             get {
                 return ((string)(this["sPCJikangaiPath"]));

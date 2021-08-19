@@ -286,17 +286,24 @@ namespace CBS_OCR.xlsData
                             }
 
                             //// 有休列追加：2021/08/17 -------------------------------------------------------------
-                            if (t.有休区分 == global.YUKYU_ZEN)
+                            if (t.Is有休区分Null())
                             {
-                                sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_ZEN_MARK;
-                            }
-                            else if (t.有休区分 == global.YUKYU_HAN)
-                            {
-                                sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_HAN_MARK;
+                                sheet.Cell(20 + r, global.col_Yukyu).Value = "";
                             }
                             else
                             {
-                                sheet.Cell(20 + r, global.col_Yukyu).Value = "";
+                                if (t.有休区分 == global.YUKYU_ZEN)
+                                {
+                                    sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_ZEN_MARK;
+                                }
+                                else if (t.有休区分 == global.YUKYU_HAN)
+                                {
+                                    sheet.Cell(20 + r, global.col_Yukyu).Value = global.YUKYU_HAN_MARK;
+                                }
+                                else
+                                {
+                                    sheet.Cell(20 + r, global.col_Yukyu).Value = "";
+                                }
                             }
 
                             // 有休列追加でカラム変更：2021/08/17
@@ -1251,7 +1258,7 @@ namespace CBS_OCR.xlsData
             int shaFullPart = 0;
 
             // 社員番号の2桁目を取得
-            string nn = sNum.ToString().PadLeft(6, '0').Substring(1, 1);
+            string nn = sNum.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0').Substring(1, 1);
 
             switch (nn)
             {

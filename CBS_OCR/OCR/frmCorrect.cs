@@ -142,7 +142,7 @@ namespace CBS_OCR.OCR
         const string END_NODATA = "non Data";
         #endregion
 
-        string dID = string.Empty;              // 表示する過去データのID
+        string dID   = string.Empty;              // 表示する過去データのID
         string sDBNM = string.Empty;            // データベース名
 
         string _dbName = string.Empty;          // 会社領域データベース識別番号
@@ -993,7 +993,7 @@ namespace CBS_OCR.OCR
 
                 // 出勤簿移動先ファイルパス 
                 //toImg = tifPath + @"\" + t.画像名; 2018/01/23
-                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + "-" + t.枚数.PadLeft(2, '0') + "-" + t.社員番号.ToString().PadLeft(6, '0');
+                string toFileName = "20" + t.年 + t.月.ToString().PadLeft(2, '0') + "-" + t.枚数.PadLeft(2, '0') + "-" + t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
                 toImg = tifPath + @"\" + toFileName;
 
                 // 同名ファイルが既に登録済みのときは削除する

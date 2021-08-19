@@ -322,8 +322,8 @@ namespace CBS_OCR.common
                 adpMn.勤務票明細TableAdapter.Fill(dts.勤務票明細);
 
                 // 対象CSVファイル数を取得
-                string [] t = System.IO.Directory.GetFiles(_inPath, "*.csv");
-                int cLen = t.Length;
+                string [] t    = System.IO.Directory.GetFiles(_inPath, "*.csv");
+                int       cLen = t.Length;
 
                 //CSVデータをMDBへ取込
                 int cCnt = 0;
@@ -586,15 +586,15 @@ namespace CBS_OCR.common
         private CBS_CLIDataSet.勤務票ヘッダRow setNewHeadRecRow(CBS_CLIDataSet tblSt, string[] stCSV)
         {
             CBS_CLIDataSet.勤務票ヘッダRow r = tblSt.勤務票ヘッダ.New勤務票ヘッダRow();
-            r.ID = Utility.GetStringSubMax(stCSV[1].Trim(), 17);
-            r.年 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[2].Trim().Replace("-", ""), 2));
-            r.月 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[3].Trim().Replace("-", ""), 2));
+            r.ID      = Utility.GetStringSubMax(stCSV[1].Trim(), 17);
+            r.年      = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[2].Trim().Replace("-", ""), 2));
+            r.月      = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[3].Trim().Replace("-", ""), 2));
             r.社員番号 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[4].Trim().Replace("-", ""), 6));
-            r.承認印 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), 1));
-            r.枚数 = Utility.GetStringSubMax(stCSV[6].Trim().Replace("-", ""), 2);
-            r.画像名 = Utility.GetStringSubMax(stCSV[1].Trim(), 21);
-            r.確認 = global.flgOff;
-            r.備考 = string.Empty;
+            r.承認印   = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), 1));
+            r.枚数     = Utility.GetStringSubMax(stCSV[6].Trim().Replace("-", ""), 2);
+            r.画像名   = Utility.GetStringSubMax(stCSV[1].Trim(), 21);
+            r.確認     = global.flgOff;
+            r.備考     = string.Empty;
             r.編集アカウント = global.loginUserID;
             r.更新年月日 = DateTime.Now;
 
@@ -697,39 +697,62 @@ namespace CBS_OCR.common
 
             r.ヘッダID = headerKey;
             r.取消 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[0].Trim().Replace("-", ""), 1));
-            r.日 = Utility.GetStringSubMax(stCSV[1].Trim().Replace("-", ""), 2);
-            r.開始時 = Utility.GetStringSubMax(stCSV[2].Trim().Replace("-", ""), 2);
-            r.開始分 = Utility.GetStringSubMax(stCSV[3].Trim().Replace("-", ""), 2);
-            r.終業時= Utility.GetStringSubMax(stCSV[4].Trim().Replace("-", ""), 2);
-            r.終業分 = Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), 2);
-            r.休憩時 = Utility.GetStringSubMax(stCSV[6].Trim().Replace("-", ""), 1);
-            r.休憩分 = Utility.GetStringSubMax(stCSV[7].Trim().Replace("-", ""), 2);
-            r.実働時 = Utility.GetStringSubMax(stCSV[8].Trim().Replace("-", ""), 2);
-            r.実働分 = Utility.GetStringSubMax(stCSV[9].Trim().Replace("-", ""), 2);
+            r.日 = Utility.GetStringSubMax(stCSV[1].Trim().Replace("-", ""), 2);            
+
+            // カラム位置(+1)：2021/08/19
+            r.開始時 = Utility.GetStringSubMax(stCSV[3].Trim().Replace("-", ""), 2);
+            r.開始分 = Utility.GetStringSubMax(stCSV[4].Trim().Replace("-", ""), 2);
+            r.終業時 = Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), 2);
+            r.終業分 = Utility.GetStringSubMax(stCSV[6].Trim().Replace("-", ""), 2);
+            r.休憩時 = Utility.GetStringSubMax(stCSV[7].Trim().Replace("-", ""), 1);
+            r.休憩分 = Utility.GetStringSubMax(stCSV[8].Trim().Replace("-", ""), 2);
+            r.実働時 = Utility.GetStringSubMax(stCSV[9].Trim().Replace("-", ""), 2);
+            r.実働分 = Utility.GetStringSubMax(stCSV[10].Trim().Replace("-", ""), 2);
             r.所定時 = string.Empty;
             r.所定分 = string.Empty;
-            r.交通手段社用車 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[10].Trim().Replace("-", ""), 1));
-            r.交通手段自家用車 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[11].Trim().Replace("-", ""), 1));
-            r.交通手段交通 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[12].Trim().Replace("-", ""), 1));
-            r.交通区分 = Utility.GetStringSubMax(stCSV[13].Trim().Replace("-", ""), 1);
-            r.走行距離 = Utility.GetStringSubMax(stCSV[14].Trim().Replace("-", ""), 3);
-            r.同乗人数 = Utility.GetStringSubMax(stCSV[15].Trim().Replace("-", ""), 1);
-            r.現場コード = Utility.GetStringSubMax(stCSV[16].Trim().Replace("-", ""), 8);
+            r.交通手段社用車 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[11].Trim().Replace("-", ""), 1));
+            r.交通手段自家用車 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[12].Trim().Replace("-", ""), 1));
+            r.交通手段交通 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[13].Trim().Replace("-", ""), 1));
+            r.交通区分 = Utility.GetStringSubMax(stCSV[14].Trim().Replace("-", ""), 1);
+            r.走行距離 = Utility.GetStringSubMax(stCSV[15].Trim().Replace("-", ""), 3);
+            r.同乗人数 = Utility.GetStringSubMax(stCSV[16].Trim().Replace("-", ""), 1);
+            r.現場コード = Utility.GetStringSubMax(stCSV[17].Trim().Replace("-", ""), global.GENBA_CD_LENGTH);
 
             // 単価振分区分
             if (Utility.GetStringSubMax(stCSV[1].Trim().Replace("-", ""), 2) != string.Empty && 
-                Utility.GetStringSubMax(stCSV[17].Trim().Replace("-", ""), 1) == string.Empty)
+                Utility.GetStringSubMax(stCSV[18].Trim().Replace("-", ""), 1) == string.Empty)
             {
                 // 日付が記入ありで単価振分区分が無記入のとき：「１」をセット
                 r.単価振分区分 = global.flgOn;
             }
             else
             {
-                r.単価振分区分 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[17].Trim().Replace("-", ""), 1));
+                r.単価振分区分 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[18].Trim().Replace("-", ""), 1));
             }
 
             r.編集アカウント = global.loginUserID;
             r.更新年月日 = DateTime.Now;
+
+
+            // 有休区分：2021/08/19
+            string yukyukbn = Utility.GetStringSubMax(stCSV[2].Trim().Replace("-", ""), 1);
+            if (yukyukbn == global.FLGON)
+            {
+                if (r.開始時 != "" || r.開始分 != "" || r.終業時 != "" || r.終業分 != "")
+                {
+                    // 半休
+                    r.有休区分 = global.YUKYU_HAN;
+                }
+                else
+                {
+                    // 全日休
+                    r.有休区分 = global.YUKYU_ZEN;
+                }
+            }
+            else
+            {
+                r.有休区分 = global.flgOff;
+            }
             
             return r;
         }
@@ -2338,7 +2361,8 @@ namespace CBS_OCR.common
 
         ///----------------------------------------------------------------------
         /// <summary>
-        ///     現場コードチェック : 2021/08/12</summary>
+        ///     現場コードチェック : 2021/08/12
+        ///                         有休区分を条件に追加 2021/08/19</summary>
         /// <param name="m">
         ///     CBS_CLIDataSet.勤務票明細Row</param>
         /// <param name="tittle">
@@ -2353,8 +2377,12 @@ namespace CBS_OCR.common
         {
             if (Utility.StrtoInt(m.日) != global.flgOff && Utility.StrtoInt(m.現場コード) == global.flgOff)
             {
-                setErrStatus(eGenbaCode, iX - 1, "現場コードが未記入です");
-                return false;
+                // 2021/08/19
+                if (m.有休区分 == global.flgOff)
+                {
+                    setErrStatus(eGenbaCode, iX - 1, "現場コードが未記入です");
+                    return false;
+                }
             }
             
             // コメント化：2021/08/12
@@ -2378,7 +2406,7 @@ namespace CBS_OCR.common
             //}
 
 
-            // 現場ＣＳＶデータよりプロジェクトデータを取得する：
+            // 現場ＣＳＶデータよりプロジェクトデータを取得する：2021/08/12
             clsMaster ms = new clsMaster();
             clsCsvData.ClsCsvGenba genba = ms.GetData<clsCsvData.ClsCsvGenba>(m.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'));
 
@@ -2775,7 +2803,7 @@ namespace CBS_OCR.common
         
         ///------------------------------------------------------------------------------------
         /// <summary>
-        ///     明細記入チェック </summary>
+        ///     明細記入チェック : 有休区分を条件に追加 2021/08/19</summary>
         /// <param name="obj">
         ///     勤務票明細Rowコレクション</param>
         /// <param name="tittle">
@@ -2787,7 +2815,8 @@ namespace CBS_OCR.common
         ///------------------------------------------------------------------------------------
         private bool errCheckRow(CBS_CLIDataSet.勤務票明細Row m, string tittle, int iX)
         {
-            if (m.日 != string.Empty)
+            //if (m.日 != string.Empty) // コメント化：2021/08/19
+            if (m.日 != string.Empty && m.有休区分 == global.flgOff)
             {
                 if (m.開始時 == string.Empty)
                 {

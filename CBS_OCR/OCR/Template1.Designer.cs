@@ -61,6 +61,8 @@
             GrapeCity.Win.MultiRow.Border border40 = new GrapeCity.Win.MultiRow.Border();
             GrapeCity.Win.MultiRow.CellStyle cellStyle44 = new GrapeCity.Win.MultiRow.CellStyle();
             GrapeCity.Win.MultiRow.Border border41 = new GrapeCity.Win.MultiRow.Border();
+            GrapeCity.Win.MultiRow.CellStyle cellStyle45 = new GrapeCity.Win.MultiRow.CellStyle();
+            GrapeCity.Win.MultiRow.Border border42 = new GrapeCity.Win.MultiRow.Border();
             GrapeCity.Win.MultiRow.CellStyle cellStyle3 = new GrapeCity.Win.MultiRow.CellStyle();
             GrapeCity.Win.MultiRow.Border border3 = new GrapeCity.Win.MultiRow.Border();
             GrapeCity.Win.MultiRow.CellStyle cellStyle8 = new GrapeCity.Win.MultiRow.CellStyle();
@@ -114,8 +116,6 @@
             GrapeCity.Win.MultiRow.Border border2 = new GrapeCity.Win.MultiRow.Border();
             GrapeCity.Win.MultiRow.CellStyle cellStyle28 = new GrapeCity.Win.MultiRow.CellStyle();
             GrapeCity.Win.MultiRow.Border border25 = new GrapeCity.Win.MultiRow.Border();
-            GrapeCity.Win.MultiRow.CellStyle cellStyle45 = new GrapeCity.Win.MultiRow.CellStyle();
-            GrapeCity.Win.MultiRow.Border border42 = new GrapeCity.Win.MultiRow.Border();
             GrapeCity.Win.MultiRow.CellStyle cellStyle46 = new GrapeCity.Win.MultiRow.CellStyle();
             this.columnHeaderSection1 = new GrapeCity.Win.MultiRow.ColumnHeaderSection();
             this.labelCell5 = new GrapeCity.Win.MultiRow.LabelCell();
@@ -134,6 +134,7 @@
             this.labelCell17 = new GrapeCity.Win.MultiRow.LabelCell();
             this.labelCell18 = new GrapeCity.Win.MultiRow.LabelCell();
             this.labelCell2 = new GrapeCity.Win.MultiRow.LabelCell();
+            this.labelCell20 = new GrapeCity.Win.MultiRow.LabelCell();
             this.lblWeek = new GrapeCity.Win.MultiRow.LabelCell();
             this.txtSh = new GrapeCity.Win.MultiRow.TextBoxCell();
             this.labelCell3 = new GrapeCity.Win.MultiRow.LabelCell();
@@ -162,7 +163,6 @@
             this.txtWm = new GrapeCity.Win.MultiRow.TextBoxCell();
             this.txtDay = new GrapeCity.Win.MultiRow.TextBoxCell();
             this.chkYukyu = new GrapeCity.Win.MultiRow.CheckBoxCell();
-            this.labelCell20 = new GrapeCity.Win.MultiRow.LabelCell();
             // 
             // Row
             // 
@@ -529,6 +529,26 @@
             this.labelCell2.Style = cellStyle44;
             this.labelCell2.TabIndex = 15;
             this.labelCell2.Value = "実働";
+            // 
+            // labelCell20
+            // 
+            this.labelCell20.Location = new System.Drawing.Point(90, 1);
+            this.labelCell20.Name = "labelCell20";
+            this.labelCell20.Size = new System.Drawing.Size(25, 40);
+            cellStyle45.BackColor = System.Drawing.Color.PowderBlue;
+            border42.Bottom = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
+            border42.Left = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
+            border42.Right = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
+            border42.Top = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
+            cellStyle45.Border = border42;
+            cellStyle45.Font = new System.Drawing.Font("游ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            cellStyle45.ForeColor = System.Drawing.Color.Black;
+            cellStyle45.ImeMode = System.Windows.Forms.ImeMode.Off;
+            cellStyle45.Multiline = GrapeCity.Win.MultiRow.MultiRowTriState.True;
+            cellStyle45.TextAlign = GrapeCity.Win.MultiRow.MultiRowContentAlignment.MiddleCenter;
+            this.labelCell20.Style = cellStyle45;
+            this.labelCell20.TabIndex = 16;
+            this.labelCell20.Value = "有休";
             // 
             // lblWeek
             // 
@@ -944,26 +964,6 @@
             cellStyle28.TextAlign = GrapeCity.Win.MultiRow.MultiRowContentAlignment.MiddleCenter;
             this.chkYukyu.Style = cellStyle28;
             this.chkYukyu.TabIndex = 3;
-            // 
-            // labelCell20
-            // 
-            this.labelCell20.Location = new System.Drawing.Point(90, 1);
-            this.labelCell20.Name = "labelCell20";
-            this.labelCell20.Size = new System.Drawing.Size(25, 40);
-            cellStyle45.BackColor = System.Drawing.Color.PowderBlue;
-            border42.Bottom = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
-            border42.Left = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
-            border42.Right = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
-            border42.Top = new GrapeCity.Win.MultiRow.Line(GrapeCity.Win.MultiRow.LineStyle.Thin, System.Drawing.Color.DimGray);
-            cellStyle45.Border = border42;
-            cellStyle45.Font = new System.Drawing.Font("游ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            cellStyle45.ForeColor = System.Drawing.Color.Black;
-            cellStyle45.ImeMode = System.Windows.Forms.ImeMode.Off;
-            cellStyle45.Multiline = GrapeCity.Win.MultiRow.MultiRowTriState.True;
-            cellStyle45.TextAlign = GrapeCity.Win.MultiRow.MultiRowContentAlignment.MiddleCenter;
-            this.labelCell20.Style = cellStyle45;
-            this.labelCell20.TabIndex = 16;
-            this.labelCell20.Value = "有休";
             // 
             // Template1
             // 

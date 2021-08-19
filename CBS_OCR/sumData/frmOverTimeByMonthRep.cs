@@ -328,7 +328,7 @@ namespace CBS_OCR.sumData
 
                         g[colBushoCode, g.Rows.Count - 1].Value = t.sBmn;
                         g[colBushoName, g.Rows.Count - 1].Value = t.sBmnName;
-                        g[colStaffCode, g.Rows.Count - 1].Value = t.sNum.ToString().PadLeft(6, '0');
+                        g[colStaffCode, g.Rows.Count - 1].Value = t.sNum.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
                         g[colStaffName, g.Rows.Count - 1].Value = t.sName;
                         wNum = t.sNum;
                         wTotal = 0;

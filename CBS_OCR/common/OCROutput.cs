@@ -47,20 +47,19 @@ namespace CBS_OCR.common
 
         ///--------------------------------------------------------------------
         /// <summary>
-        ///     清掃出勤簿OCRデータを共通勤務票に書き込む </summary>
+        ///     清掃出勤簿OCRデータを共通勤務票に書き込む : 2021/08/17 </summary>
         ///--------------------------------------------------------------------
         public bool putComDataSeisou(ref int cnt, ref int sCnt)
         {
-            // 同じ年月の勤怠データを読み込む
-            cAdp.FillByYYMM(dtsM.共通勤務票, global.cnfYear, global.cnfMonth);
+            // コメント化：2021/08/18
+            //// 同じ年月の勤怠データを読み込む
+            //cAdp.FillByYYMM(dtsM.共通勤務票, global.cnfYear, global.cnfMonth);
+            //// 奉行SQLServer接続文字列取得
+            //string sc = sqlControl.obcConnectSting.get(dbName);
+            //// 奉行SQLServer接続
+            //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
+            //SqlDataReader dR = null;
 
-            // 奉行SQLServer接続文字列取得
-            string sc = sqlControl.obcConnectSting.get(dbName);
-
-            // 奉行SQLServer接続
-            sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
-
-            SqlDataReader dR = null;
             DateTime dt;
 
             // ログメッセージ
@@ -113,22 +112,38 @@ namespace CBS_OCR.common
                     
                     CBSDataSet1.共通勤務票Row r = dtsM.共通勤務票.New共通勤務票Row();
 
-                    string bCode = Utility.NulltoStr(t.勤務票ヘッダRow.社員番号.ToString().PadLeft(10, '0'));
-                    dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+                    // コメント化：2021/08/18
+                    //string bCode = Utility.NulltoStr(t.勤務票ヘッダRow.社員番号.ToString().PadLeft(10, '0'));
+                    //dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
+                    //while (dR.Read())
+                    //{
+                    //    r.雇用区分 = Utility.StrtoInt(dR["koyoukbn"].ToString());
+                    //    r.部門コード = dR["DepartmentCode"].ToString();
+                    //    r.部門名 = dR["DepartmentName"].ToString();
+                    //    r.社員名 = dR["Name"].ToString();
+                    //}
+                    //dR.Close();
 
-                    r.雇用区分 = global.flgOff;
-                    r.部門コード = string.Empty;
-                    r.部門名 = string.Empty;
+                    string bCode = Utility.NulltoStr(t.勤務票ヘッダRow.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0')); // 2021/08/18
 
-                    while (dR.Read())
+                    // 社員ＣＳＶデータより社員情報を取得する：2021/08/18
+                    clsMaster ms = new clsMaster();
+                    clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(bCode);
+
+                    if (shain.SHAIN_CD != "")
                     {
-                        r.雇用区分 = Utility.StrtoInt(dR["koyoukbn"].ToString());
-                        r.部門コード = dR["DepartmentCode"].ToString();
-                        r.部門名 = dR["DepartmentName"].ToString();
-                        r.社員名 = dR["Name"].ToString();
+                        r.雇用区分 = Utility.StrtoInt(shain.SHAIN_KOYOU_CD);
+                        r.部門コード = shain.SHAIN_SHOZOKU_CD;
+                        r.部門名 = shain.SHAIN_SHOZOKU;
+                        r.社員名 = shain.SHAIN_NAME;
                     }
-
-                    dR.Close();
+                    else
+                    {
+                        r.雇用区分   = global.flgOff;
+                        r.部門コード = string.Empty;
+                        r.部門名 = string.Empty;
+                        r.社員名 = string.Empty;
+                    }
 
                     if (DateTime.TryParse(t.勤務票ヘッダRow.年 + "/" + t.勤務票ヘッダRow.月 + "/" + t.日, out dt))
                     {
@@ -196,15 +211,16 @@ namespace CBS_OCR.common
             }
             finally
             {
-                if (dR != null && !dR.IsClosed)
-                {
-                    dR.Close();
-                }
+                // コメント化：2021/08/18
+                //if (dR != null && !dR.IsClosed)
+                //{
+                //    dR.Close();
+                //}
 
-                if (sdCon.Cn.State == System.Data.ConnectionState.Open)
-                {
-                    sdCon.Close();
-                }
+                //if (sdCon.Cn.State == System.Data.ConnectionState.Open)
+                //{
+                //    sdCon.Close();
+                //}
 
                 // ログ出力 : 2018/04/04
                 sb.Clear();
@@ -242,27 +258,27 @@ namespace CBS_OCR.common
 
                     CBSDataSet1.時間外命令書ヘッダRow r = dtsM.時間外命令書ヘッダ.New時間外命令書ヘッダRow();
 
-                    r.ID            = t.ID;
-                    r.社員番号      = t.社員番号;
-                    r.年            = yy;
-                    r.月            = t.月;
-                    r.画像名        = t.画像名;
-                    r.確認          = t.確認;
-                    r.備考          = t.備考;
+                    r.ID = t.ID;
+                    r.社員番号 = t.社員番号;
+                    r.年 = yy;
+                    r.月 = t.月;
+                    r.画像名 = t.画像名;
+                    r.確認 = t.確認;
+                    r.備考 = t.備考;
                     r.編集アカウント = t.編集アカウント;
-                    r.更新年月日     = DateTime.Now;
+                    r.更新年月日 = DateTime.Now;
 
                     dtsM.時間外命令書ヘッダ.Add時間外命令書ヘッダRow(r);
 
                     foreach (var m in dts.時間外命令書明細.Where(a => a.ヘッダID == t.ID))
                     {
                         CBSDataSet1.時間外命令書明細Row mr = dtsM.時間外命令書明細.New時間外命令書明細Row();
-                        mr.ヘッダID       = m.ヘッダID;
-                        mr.日             = m.日;
-                        mr.命令有無       = m.命令有無;
-                        mr.取消           = m.取消;
+                        mr.ヘッダID = m.ヘッダID;
+                        mr.日 = m.日;
+                        mr.命令有無 = m.命令有無;
+                        mr.取消 = m.取消;
                         mr.編集アカウント = m.編集アカウント;
-                        mr.更新年月日     = DateTime.Now;
+                        mr.更新年月日 = DateTime.Now;
 
                         dtsM.時間外命令書明細.Add時間外命令書明細Row(mr);
                     }
@@ -302,12 +318,10 @@ namespace CBS_OCR.common
             // コメント化：2021/08/12
             //// 奉行SQLServer接続文字列取得
             //string sc = sqlControl.obcConnectSting.get(dbName);
-
             //// 奉行SQLServer接続
             //sqlControl.DataControl sdCon = new sqlControl.DataControl(sc);
-
             //SqlDataReader dR = null;
-            DateTime dt;
+            //DateTime dt;
 
             // ログメッセージ
             string logText   = string.Empty;
@@ -459,7 +473,7 @@ namespace CBS_OCR.common
         // 2021/08/12
         private void addKeibiData(CBS_CLIDataSet.警備報告書明細Row t, ref int cnt, int sStatus)
         {
-            SqlDataReader dR = null;
+            //SqlDataReader dR = null;  // コメント化：2021/08/18
             DateTime dt;
 
             CBSDataSet1.共通勤務票Row r = dtsM.共通勤務票.New共通勤務票Row();
@@ -468,10 +482,6 @@ namespace CBS_OCR.common
             string bCode = Utility.NulltoStr(t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0')); // 2021/08/12
 
             //dR = sdCon.free_dsReader(Utility.getEmployee(bCode));  // コメント化：2021/08/12
-
-            r.雇用区分   = global.flgOff;
-            r.部門コード = string.Empty;
-            r.部門名     = string.Empty;
 
             // コメント化：2021/08/12
             //while (dR.Read())
@@ -490,10 +500,17 @@ namespace CBS_OCR.common
 
             if (shain.SHAIN_CD != "")
             {
-                r.雇用区分   = Utility.StrtoInt(shain.SHAIN_KOYOU_CD);
+                r.雇用区分 = Utility.StrtoInt(shain.SHAIN_KOYOU_CD);
                 r.部門コード = shain.SHAIN_SHOZOKU_CD;
-                r.部門名     = shain.SHAIN_SHOZOKU;
-                r.社員名     = shain.SHAIN_NAME;
+                r.部門名 = shain.SHAIN_SHOZOKU;
+                r.社員名 = shain.SHAIN_NAME;
+            }
+            else
+            {
+                r.雇用区分 = global.flgOff;
+                r.部門コード = string.Empty;
+                r.部門名 = string.Empty;
+                r.社員名 = string.Empty;
             }
 
             if (DateTime.TryParse(t.警備報告書ヘッダRow.年 + "/" + t.警備報告書ヘッダRow.月 + "/" + t.警備報告書ヘッダRow.日, out dt))

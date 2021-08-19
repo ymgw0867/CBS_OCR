@@ -665,7 +665,7 @@ namespace CBS_OCR.OCR
 
                 // 社員CSVデータより社員名を取得して表示します：2021/08/11
                 clsMaster ms = new clsMaster();
-                clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(6, '0'));
+                clsCsvData.ClsCsvShain shain = ms.GetData<clsCsvData.ClsCsvShain>(txtSNum.Text.PadLeft(global.SHAIN_CD_LENGTH, '0'));
                 if (shain.SHAIN_CD != "")
                 {
                     lblKoyoukbn.Text = shain.SHAIN_KOYOU_CD;

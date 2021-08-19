@@ -706,7 +706,7 @@ namespace CBS_OCR.OCR
             var s = _dts.共通勤務票.Single(a => a.ID == sID);
 
             dateTimePicker1.Value = s.日付;
-            txtSNum.Text = s.社員番号.ToString().PadLeft(6, '0');
+            txtSNum.Text = s.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
 
             cmbShubetsu.SelectedIndex = s.出勤簿区分;
             cmbShubetsu.Enabled       = false;

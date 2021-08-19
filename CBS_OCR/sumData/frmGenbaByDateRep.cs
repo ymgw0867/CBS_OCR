@@ -260,7 +260,7 @@ namespace CBS_OCR.sumData
                         }
                     }
 
-                    g[colStaffCode, g.Rows.Count - 1].Value = t.社員番号.ToString().PadLeft(6, '0');
+                    g[colStaffCode, g.Rows.Count - 1].Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
                     g[colStaffName, g.Rows.Count - 1].Value = t.社員名;
 
                     if (!t.Is開始時Null())

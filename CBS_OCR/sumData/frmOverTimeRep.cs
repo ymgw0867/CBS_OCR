@@ -242,7 +242,7 @@ namespace CBS_OCR.sumData
 
                     g[colBushoCode, g.Rows.Count - 1].Value = t.sBmn;
                     g[colBushoName, g.Rows.Count - 1].Value = t.sBmnName;
-                    g[colStaffCode, g.Rows.Count - 1].Value = t.sNum.ToString().PadLeft(6, '0');
+                    g[colStaffCode, g.Rows.Count - 1].Value = t.sNum.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
                     g[colStaffName, g.Rows.Count - 1].Value = t.sName;
                     g[colOverTime, g.Rows.Count - 1].Value = (t.sOverTime / 60) + ":" + (t.sOverTime % 60).ToString().PadLeft(2, '0');
                     g[colHolidayWork, g.Rows.Count - 1].Value = (t.sHolwork / 60) + ":" + (t.sHolwork % 60).ToString().PadLeft(2, '0');

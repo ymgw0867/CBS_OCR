@@ -320,7 +320,7 @@ namespace CBS_OCR.xlsData
                         int kyuyoKbn = Utility.StrtoInt(Utility.NulltoStr(dataRow.Cell(5).Value));
 
                         // 部門コード（所属）
-                        string bmnCode = Utility.NulltoStr(dataRow.Cell(3).Value).PadLeft(3, '0');
+                        string bmnCode = Utility.NulltoStr(dataRow.Cell(3).Value).PadLeft(global.BMN_CD_LENGTH, '0');
 
                         // 社員名
                         string sName = Utility.NulltoStr(dataRow.Cell(2).Value);
@@ -331,7 +331,7 @@ namespace CBS_OCR.xlsData
 
                         if (z == 0)
                         {
-                            listBox1.Items.Add(sNum.ToString().PadLeft(6, '0') + " " + sName + "：所定時間が０のため、スキップしました");
+                            listBox1.Items.Add(sNum.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') + " " + sName + "：所定時間が０のため、スキップしました");
                             listBox1.TopIndex = listBox1.Items.Count - 1;
                             System.Threading.Thread.Sleep(100);
                             Application.DoEvents();
@@ -374,7 +374,7 @@ namespace CBS_OCR.xlsData
                             sumTsukiDen(sNum, sTsukin, bmnCode, sName, z, global.FURIKAE_RYOHI, "交通費振替");
                         }
 
-                        listBox1.Items.Add(sNum.ToString().PadLeft(6, '0') + " " + sName + "：振替仕訳伝票データを作成しました");
+                        listBox1.Items.Add(sNum.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') + " " + sName + "：振替仕訳伝票データを作成しました");
                         listBox1.TopIndex = listBox1.Items.Count - 1;
                         System.Threading.Thread.Sleep(100);
                         Application.DoEvents();
