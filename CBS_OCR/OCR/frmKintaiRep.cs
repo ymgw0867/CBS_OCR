@@ -81,34 +81,35 @@ namespace CBS_OCR.OCR
         //string sc = string.Empty;
         //sqlControl.DataControl sdCon;
 
-        string _dbName = string.Empty;          // 会社領域データベース識別番号
-        string _comNo = string.Empty;           // 会社番号
-        string _comName = string.Empty;         // 会社名
-        string _dbName_AC = string.Empty;       // 会社領域データベース識別番号
-        string _comName_AC = string.Empty;      // 会社名
+        //string _dbName     = string.Empty;  // 会社領域データベース識別番号
+        //string _comNo      = string.Empty;  // 会社番号
+        //string _comName    = string.Empty;  // 会社名
+        //string _dbName_AC  = string.Empty;  // 会社領域データベース識別番号
+        //string _comName_AC = string.Empty;  // 会社名
         
-        string colDate = "c0";
-        string colGenbaCode = "c1";
-        string colGenbaName = "c2";
-        string colStaffCode = "c3";
-        string colStaffName = "c4";
-        string colID = "c5";
-        string colSTime = "c6";
-        string colETime = "c7";
-        string colRestTime = "c8";
-        string colWorkTime = "c9";
-        string colKm = "c10";
-        string colDoujyou = "c11";
-        string colKoutsuuhi = "c12";
-        string colTankakbn = "c13";
-        string colMemo = "c14";
-        string colShayou = "c15";
-        string colJikayou = "c16";
+        string colDate        = "c0";
+        string colGenbaCode   = "c1";
+        string colGenbaName   = "c2";
+        string colStaffCode   = "c3";
+        string colStaffName   = "c4";
+        string colID          = "c5";
+        string colSTime       = "c6";
+        string colETime       = "c7";
+        string colRestTime    = "c8";
+        string colWorkTime    = "c9";
+        string colKm          = "c10";
+        string colDoujyou     = "c11";
+        string colKoutsuuhi   = "c12";
+        string colTankakbn    = "c13";
+        string colMemo        = "c14";
+        string colShayou      = "c15";
+        string colJikayou     = "c16";
         string colKoutsukikan = "c17";
-        string colKoutsuKbn = "c18";
-        string colShubetsu = "c19";
-        string colYakan = "c20";
-        string colHoshou = "c21";
+        string colKoutsuKbn   = "c18";
+        string colShubetsu    = "c19";
+        string colYakan       = "c20";
+        string colHoshou      = "c21";
+        string colYukyu       = "c22";
 
         ///---------------------------------------------------------------------
         /// <summary>
@@ -140,7 +141,7 @@ namespace CBS_OCR.OCR
 
                 // 行の高さ
                 tempDGV.ColumnHeadersHeight = 20;
-                tempDGV.RowTemplate.Height = 20;
+                tempDGV.RowTemplate.Height  = 20;
 
                 // 全体の高さ
                 tempDGV.Height = 462;
@@ -149,68 +150,71 @@ namespace CBS_OCR.OCR
                 tempDGV.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
 
                 // 各列幅指定
-                tempDGV.Columns.Add(colDate, "日付");
-                tempDGV.Columns.Add(colGenbaCode, "現場コード");
-                tempDGV.Columns.Add(colGenbaName, "現場名");
-                tempDGV.Columns.Add(colShubetsu, "種別");
-                tempDGV.Columns.Add(colSTime, "開始時刻");
-                tempDGV.Columns.Add(colETime, "終了時刻");
-                tempDGV.Columns.Add(colRestTime, "休憩時間");
-                tempDGV.Columns.Add(colWorkTime, "実働時間");
-                tempDGV.Columns.Add(colShayou, "社用車");
-                tempDGV.Columns.Add(colJikayou, "自家用車");
+                tempDGV.Columns.Add(colDate,        "日付");
+                tempDGV.Columns.Add(colYukyu,       "有休");  // 2021/08/23
+                tempDGV.Columns.Add(colGenbaCode,   "現場コード");
+                tempDGV.Columns.Add(colGenbaName,   "現場名");
+                tempDGV.Columns.Add(colShubetsu,    "種別");
+                tempDGV.Columns.Add(colSTime,       "開始時刻");
+                tempDGV.Columns.Add(colETime,       "終了時刻");
+                tempDGV.Columns.Add(colRestTime,    "休憩時間");
+                tempDGV.Columns.Add(colWorkTime,    "実働時間");
+                tempDGV.Columns.Add(colShayou,      "社用車");
+                tempDGV.Columns.Add(colJikayou,     "自家用車");
                 tempDGV.Columns.Add(colKoutsukikan, "交通機関");
-                tempDGV.Columns.Add(colKoutsuKbn, "交通区分");
-                tempDGV.Columns.Add(colKoutsuuhi, "交通費");
-                tempDGV.Columns.Add(colKm, "走行距離");
-                tempDGV.Columns.Add(colDoujyou, "同乗人数");
-                tempDGV.Columns.Add(colHoshou, "保証有無");
-                tempDGV.Columns.Add(colYakan, "夜間単価");
-                tempDGV.Columns.Add(colTankakbn, "単価区分");
-                tempDGV.Columns.Add(colMemo, "備考");
-                tempDGV.Columns.Add(colID, "ID");
+                tempDGV.Columns.Add(colKoutsuKbn,   "交通区分");
+                tempDGV.Columns.Add(colKoutsuuhi,   "交通費");
+                tempDGV.Columns.Add(colKm,          "走行距離");
+                tempDGV.Columns.Add(colDoujyou,     "同乗人数");
+                tempDGV.Columns.Add(colHoshou,      "保証有無");
+                tempDGV.Columns.Add(colYakan,       "夜間単価");
+                tempDGV.Columns.Add(colTankakbn,    "単価区分");
+                tempDGV.Columns.Add(colMemo,        "備考");
+                tempDGV.Columns.Add(colID,          "ID");
 
-                tempDGV.Columns[colDate].Width = 90;
-                tempDGV.Columns[colGenbaCode].Width = 80;
-                tempDGV.Columns[colGenbaName].Width = 300;
-                tempDGV.Columns[colShubetsu].Width = 70;
+                tempDGV.Columns[colDate].Width        = 90;
+                tempDGV.Columns[colYukyu].Width       = 50;  // 2021/08/23
+                tempDGV.Columns[colGenbaCode].Width   = 80;
+                tempDGV.Columns[colGenbaName].Width   = 300;
+                tempDGV.Columns[colShubetsu].Width    = 70;
                 //tempDGV.Columns[colStaffCode].Width = 100;
                 //tempDGV.Columns[colStaffName].Width = 120;
-                tempDGV.Columns[colSTime].Width = 70;
-                tempDGV.Columns[colETime].Width = 70;
-                tempDGV.Columns[colRestTime].Width = 70;
-                tempDGV.Columns[colWorkTime].Width = 70;
-                tempDGV.Columns[colKm].Width = 70;
-                tempDGV.Columns[colShayou].Width = 70;
-                tempDGV.Columns[colJikayou].Width = 70;
+                tempDGV.Columns[colSTime].Width       = 70;
+                tempDGV.Columns[colETime].Width       = 70;
+                tempDGV.Columns[colRestTime].Width    = 70;
+                tempDGV.Columns[colWorkTime].Width    = 70;
+                tempDGV.Columns[colKm].Width          = 70;
+                tempDGV.Columns[colShayou].Width      = 70;
+                tempDGV.Columns[colJikayou].Width     = 70;
                 tempDGV.Columns[colKoutsukikan].Width = 70;
-                tempDGV.Columns[colKoutsuKbn].Width = 70;
-                tempDGV.Columns[colKoutsuuhi].Width = 70;
-                tempDGV.Columns[colDoujyou].Width = 70;
-                tempDGV.Columns[colHoshou].Width = 70;
-                tempDGV.Columns[colYakan].Width = 70;
-                tempDGV.Columns[colTankakbn].Width = 70;
-                tempDGV.Columns[colMemo].Width = 120;
+                tempDGV.Columns[colKoutsuKbn].Width   = 70;
+                tempDGV.Columns[colKoutsuuhi].Width   = 70;
+                tempDGV.Columns[colDoujyou].Width     = 70;
+                tempDGV.Columns[colHoshou].Width      = 70;
+                tempDGV.Columns[colYakan].Width       = 70;
+                tempDGV.Columns[colTankakbn].Width    = 70;
+                tempDGV.Columns[colMemo].Width        = 120;
 
                 //tempDGV.Columns[colGenbaName].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                tempDGV.Columns[colGenbaCode].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colGenbaCode].DefaultCellStyle.Alignment   = DataGridViewContentAlignment.MiddleCenter;
                 //tempDGV.Columns[colStaffCode].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colSTime].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colETime].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colRestTime].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colWorkTime].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colKm].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colDoujyou].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colShayou].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colJikayou].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colSTime].DefaultCellStyle.Alignment       = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colETime].DefaultCellStyle.Alignment       = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colRestTime].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colWorkTime].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colKm].DefaultCellStyle.Alignment          = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colDoujyou].DefaultCellStyle.Alignment     = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colShayou].DefaultCellStyle.Alignment      = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colJikayou].DefaultCellStyle.Alignment     = DataGridViewContentAlignment.MiddleCenter;
                 tempDGV.Columns[colKoutsukikan].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colKoutsuKbn].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colKoutsuuhi].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colHoshou].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colYakan].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colShubetsu].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                tempDGV.Columns[colTankakbn].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colKoutsuKbn].DefaultCellStyle.Alignment   = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colKoutsuuhi].DefaultCellStyle.Alignment   = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colHoshou].DefaultCellStyle.Alignment      = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colYakan].DefaultCellStyle.Alignment       = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colShubetsu].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colTankakbn].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
+                tempDGV.Columns[colYukyu].DefaultCellStyle.Alignment       = DataGridViewContentAlignment.MiddleCenter; // 2021/08/23
                 //tempDGV.Columns[colMemo].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 tempDGV.Columns[colID].Visible = false;
@@ -287,7 +291,24 @@ namespace CBS_OCR.OCR
                 {
                     g.Rows.Add();
 
-                    g[colDate, g.Rows.Count - 1].Value      = t.日付.ToShortDateString();
+                    g[colDate, g.Rows.Count - 1].Value = t.日付.ToShortDateString();
+
+                    // 有給休暇：2021/08/23
+                    if (t.有休区分 == global.flgOff)
+                    {
+                        g[colYukyu, g.Rows.Count - 1].Value = "";
+                    }
+                    else if (t.有休区分 == global.YUKYU_ZEN)
+                    {
+                        // 有給休暇：全日
+                        g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_ZEN_MARK;
+                    }
+                    else if (t.有休区分 == global.YUKYU_HAN)
+                    {
+                        // 半休
+                        g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_HAN_MARK;
+                    }
+
                     g[colGenbaCode, g.Rows.Count - 1].Value = t.現場コード;
                     g[colGenbaName, g.Rows.Count - 1].Value = t.現場名;
 

@@ -618,7 +618,7 @@ namespace CBS_OCR.common
             r.年 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[2].Trim().Replace("-", ""), 2));
             r.月 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[3].Trim().Replace("-", ""), 2));
             r.日 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[4].Trim().Replace("-", ""), 2));
-            r.現場コード = Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), 8);
+            r.現場コード = Utility.GetStringSubMax(stCSV[5].Trim().Replace("-", ""), global.GENBA_CD_LENGTH);    // 2021/08/20
             r.現場名 = string.Empty;
             r.報告書確認印 = Utility.StrtoInt(Utility.GetStringSubMax(stCSV[6].Trim().Replace("-", ""), 1));
 

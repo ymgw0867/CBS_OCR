@@ -304,6 +304,7 @@ namespace CBS_OCR.OCR
 
             cmbShubetsu.SelectedIndex = -1;
             cmbShubetsu.Enabled       = true;
+            cmbYukyu.SelectedIndex    = 0;  // 2021/08/23
 
             txtSNum.Text      = string.Empty;
             lblSName.Text     = string.Empty;
@@ -708,6 +709,20 @@ namespace CBS_OCR.OCR
             dateTimePicker1.Value = s.日付;
             txtSNum.Text = s.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
 
+            // 有給休暇：2021/08/23
+            if (s.有休区分 == global.flgOff)
+            {
+                cmbYukyu.SelectedIndex = 0;
+            }
+            else if (s.有休区分 == global.YUKYU_ZEN)
+            {
+                cmbYukyu.SelectedIndex = 1;
+            }
+            else if (s.有休区分 == global.YUKYU_HAN)
+            {
+                cmbYukyu.SelectedIndex = 2;
+            }
+
             cmbShubetsu.SelectedIndex = s.出勤簿区分;
             cmbShubetsu.Enabled       = false;
             txtGenbaCode.Text         = s.現場コード;
@@ -966,123 +981,145 @@ namespace CBS_OCR.OCR
                 return false;
             }
 
-            if (lblGenbaName.Text == string.Empty)
+            // 有給休暇・全日のとき：2021/08/23
+            if (cmbYukyu.SelectedIndex == 1)
+            {
+                if (txtGenbaCode.Text != "")
+                {
+                    MessageBox.Show("有給休暇（全日）で現場コードが登録されています", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    cmbYukyu.Focus();
+                    return false;
+                }
+
+                if (txtSh.Text != "" || txtSm.Text != "" || txtEh.Text != "" || txtEm.Text != "" ||
+                    txtRh.Text != "" || txtRm.Text != "" || txtWh.Text != "" || txtWm.Text != "")
+                {
+                    MessageBox.Show("有給休暇（全日）で勤務記録が登録されています", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    cmbYukyu.Focus();
+                    return false;
+                }
+            }
+            else if (lblGenbaName.Text == string.Empty)
             {
                 MessageBox.Show("現場コードを入力してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtGenbaCode.Focus();
                 return false;
             }
 
-            if (!chkChushi.Checked)
+            if (!chkChushi.Checked) // 中止ではないとき
             {
-                if (txtSh.Text.Trim() == string.Empty || Utility.StrtoInt(txtSh.Text) > 23)
+                // 出勤日と半休を条件に追加：2023/08/23
+                if (cmbYukyu.SelectedIndex != 1)
                 {
-                    MessageBox.Show("開始時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtSh.Focus();
-                    return false;
-                }
+                    if (txtSh.Text.Trim() == string.Empty || Utility.StrtoInt(txtSh.Text) > 23)
+                    {
+                        MessageBox.Show("開始時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtSh.Focus();
+                        return false;
+                    }
 
-                if (txtSm.Text.Trim() == string.Empty || Utility.StrtoInt(txtSm.Text) > 59)
-                {
-                    MessageBox.Show("開始時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtSm.Focus();
-                    return false;
-                }
+                    if (txtSm.Text.Trim() == string.Empty || Utility.StrtoInt(txtSm.Text) > 59)
+                    {
+                        MessageBox.Show("開始時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtSm.Focus();
+                        return false;
+                    }
 
-                if (txtSh.Text.Trim() != string.Empty && txtSm.Text.Trim() == string.Empty)
-                {
-                    MessageBox.Show("開始時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtSm.Focus();
-                    return false;
-                }
+                    if (txtSh.Text.Trim() != string.Empty && txtSm.Text.Trim() == string.Empty)
+                    {
+                        MessageBox.Show("開始時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtSm.Focus();
+                        return false;
+                    }
 
-                if (txtSh.Text.Trim() == string.Empty && txtSm.Text.Trim() != string.Empty)
-                {
-                    MessageBox.Show("開始時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtSh.Focus();
-                    return false;
-                }
+                    if (txtSh.Text.Trim() == string.Empty && txtSm.Text.Trim() != string.Empty)
+                    {
+                        MessageBox.Show("開始時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtSh.Focus();
+                        return false;
+                    }
 
-                if (txtEh.Text.Trim() == string.Empty || Utility.StrtoInt(txtEh.Text) > 23)
-                {
-                    MessageBox.Show("終了時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtEh.Focus();
-                    return false;
-                }
+                    if (txtEh.Text.Trim() == string.Empty || Utility.StrtoInt(txtEh.Text) > 23)
+                    {
+                        MessageBox.Show("終了時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtEh.Focus();
+                        return false;
+                    }
 
-                if (txtEm.Text.Trim() == string.Empty || Utility.StrtoInt(txtEm.Text) > 59)
-                {
-                    MessageBox.Show("終了時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtEm.Focus();
-                    return false;
-                }
+                    if (txtEm.Text.Trim() == string.Empty || Utility.StrtoInt(txtEm.Text) > 59)
+                    {
+                        MessageBox.Show("終了時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtEm.Focus();
+                        return false;
+                    }
 
-                if (txtEh.Text.Trim() != string.Empty && txtEm.Text.Trim() == string.Empty)
-                {
-                    MessageBox.Show("終了時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtEm.Focus();
-                    return false;
-                }
+                    if (txtEh.Text.Trim() != string.Empty && txtEm.Text.Trim() == string.Empty)
+                    {
+                        MessageBox.Show("終了時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtEm.Focus();
+                        return false;
+                    }
 
-                if (txtEh.Text.Trim() == string.Empty && txtEm.Text.Trim() != string.Empty)
-                {
-                    MessageBox.Show("終了時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtEh.Focus();
-                    return false;
-                }
+                    if (txtEh.Text.Trim() == string.Empty && txtEm.Text.Trim() != string.Empty)
+                    {
+                        MessageBox.Show("終了時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtEh.Focus();
+                        return false;
+                    }
 
-                if (Utility.StrtoInt(txtRh.Text) > 23)
-                {
-                    MessageBox.Show("休憩時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtRh.Focus();
-                    return false;
-                }
+                    if (Utility.StrtoInt(txtRh.Text) > 23)
+                    {
+                        MessageBox.Show("休憩時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtRh.Focus();
+                        return false;
+                    }
 
-                if (Utility.StrtoInt(txtRm.Text) > 59)
-                {
-                    MessageBox.Show("休憩時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtRm.Focus();
-                    return false;
-                }
+                    if (Utility.StrtoInt(txtRm.Text) > 59)
+                    {
+                        MessageBox.Show("休憩時刻が不正です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtRm.Focus();
+                        return false;
+                    }
 
-                if (txtRh.Text.Trim() != string.Empty && txtRm.Text.Trim() == string.Empty)
-                {
-                    MessageBox.Show("休憩時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtRm.Focus();
-                    return false;
-                }
+                    if (txtRh.Text.Trim() != string.Empty && txtRm.Text.Trim() == string.Empty)
+                    {
+                        MessageBox.Show("休憩時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtRm.Focus();
+                        return false;
+                    }
 
-                if (txtRh.Text.Trim() == string.Empty && txtRm.Text.Trim() != string.Empty)
-                {
-                    MessageBox.Show("休憩時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtRh.Focus();
-                    return false;
-                }
+                    if (txtRh.Text.Trim() == string.Empty && txtRm.Text.Trim() != string.Empty)
+                    {
+                        MessageBox.Show("休憩時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtRh.Focus();
+                        return false;
+                    }
 
-                if (txtWh.Text.Trim() != string.Empty && txtWm.Text.Trim() == string.Empty)
-                {
-                    MessageBox.Show("実働時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtWm.Focus();
-                    return false;
-                }
+                    if (txtWh.Text.Trim() != string.Empty && txtWm.Text.Trim() == string.Empty)
+                    {
+                        MessageBox.Show("実働時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtWm.Focus();
+                        return false;
+                    }
 
-                if (txtWh.Text.Trim() == string.Empty && txtWm.Text.Trim() != string.Empty)
-                {
-                    MessageBox.Show("実働時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtWh.Focus();
-                    return false;
-                }
+                    if (txtWh.Text.Trim() == string.Empty && txtWm.Text.Trim() != string.Empty)
+                    {
+                        MessageBox.Show("実働時刻が未入力です", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtWh.Focus();
+                        return false;
+                    }
 
-                // 休憩時間記入チェック
-                if (!errCheckRestTime())
-                {
-                    return false;
-                }
+                    // 休憩時間記入チェック
+                    if (!errCheckRestTime())
+                    {
+                        return false;
+                    }
 
-                // 実働時間記入チェック
-                if (!errCheckWorkTime())
-                {
-                    return false;
+                    // 実働時間記入チェック
+                    if (!errCheckWorkTime())
+                    {
+                        return false;
+                    }
                 }
             }
             else
@@ -1145,28 +1182,30 @@ namespace CBS_OCR.OCR
             }
 
             // 交通手段
-            if (!rbShayou.Checked && !rbJikayousha.Checked && !rbKoutsuukikan.Checked)
+            if (cmbYukyu.SelectedIndex != 1) // 有給休暇全日を条件に追加：2021/08/23
             {
-                MessageBox.Show("交通手段を選択してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
+                if (!rbShayou.Checked && !rbJikayousha.Checked && !rbKoutsuukikan.Checked)
+                {
+                    MessageBox.Show("交通手段を選択してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
 
-            // 走行距離
-            if ((rbShayou.Checked || rbJikayousha.Checked) && Utility.StrtoInt(txtKm.Text) == global.flgOff)
-            {
-                MessageBox.Show("走行距離を入力してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                txtKm.Focus();
-                return false;
-            }
+                // 走行距離
+                if ((rbShayou.Checked || rbJikayousha.Checked) && Utility.StrtoInt(txtKm.Text) == global.flgOff)
+                {
+                    MessageBox.Show("走行距離を入力してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtKm.Focus();
+                    return false;
+                }
 
-            // 単価区分
-            if (cmbTankakbn.SelectedIndex == -1)
-            {
-                MessageBox.Show("単価区分を選択してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                cmbTankakbn.Focus();
-                return false;
+                // 単価区分
+                if (cmbTankakbn.SelectedIndex == -1)
+                {
+                    MessageBox.Show("単価区分を選択してください", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    cmbTankakbn.Focus();
+                    return false;
+                }
             }
-
 
             return true;
         }
@@ -1341,6 +1380,21 @@ namespace CBS_OCR.OCR
                 CBSDataSet1.共通勤務票Row r = _dts.共通勤務票.New共通勤務票Row();
 
                 r.日付 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());
+
+                // 有給休暇：2021/08/23
+                if (cmbYukyu.SelectedIndex == 0)
+                {
+                    r.有休区分 = global.flgOff;
+                }
+                else if (cmbYukyu.SelectedIndex == 1)
+                {
+                    r.有休区分 = global.YUKYU_ZEN;
+                }
+                else if (cmbYukyu.SelectedIndex == 2)
+                {
+                    r.有休区分 = global.YUKYU_HAN;
+                }
+
                 r.社員番号 = Utility.StrtoInt(txtSNum.Text);
                 r.社員名 = lblSName.Text;
 
@@ -1458,6 +1512,21 @@ namespace CBS_OCR.OCR
                 var r = _dts.共通勤務票.Single(a => a.ID == fMode.ID);
 
                 r.日付 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());
+
+                // 有給休暇：2021/08/23
+                if (cmbYukyu.SelectedIndex == 0)
+                {
+                    r.有休区分 = global.flgOff;
+                }
+                else if (cmbYukyu.SelectedIndex == 1)
+                {
+                    r.有休区分 = global.YUKYU_ZEN;
+                }
+                else if (cmbYukyu.SelectedIndex == 2)
+                {
+                    r.有休区分 = global.YUKYU_HAN;
+                }
+
                 r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
                 r.現場名 = lblGenbaName.Text;
                 r.開始時 = txtSh.Text.Trim();
@@ -1559,8 +1628,8 @@ namespace CBS_OCR.OCR
                 //SqlDataReader dR = sdCon.free_dsReader(Utility.getEmployee(bCode));
 
                 lblKoyoukbn.Text = string.Empty;
-                lblBmnCode.Text = string.Empty;
-                lblBmnName.Text = string.Empty;
+                lblBmnCode.Text  = string.Empty;
+                lblBmnName.Text  = string.Empty;
 
                 // コメント化：2021/08/11
                 //while (dR.Read())

@@ -195,7 +195,7 @@ namespace CBS_OCR.OCR
             gcMultiRow3.ShortcutKeyManager.Register(new clsKeyTab.CustomMoveToNextContorol(), Keys.Enter);
 
             txtMemo.AutoSize = false;
-            txtMemo.Height = 23;
+            txtMemo.Height   = 23;
 
 
             // 自分のコンピュータの登録がされていないとき終了します

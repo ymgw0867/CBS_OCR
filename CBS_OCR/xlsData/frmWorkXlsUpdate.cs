@@ -225,7 +225,8 @@ namespace CBS_OCR.xlsData
                         rng = sheet.Range("B20", "Y241");   // 有休欄追加のため：2021/08/17
                         rng.Value = string.Empty;
 
-                        int r = 0;
+                        int    r               = 0;
+                        double yukyu_Totaldays = 0;    // 月間有給休暇取得日数：2021/08/20
 
                         DateTime dt = new DateTime(1900, 1, 1);
 
@@ -304,6 +305,8 @@ namespace CBS_OCR.xlsData
                                 {
                                     sheet.Cell(20 + r, global.col_Yukyu).Value = "";
                                 }
+
+                                yukyu_Totaldays += t.有休区分;
                             }
 
                             // 有休列追加でカラム変更：2021/08/17
@@ -327,6 +330,9 @@ namespace CBS_OCR.xlsData
 
                             dt = t.日付;
                         }
+
+                        // 有休日数を書き込む：2021/08/20
+                        sheet.Cell(2, 15).Value = yukyu_Totaldays;
 
                         // シートを開放
                         sheet.Dispose();
@@ -541,8 +547,8 @@ namespace CBS_OCR.xlsData
                     {
                         // 日所定時間上限
                         int shoDayMaxHour = 0;  // 時間
-                        int shoDayMaxMin = 0;   // 分
-                        int shoDayMax = 0;      // 分換算
+                        int shoDayMaxMin  = 0;  // 分
+                        int shoDayMax     = 0;  // 分換算
                         
                         // 同日の現場勤務数を取得
                         int cnt = dts.共通勤務票.Count(a => a.社員番号 == t.社員番号 && a.日付 == t.日付 && a.中止 == global.flgOff);
@@ -656,12 +662,12 @@ namespace CBS_OCR.xlsData
                         // 2019/03/20 以下、同日複数勤務を考慮
                         // 日所定時間上限
                         int shoDayMaxHour = 0;  // 時間
-                        int shoDayMaxMin = 0;   // 分
-                        int shoDayMax = 0;      // 分換算
+                        int shoDayMaxMin  = 0;  // 分
+                        int shoDayMax     = 0;  // 分換算
 
                         // 実働時間が8時間以上のとき8時間
                         shoDayMaxHour = global.SHOTEI_8;
-                        shoDayMaxMin = global.flgOff;
+                        shoDayMaxMin  = global.flgOff;
 
                         shoDayMax = shoDayMaxHour * 60 + shoDayMaxMin;
 

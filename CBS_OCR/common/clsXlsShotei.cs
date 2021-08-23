@@ -152,7 +152,7 @@ namespace CBS_OCR.common
                     }
 
                     // ファイル名から社員番号を取得する
-                    int fNum = Utility.StrtoInt(System.IO.Path.GetFileNameWithoutExtension(file).Substring(0, 6));
+                    int fNum = Utility.StrtoInt(System.IO.Path.GetFileNameWithoutExtension(file).Substring(0, global.SHAIN_CD_LENGTH)); // 2021/08/20
 
                     // 社員番号でないとき読み飛ばす
                     if (fNum == global.flgOff)
@@ -164,7 +164,7 @@ namespace CBS_OCR.common
                     using (var bk = new XLWorkbook(file, XLEventTracking.Disabled))
                     {
                         var sheet = bk.Worksheet(1);
-                        var tbl = sheet.Range("B11", "AB41");
+                        var tbl   = sheet.Range("B11", "AB41");
 
                         for (int i = 11; i <= 41; i++)
                         {
