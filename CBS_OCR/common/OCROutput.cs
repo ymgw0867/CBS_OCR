@@ -151,7 +151,17 @@ namespace CBS_OCR.common
                     }
 
                     r.社員番号 = t.勤務票ヘッダRow.社員番号;
-                    r.現場コード = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'); // 2021/08/16
+
+                    // 現場コード：2021/08/24
+                    if (t.現場コード != "")
+                    {
+                        r.現場コード = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0'); // 2021/08/16
+                    }
+                    else
+                    {
+                        r.現場コード = "";
+                    }
+
                     r.現場名 = t.現場名;
                     r.出勤簿区分 = global.flgOff;
                     r.開始時 = t.開始時;

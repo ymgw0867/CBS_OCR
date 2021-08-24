@@ -540,7 +540,7 @@ namespace CBS_OCR.xlsData
 
                         objArray[i, 1] = t.日付.ToShortDateString();   // 日付                         
                         objArray[i, 2] = t.現場コード;                 // 現場コード                         
-                        //objArray[i, 3] = t.現場名;                     // 現場名       // 2018/05/31 コメント化                 
+                        objArray[i, 3] = t.現場名;                     // 現場名       // 2018/05/31 コメント化、2021/08/24 コメント撤廃               
                         objArray[i, 4] = global.FLGON;                 // ガソリン単価                        
                         objArray[i, 5] = t.走行距離;                   // 走行距離                    
                         objArray[i, 6] = t.同乗人数;                   // 同乗人数

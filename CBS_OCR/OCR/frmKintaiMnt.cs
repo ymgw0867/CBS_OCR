@@ -1405,7 +1405,16 @@ namespace CBS_OCR.OCR
                 r.部門コード = lblBmnCode.Text;
                 r.部門名 = lblBmnName.Text;
 
-                r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
+                // 2021/08/24
+                if (txtGenbaCode.Text != "")
+                {
+                    r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
+                }
+                else
+                {
+                    r.現場コード = "";   // 2021/08/24
+                }
+
                 r.現場名 = lblGenbaName.Text;
                 r.出勤簿区分 = cmbShubetsu.SelectedIndex;
                 r.開始時 = txtSh.Text.Trim();
@@ -1527,7 +1536,18 @@ namespace CBS_OCR.OCR
                     r.有休区分 = global.YUKYU_HAN;
                 }
 
-                r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
+                //r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
+
+                // 2021/08/24
+                if (txtGenbaCode.Text != "")
+                {
+                    r.現場コード = txtGenbaCode.Text.PadLeft(global.GENBA_CD_LENGTH, '0');   // 2021/08/16
+                }
+                else
+                {
+                    r.現場コード = "";   // 2021/08/24
+                }
+
                 r.現場名 = lblGenbaName.Text;
                 r.開始時 = txtSh.Text.Trim();
                 r.開始分 = txtSm.Text.Trim();

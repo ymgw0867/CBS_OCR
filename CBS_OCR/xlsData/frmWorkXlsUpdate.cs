@@ -249,10 +249,23 @@ namespace CBS_OCR.xlsData
                                 sheet.Cell(20 + r, 4).Value = "";
                             }
 
-                            sheet.Cell(20 + r,  5).Style.NumberFormat.Format = "00000000";   // 書式 2017/12/26
+                            sheet.Cell(20 + r,  5).Style.NumberFormat.Format = "000000000";   // 書式 2017/12/26, 9桁 2021/08/24
                             sheet.Cell(20 + r,  5).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;  // セル横位置 2017/12/26
 
-                            sheet.Cell(20 + r,  5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16 global.GENBA_CD_LENGTH
+
+                            // 2021/08/24
+                            if (t.現場コード != "")
+                            {
+                                sheet.Cell(20 + r, 5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16 global.GENBA_CD_LENGTH
+                            }
+                            else
+                            {
+                                sheet.Cell(20 + r, 5).Value = "";   // 2021/08/24
+                            }
+
+                            // コメント化：2021/08/24
+                            //sheet.Cell(20 + r,  5).Value = t.現場コード.PadLeft(global.GENBA_CD_LENGTH, '0');     // 2021/08/16 global.GENBA_CD_LENGTH
+                            
                             sheet.Cell(20 + r,  6).Value = t.現場名;
                             sheet.Cell(20 + r,  7).Value = t.交通区分;
 
