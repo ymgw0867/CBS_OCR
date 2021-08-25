@@ -236,13 +236,24 @@ namespace CBS_OCR.xlsData
                             sheet.Cell(2, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');    // 2021/08/17 global.SHAIN_CD_LENGTH
                             sheet.Cell(2, 3).Value = t.社員名;
 
-                            sheet.Cell(20 + r, 2).Style.NumberFormat.Format = "0000000";  // 書式 2017/12/26
-                            sheet.Cell(20 + r, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') + t.単価振分区分;     // 2021/08/17 global.SHAIN_CD_LENGTH
+                            sheet.Cell(20 + r, 2).Style.NumberFormat.Format = "000000";  // 書式 2017/12/26、6桁：2021/08/25
+
+                            // 社員番号：コメント化 2021/08/25
+                            //sheet.Cell(20 + r, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0') + t.単価振分区分;     // 2021/08/17 global.SHAIN_CD_LENGTH
+                            sheet.Cell(20 + r, 2).Value = t.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');   // 2021/08/25 単価振り分け区分付加しない
                             sheet.Cell(20 + r, 3).Value = t.日付.ToShortDateString();
 
                             if (dt != t.日付)
                             {
-                                sheet.Cell(20 + r, 4).Value = "○";
+                                if (t.有休区分 == global.YUKYU_ZEN)
+                                {
+                                    // 有休（全日）のときは「○」なし：2021/08/25
+                                    sheet.Cell(20 + r, 4).Value = "";
+                                }
+                                else
+                                {
+                                    sheet.Cell(20 + r, 4).Value = "○";
+                                }
                             }
                             else
                             {
@@ -1316,14 +1327,14 @@ namespace CBS_OCR.xlsData
         ///----------------------------------------------------------------------
         private void getShainZanTm(CBSDataSet1 dts, int sNum, clsXlsShotei[] cs, int yy, int mm)
         {
-            int monthSho = 0;       // 月間所定時間合計
-            int monthTm = 0;        // 月間実働時間合計
-            int monthZan = 0;       // 月間残業時間の合計
-            int HouteiNai = 0;      // 法定内労働時間の合計
+            int monthSho     = 0;   // 月間所定時間合計
+            int monthTm      = 0;   // 月間実働時間合計
+            int monthZan     = 0;   // 月間残業時間の合計
+            int HouteiNai    = 0;   // 法定内労働時間の合計
 
-            int weekSho = 0;    // 週間所定時間合計
-            int weekTm = 0;     // 週間実働時間合計
-            int weekZan = 0;    // 一日の残業時間の合計
+            int weekSho      = 0;   // 週間所定時間合計
+            int weekTm       = 0;   // 週間実働時間合計
+            int weekZan      = 0;   // 一日の残業時間の合計
             int weekWorkDays = 0;   // 週間勤務日合計
 
             // 当月の法定労働時間
@@ -1354,9 +1365,9 @@ namespace CBS_OCR.xlsData
             DateTime tDt = startDt;
             int iDX = 0;
 
-            monthTm = 0;        // 月間実働時間リセット
-            monthZan = 0;       // 月間残業時間リセット
-            HouteiNai = 0;      // 法定内労働時間をリセット  
+            monthTm   = 0;  // 月間実働時間リセット
+            monthZan  = 0;  // 月間残業時間リセット
+            HouteiNai = 0;  // 法定内労働時間をリセット  
 
             // 対象月の限り実行する
             while (tDt.Month == global.cnfMonth)
@@ -1367,9 +1378,9 @@ namespace CBS_OCR.xlsData
                 // 週単位の始まりの日か？(1日, 8日, 15日, 22日, 29日のとき)
                 if ((tDt.Day % 7) == 1)
                 {
-                    weekSho = 0;        // 週間所定時間合計をリセット
-                    weekTm = 0;         // 週間実労時間をリセット
-                    weekZan = 0;        // 週残業時間の合計をリセット
+                    weekSho      = 0;   // 週間所定時間合計をリセット
+                    weekTm       = 0;   // 週間実労時間をリセット
+                    weekZan      = 0;   // 週残業時間の合計をリセット
                     weekWorkDays = 0;   // 週間勤務日合計をリセット
 
                     DateTime minDate = tDt;
@@ -1396,8 +1407,8 @@ namespace CBS_OCR.xlsData
                     }
                 }
 
-                // 該当日の出勤簿データがないときは次の日付へ
-                if (!dts.共通勤務票.Any(a => a.社員番号 == sNum && a.日付 == tDt))
+                // 該当日の出勤簿データがないときは次の日付へ ※有休全日以外を条件に追加 2021/08/25
+                if (!dts.共通勤務票.Any(a => a.社員番号 == sNum && a.日付 == tDt && a.有休区分 != global.YUKYU_ZEN))
                 {
                     iDX++;
                     continue;
@@ -1538,8 +1549,8 @@ namespace CBS_OCR.xlsData
                         // 時間外データ・日所定時間更新
                         jikangaiUpdate(dts, sNum, tDt, zan, 0, sH, sM, ss.iDNum);
 
-                        weekZan += zan;
-                        monthZan += zan; // 2018/06/06コメント化
+                        weekZan  += zan;
+                        monthZan += zan;
 
                         // 当日の法定内労働時間から週間の時間外労働を減算する
                         if (sHoutei >= zan)
@@ -1595,7 +1606,7 @@ namespace CBS_OCR.xlsData
                         jikangaiUpdate(dts, sNum, tDt, zan, 0, null, null, ss.iDNum);
 
                         //weekZan += zan;   2018/06/05コメント化
-                        monthZan += zan;  // 2018/06/06コメント化
+                        monthZan += zan;
                     }
 
                     // 法定内労働時間を加算
@@ -1901,9 +1912,18 @@ namespace CBS_OCR.xlsData
         private int getWorkDays(CBSDataSet1 dts, DateTime _dt, int _sNum)
         {
             DateTime dt = _dt.AddDays(-6);
-            
-            int w = dts.共通勤務票.Where(a => a.日付 >= dt && a.日付 <= _dt && a.社員番号 == _sNum).Select(a => new { sDate = a.日付 }).Distinct().Count();
 
+            // コメント化 2021/08/25
+            //int w = dts.共通勤務票.Where(a => a.日付 >= dt && a.日付 <= _dt && a.社員番号 == _sNum).Select(a => new { sDate = a.日付 }).Distinct().Count();
+
+            // 有給休暇（全日）は対象外：2021/08/25
+            int w = dts.共通勤務票.Where(a => a.日付 >= dt && a.日付 <= _dt && a.社員番号 == _sNum && a.有休区分 != 1).Select(a => new { sDate = a.日付 }).Distinct().Count();
+
+            // debug
+            string sdt = dt.Year + "/" + dt.Month + "/" + dt.Day;
+            string edt = _dt.Year + "/" + _dt.Month + "/" + _dt.Day;
+
+            System.Diagnostics.Debug.WriteLine(sdt + " " + edt + " " + _sNum + " " + w);
             return w;
         }
 
