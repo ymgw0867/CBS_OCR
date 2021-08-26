@@ -101,6 +101,12 @@ namespace CBS_OCR.OCR
             txtWm.AutoSize = false;
             txtWm.Height   = 26;
 
+            txtShoteiH.AutoSize = false;
+            txtShoteiH.Height   = 26;
+
+            txtShoteiM.AutoSize = false;
+            txtShoteiM.Height   = 26;
+
             txtKm.AutoSize = false;
             txtKm.Height   = 26;
 
@@ -321,6 +327,8 @@ namespace CBS_OCR.OCR
             txtRm.Text        = string.Empty;
             txtWh.Text        = string.Empty;
             txtWm.Text        = string.Empty;
+            txtShoteiH.Text   = string.Empty;
+            txtShoteiM.Text   = string.Empty;
 
             cmbTankakbn.SelectedIndex = -1;
 
@@ -728,14 +736,16 @@ namespace CBS_OCR.OCR
             txtGenbaCode.Text         = s.現場コード;
             //lblGenbaName.Text = s.現場名;
             
-            txtSh.Text = s.開始時;
-            txtSm.Text = s.開始分;
-            txtEh.Text = s.終業時;
-            txtEm.Text = s.終業分;
-            txtRh.Text = s.休憩時;
-            txtRm.Text = s.休憩分;
-            txtWh.Text = s.実働時;
-            txtWm.Text = s.実働分;
+            txtSh.Text      = s.開始時;
+            txtSm.Text      = s.開始分;
+            txtEh.Text      = s.終業時;
+            txtEm.Text      = s.終業分;
+            txtRh.Text      = s.休憩時;
+            txtRm.Text      = s.休憩分;
+            txtWh.Text      = s.実働時;
+            txtWm.Text      = s.実働分;
+            txtShoteiH.Text = s.所定時;    // 2021/08/25
+            txtShoteiM.Text = s.所定分;    // 2021/08/25
 
             if (s.単価振分区分 == global.flgOff)
             {
@@ -1425,8 +1435,12 @@ namespace CBS_OCR.OCR
                 r.休憩分 = txtRm.Text.Trim();
                 r.実働時 = txtWh.Text.Trim();
                 r.実働分 = txtWm.Text.Trim();
-                r.所定時 = string.Empty;
-                r.所定分 = string.Empty;
+
+                //r.所定時 = string.Empty;         // 2021/08/26 コメント化
+                //r.所定分 = string.Empty;         // 2021/08/26 コメント化
+                r.所定時 = txtShoteiH.Text.Trim(); // 2021/08/26
+                r.所定分 = txtShoteiM.Text.Trim(); // 2021/08/26
+
                 r.時間外 = global.flgOff;
                 r.休日 = global.flgOff;
                 r.深夜 = global.flgOff;
@@ -1557,6 +1571,9 @@ namespace CBS_OCR.OCR
                 r.休憩分 = txtRm.Text.Trim();
                 r.実働時 = txtWh.Text.Trim();
                 r.実働分 = txtWm.Text.Trim();
+
+                r.所定時 = txtShoteiH.Text.Trim();     // 2021/08/26
+                r.所定分 = txtShoteiM.Text.Trim();     // 2021/08/26
 
                 r.交通手段社用車 = Convert.ToInt32(rbShayou.Checked);
                 r.交通手段自家用車 = Convert.ToInt32(rbJikayousha.Checked);
@@ -1783,6 +1800,14 @@ namespace CBS_OCR.OCR
 
             // 閉じる
             Close();
+        }
+
+        private void txtShoteiM_Leave(object sender, EventArgs e)
+        {
+            if (txtShoteiM.Text != string.Empty)
+            {
+                txtShoteiM.Text = txtShoteiM.Text.PadLeft(2, '0');
+            }
         }
     }
 }

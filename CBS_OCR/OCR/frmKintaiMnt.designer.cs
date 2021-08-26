@@ -89,6 +89,10 @@
             this.lblChushi = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.cmbYukyu = new System.Windows.Forms.ComboBox();
+            this.txtShoteiM = new System.Windows.Forms.TextBox();
+            this.txtShoteiH = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +106,7 @@
             this.txtSNum.MaxLength = 6;
             this.txtSNum.Name = "txtSNum";
             this.txtSNum.Size = new System.Drawing.Size(80, 31);
-            this.txtSNum.TabIndex = 1;
+            this.txtSNum.TabIndex = 4;
             this.txtSNum.Text = "098765";
             this.txtSNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSNum.TextChanged += new System.EventHandler(this.txtSNum_TextChanged);
@@ -174,7 +178,7 @@
             this.txtGenbaCode.MaxLength = 9;
             this.txtGenbaCode.Name = "txtGenbaCode";
             this.txtGenbaCode.Size = new System.Drawing.Size(80, 31);
-            this.txtGenbaCode.TabIndex = 4;
+            this.txtGenbaCode.TabIndex = 8;
             this.txtGenbaCode.Text = "123456789";
             this.txtGenbaCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtGenbaCode.TextChanged += new System.EventHandler(this.txtGenbaCode_TextChanged);
@@ -186,7 +190,7 @@
             this.lblGenbaName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGenbaName.Location = new System.Drawing.Point(186, 116);
             this.lblGenbaName.Name = "lblGenbaName";
-            this.lblGenbaName.Size = new System.Drawing.Size(650, 29);
+            this.lblGenbaName.Size = new System.Drawing.Size(720, 29);
             this.lblGenbaName.TabIndex = 7;
             this.lblGenbaName.Text = "label8";
             this.lblGenbaName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -200,7 +204,7 @@
             this.txtSh.MaxLength = 2;
             this.txtSh.Name = "txtSh";
             this.txtSh.Size = new System.Drawing.Size(29, 31);
-            this.txtSh.TabIndex = 0;
+            this.txtSh.TabIndex = 1;
             this.txtSh.Text = "09";
             this.txtSh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -214,7 +218,7 @@
             this.txtSm.MaxLength = 2;
             this.txtSm.Name = "txtSm";
             this.txtSm.Size = new System.Drawing.Size(29, 31);
-            this.txtSm.TabIndex = 1;
+            this.txtSm.TabIndex = 2;
             this.txtSm.Text = "09";
             this.txtSm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -238,7 +242,7 @@
             this.txtEm.MaxLength = 2;
             this.txtEm.Name = "txtEm";
             this.txtEm.Size = new System.Drawing.Size(29, 31);
-            this.txtEm.TabIndex = 3;
+            this.txtEm.TabIndex = 4;
             this.txtEm.Text = "09";
             this.txtEm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtEm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -253,7 +257,7 @@
             this.txtEh.MaxLength = 2;
             this.txtEh.Name = "txtEh";
             this.txtEh.Size = new System.Drawing.Size(29, 31);
-            this.txtEh.TabIndex = 2;
+            this.txtEh.TabIndex = 3;
             this.txtEh.Text = "09";
             this.txtEh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtEh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -276,7 +280,7 @@
             this.txtRm.MaxLength = 2;
             this.txtRm.Name = "txtRm";
             this.txtRm.Size = new System.Drawing.Size(29, 31);
-            this.txtRm.TabIndex = 5;
+            this.txtRm.TabIndex = 6;
             this.txtRm.Text = "09";
             this.txtRm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -291,7 +295,7 @@
             this.txtRh.MaxLength = 2;
             this.txtRh.Name = "txtRh";
             this.txtRh.Size = new System.Drawing.Size(29, 31);
-            this.txtRh.TabIndex = 4;
+            this.txtRh.TabIndex = 5;
             this.txtRh.Text = "09";
             this.txtRh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -309,12 +313,12 @@
             // 
             this.txtWm.Font = new System.Drawing.Font("游ゴシック", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtWm.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txtWm.Location = new System.Drawing.Point(328, 54);
+            this.txtWm.Location = new System.Drawing.Point(324, 54);
             this.txtWm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtWm.MaxLength = 2;
             this.txtWm.Name = "txtWm";
             this.txtWm.Size = new System.Drawing.Size(29, 31);
-            this.txtWm.TabIndex = 7;
+            this.txtWm.TabIndex = 8;
             this.txtWm.Text = "09";
             this.txtWm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtWm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -324,12 +328,12 @@
             // 
             this.txtWh.Font = new System.Drawing.Font("游ゴシック", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtWh.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txtWh.Location = new System.Drawing.Point(286, 54);
+            this.txtWh.Location = new System.Drawing.Point(282, 54);
             this.txtWh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtWh.MaxLength = 2;
             this.txtWh.Name = "txtWh";
             this.txtWh.Size = new System.Drawing.Size(29, 31);
-            this.txtWh.TabIndex = 6;
+            this.txtWh.TabIndex = 7;
             this.txtWh.Text = "09";
             this.txtWh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtWh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
@@ -337,7 +341,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(310, 58);
+            this.label13.Location = new System.Drawing.Point(306, 58);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(24, 20);
             this.label13.TabIndex = 78;
@@ -360,10 +364,10 @@
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.label25);
             this.panel1.Controls.Add(this.label27);
-            this.panel1.Location = new System.Drawing.Point(415, 151);
+            this.panel1.Location = new System.Drawing.Point(485, 151);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(421, 111);
-            this.panel1.TabIndex = 8;
+            this.panel1.TabIndex = 10;
             // 
             // cmbKoutsuukbn
             // 
@@ -539,20 +543,20 @@
             // chkYakan
             // 
             this.chkYakan.AutoSize = true;
-            this.chkYakan.Location = new System.Drawing.Point(421, 278);
+            this.chkYakan.Location = new System.Drawing.Point(491, 278);
             this.chkYakan.Name = "chkYakan";
             this.chkYakan.Size = new System.Drawing.Size(208, 24);
-            this.chkYakan.TabIndex = 10;
+            this.chkYakan.TabIndex = 11;
             this.chkYakan.Text = "交通誘導警備夜間単価対象";
             this.chkYakan.UseVisualStyleBackColor = true;
             // 
             // chkHoshou
             // 
             this.chkHoshou.AutoSize = true;
-            this.chkHoshou.Location = new System.Drawing.Point(658, 278);
+            this.chkHoshou.Location = new System.Drawing.Point(728, 278);
             this.chkHoshou.Name = "chkHoshou";
             this.chkHoshou.Size = new System.Drawing.Size(178, 24);
-            this.chkHoshou.TabIndex = 11;
+            this.chkHoshou.TabIndex = 12;
             this.chkHoshou.Text = "交通誘導警備保証対象";
             this.chkHoshou.UseVisualStyleBackColor = true;
             // 
@@ -563,7 +567,7 @@
             this.chkChushi.Location = new System.Drawing.Point(247, 19);
             this.chkChushi.Name = "chkChushi";
             this.chkChushi.Size = new System.Drawing.Size(61, 25);
-            this.chkChushi.TabIndex = 5;
+            this.chkChushi.TabIndex = 1;
             this.chkChushi.Text = "中止";
             this.chkChushi.UseVisualStyleBackColor = true;
             this.chkChushi.CheckedChanged += new System.EventHandler(this.chkChushi_CheckedChanged);
@@ -574,7 +578,7 @@
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("游ゴシック", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(15, 270);
+            this.label3.Location = new System.Drawing.Point(18, 276);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 28);
             this.label3.TabIndex = 105;
@@ -585,10 +589,10 @@
             // 
             this.lblKoyoukbn.BackColor = System.Drawing.Color.White;
             this.lblKoyoukbn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblKoyoukbn.Location = new System.Drawing.Point(806, 50);
+            this.lblKoyoukbn.Location = new System.Drawing.Point(876, 50);
             this.lblKoyoukbn.Name = "lblKoyoukbn";
             this.lblKoyoukbn.Size = new System.Drawing.Size(30, 29);
-            this.lblKoyoukbn.TabIndex = 108;
+            this.lblKoyoukbn.TabIndex = 6;
             this.lblKoyoukbn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblKoyoukbn.TextChanged += new System.EventHandler(this.lblKoyoukbn_TextChanged);
             this.lblKoyoukbn.Click += new System.EventHandler(this.lblKoyoukbn_Click);
@@ -598,7 +602,7 @@
             this.label29.BackColor = System.Drawing.Color.PowderBlue;
             this.label29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label29.ForeColor = System.Drawing.Color.Black;
-            this.label29.Location = new System.Drawing.Point(714, 50);
+            this.label29.Location = new System.Drawing.Point(784, 50);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(93, 29);
             this.label29.TabIndex = 107;
@@ -610,12 +614,12 @@
             // 
             this.txtMaisu.Font = new System.Drawing.Font("游ゴシック", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtMaisu.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txtMaisu.Location = new System.Drawing.Point(806, 16);
+            this.txtMaisu.Location = new System.Drawing.Point(876, 16);
             this.txtMaisu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaisu.MaxLength = 8;
             this.txtMaisu.Name = "txtMaisu";
             this.txtMaisu.Size = new System.Drawing.Size(30, 31);
-            this.txtMaisu.TabIndex = 6;
+            this.txtMaisu.TabIndex = 3;
             this.txtMaisu.Text = "09";
             this.txtMaisu.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMaisu.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
@@ -626,7 +630,7 @@
             this.label31.BackColor = System.Drawing.SystemColors.Control;
             this.label31.Font = new System.Drawing.Font("游ゴシック", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label31.ForeColor = System.Drawing.Color.Black;
-            this.label31.Location = new System.Drawing.Point(743, 16);
+            this.label31.Location = new System.Drawing.Point(810, 15);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(66, 29);
             this.label31.TabIndex = 109;
@@ -642,7 +646,7 @@
             this.label18.ForeColor = System.Drawing.Color.Black;
             this.label18.Location = new System.Drawing.Point(-1, -1);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(394, 23);
+            this.label18.Size = new System.Drawing.Size(464, 23);
             this.label18.TabIndex = 0;
             this.label18.Text = "出退勤時刻";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -650,6 +654,10 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtShoteiM);
+            this.panel2.Controls.Add(this.txtShoteiH);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.txtWm);
             this.panel2.Controls.Add(this.txtWh);
             this.panel2.Controls.Add(this.label22);
@@ -669,15 +677,15 @@
             this.panel2.Controls.Add(this.label11);
             this.panel2.Location = new System.Drawing.Point(15, 151);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(394, 111);
-            this.panel2.TabIndex = 7;
+            this.panel2.Size = new System.Drawing.Size(464, 111);
+            this.panel2.TabIndex = 9;
             // 
             // label22
             // 
             this.label22.BackColor = System.Drawing.SystemColors.Control;
             this.label22.Font = new System.Drawing.Font("游ゴシック", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label22.ForeColor = System.Drawing.Color.Black;
-            this.label22.Location = new System.Drawing.Point(284, 27);
+            this.label22.Location = new System.Drawing.Point(280, 27);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(73, 29);
             this.label22.TabIndex = 109;
@@ -725,10 +733,10 @@
             this.btnUpdate.BackColor = System.Drawing.Color.PowderBlue;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("游ゴシック", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnUpdate.Location = new System.Drawing.Point(538, 325);
+            this.btnUpdate.Location = new System.Drawing.Point(608, 325);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(96, 29);
-            this.btnUpdate.TabIndex = 12;
+            this.btnUpdate.TabIndex = 13;
             this.btnUpdate.Text = "登録(&U)";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click_1);
@@ -738,10 +746,10 @@
             this.btnRtn.BackColor = System.Drawing.Color.PowderBlue;
             this.btnRtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRtn.Font = new System.Drawing.Font("游ゴシック", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnRtn.Location = new System.Drawing.Point(740, 325);
+            this.btnRtn.Location = new System.Drawing.Point(810, 325);
             this.btnRtn.Name = "btnRtn";
             this.btnRtn.Size = new System.Drawing.Size(96, 29);
-            this.btnRtn.TabIndex = 14;
+            this.btnRtn.TabIndex = 15;
             this.btnRtn.Text = "戻る(&E)";
             this.btnRtn.UseVisualStyleBackColor = false;
             this.btnRtn.Click += new System.EventHandler(this.btnRtn_Click_1);
@@ -769,7 +777,7 @@
             this.cmbShubetsu.Location = new System.Drawing.Point(107, 83);
             this.cmbShubetsu.Name = "cmbShubetsu";
             this.cmbShubetsu.Size = new System.Drawing.Size(80, 28);
-            this.cmbShubetsu.TabIndex = 3;
+            this.cmbShubetsu.TabIndex = 7;
             this.cmbShubetsu.SelectedIndexChanged += new System.EventHandler(this.cmbShubetsu_SelectedIndexChanged);
             // 
             // cmbTankakbn
@@ -779,10 +787,10 @@
             this.cmbTankakbn.Items.AddRange(new object[] {
             "1",
             "2"});
-            this.cmbTankakbn.Location = new System.Drawing.Point(83, 270);
+            this.cmbTankakbn.Location = new System.Drawing.Point(86, 276);
             this.cmbTankakbn.Name = "cmbTankakbn";
             this.cmbTankakbn.Size = new System.Drawing.Size(43, 28);
-            this.cmbTankakbn.TabIndex = 9;
+            this.cmbTankakbn.TabIndex = 10;
             // 
             // label6
             // 
@@ -803,7 +811,7 @@
             this.lblBmnCode.Location = new System.Drawing.Point(403, 50);
             this.lblBmnCode.Name = "lblBmnCode";
             this.lblBmnCode.Size = new System.Drawing.Size(47, 29);
-            this.lblBmnCode.TabIndex = 117;
+            this.lblBmnCode.TabIndex = 5;
             this.lblBmnCode.Text = "001";
             this.lblBmnCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -813,7 +821,7 @@
             this.lblBmnName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBmnName.Location = new System.Drawing.Point(449, 50);
             this.lblBmnName.Name = "lblBmnName";
-            this.lblBmnName.Size = new System.Drawing.Size(259, 29);
+            this.lblBmnName.Size = new System.Drawing.Size(329, 29);
             this.lblBmnName.TabIndex = 118;
             this.lblBmnName.Text = "label5";
             this.lblBmnName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -823,7 +831,7 @@
             this.lblChushi.BackColor = System.Drawing.SystemColors.Control;
             this.lblChushi.Font = new System.Drawing.Font("游ゴシック", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblChushi.ForeColor = System.Drawing.Color.Red;
-            this.lblChushi.Location = new System.Drawing.Point(14, 322);
+            this.lblChushi.Location = new System.Drawing.Point(13, 322);
             this.lblChushi.Name = "lblChushi";
             this.lblChushi.Size = new System.Drawing.Size(303, 29);
             this.lblChushi.TabIndex = 119;
@@ -835,10 +843,10 @@
             this.button1.BackColor = System.Drawing.Color.PowderBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("游ゴシック", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(639, 325);
+            this.button1.Location = new System.Drawing.Point(709, 325);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 29);
-            this.button1.TabIndex = 120;
+            this.button1.TabIndex = 14;
             this.button1.Text = "削除(&D)";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
@@ -850,16 +858,66 @@
             "出勤",
             "有給休暇：全日",
             "有給休暇：半日"});
-            this.cmbYukyu.Location = new System.Drawing.Point(349, 84);
+            this.cmbYukyu.Location = new System.Drawing.Point(349, 16);
             this.cmbYukyu.Name = "cmbYukyu";
             this.cmbYukyu.Size = new System.Drawing.Size(150, 28);
-            this.cmbYukyu.TabIndex = 122;
+            this.cmbYukyu.TabIndex = 2;
+            // 
+            // txtShoteiM
+            // 
+            this.txtShoteiM.Font = new System.Drawing.Font("游ゴシック", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtShoteiM.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtShoteiM.Location = new System.Drawing.Point(411, 54);
+            this.txtShoteiM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtShoteiM.MaxLength = 2;
+            this.txtShoteiM.Name = "txtShoteiM";
+            this.txtShoteiM.Size = new System.Drawing.Size(29, 31);
+            this.txtShoteiM.TabIndex = 10;
+            this.txtShoteiM.Text = "09";
+            this.txtShoteiM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtShoteiM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
+            this.txtShoteiM.Leave += new System.EventHandler(this.txtShoteiM_Leave);
+            // 
+            // txtShoteiH
+            // 
+            this.txtShoteiH.Font = new System.Drawing.Font("游ゴシック", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtShoteiH.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtShoteiH.Location = new System.Drawing.Point(369, 54);
+            this.txtShoteiH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtShoteiH.MaxLength = 2;
+            this.txtShoteiH.Name = "txtShoteiH";
+            this.txtShoteiH.Size = new System.Drawing.Size(29, 31);
+            this.txtShoteiH.TabIndex = 9;
+            this.txtShoteiH.Text = "09";
+            this.txtShoteiH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtShoteiH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSNum_KeyPress);
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.Font = new System.Drawing.Font("游ゴシック", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(369, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 29);
+            this.label7.TabIndex = 113;
+            this.label7.Text = "所定時間";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(392, 58);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(24, 20);
+            this.label10.TabIndex = 112;
+            this.label10.Text = "：";
             // 
             // frmKintaiMnt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 365);
+            this.ClientSize = new System.Drawing.Size(921, 365);
             this.Controls.Add(this.cmbYukyu);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblChushi);
@@ -970,5 +1028,9 @@
         private System.Windows.Forms.Label lblChushi;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cmbYukyu;
+        private System.Windows.Forms.TextBox txtShoteiM;
+        private System.Windows.Forms.TextBox txtShoteiH;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label10;
     }
 }

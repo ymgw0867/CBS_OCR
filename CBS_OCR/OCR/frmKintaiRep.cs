@@ -110,6 +110,7 @@ namespace CBS_OCR.OCR
         string colYakan       = "c20";
         string colHoshou      = "c21";
         string colYukyu       = "c22";
+        string colShotei      = "c23";  // 所定時間 2021/08/26
 
         ///---------------------------------------------------------------------
         /// <summary>
@@ -159,6 +160,8 @@ namespace CBS_OCR.OCR
                 tempDGV.Columns.Add(colETime,       "終了時刻");
                 tempDGV.Columns.Add(colRestTime,    "休憩時間");
                 tempDGV.Columns.Add(colWorkTime,    "実働時間");
+                tempDGV.Columns.Add(colShotei,      "所定時間");    // 2021/08/26
+
                 tempDGV.Columns.Add(colShayou,      "社用車");
                 tempDGV.Columns.Add(colJikayou,     "自家用車");
                 tempDGV.Columns.Add(colKoutsukikan, "交通機関");
@@ -194,6 +197,7 @@ namespace CBS_OCR.OCR
                 tempDGV.Columns[colYakan].Width       = 70;
                 tempDGV.Columns[colTankakbn].Width    = 70;
                 tempDGV.Columns[colMemo].Width        = 120;
+                tempDGV.Columns[colShotei].Width      = 70;     // 2021/08/26
 
                 //tempDGV.Columns[colGenbaName].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -215,6 +219,7 @@ namespace CBS_OCR.OCR
                 tempDGV.Columns[colShubetsu].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
                 tempDGV.Columns[colTankakbn].DefaultCellStyle.Alignment    = DataGridViewContentAlignment.MiddleCenter;
                 tempDGV.Columns[colYukyu].DefaultCellStyle.Alignment       = DataGridViewContentAlignment.MiddleCenter; // 2021/08/23
+                tempDGV.Columns[colShotei].DefaultCellStyle.Alignment      = DataGridViewContentAlignment.MiddleCenter; // 2021/08/26
                 //tempDGV.Columns[colMemo].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 tempDGV.Columns[colID].Visible = false;
@@ -255,7 +260,7 @@ namespace CBS_OCR.OCR
 
                 // 罫線
                 tempDGV.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
-                tempDGV.CellBorderStyle = DataGridViewCellBorderStyle.None;
+                tempDGV.CellBorderStyle                      = DataGridViewCellBorderStyle.None;
 
             }
             catch (Exception e)
@@ -317,13 +322,14 @@ namespace CBS_OCR.OCR
                     //g[colRestTime, g.Rows.Count - 1].Value = t.休憩時.PadLeft(2, '0') + ":" + t.休憩分.PadLeft(2, '0');
                     //g[colWorkTime, g.Rows.Count - 1].Value = t.実働時.PadLeft(2, '0') + ":" + t.実働分.PadLeft(2, '0');
 
-                    g[colSTime, g.Rows.Count - 1].Value    = getHhMm(t.開始時, t.開始分);
-                    g[colETime, g.Rows.Count - 1].Value    = getHhMm(t.終業時, t.終業分);
+                    g[colSTime,    g.Rows.Count - 1].Value = getHhMm(t.開始時, t.開始分);
+                    g[colETime,    g.Rows.Count - 1].Value = getHhMm(t.終業時, t.終業分);
                     g[colRestTime, g.Rows.Count - 1].Value = getHhMm(t.休憩時, t.休憩分);
                     g[colWorkTime, g.Rows.Count - 1].Value = getHhMm(t.実働時, t.実働分);
+                    g[colShotei,   g.Rows.Count - 1].Value = getHhMm(t.所定時, t.所定分); // 2021/08/26
 
-                    g[colKm, g.Rows.Count - 1].Value      = t.走行距離;
-                    g[colDoujyou, g.Rows.Count - 1].Value = t.同乗人数;
+                    g[colKm,       g.Rows.Count - 1].Value = t.走行距離;
+                    g[colDoujyou,  g.Rows.Count - 1].Value = t.同乗人数;
 
                     if (t.交通手段社用車 == global.flgOn)
                     {
