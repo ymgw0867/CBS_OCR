@@ -20,9 +20,6 @@ namespace CBS_OCR
         public Form1()
         {
             InitializeComponent();
-
-            // 環境設定項目よみこみ
-            Config.getConfig cnf = new Config.getConfig();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -760,6 +757,10 @@ namespace CBS_OCR
                 button15.Enabled = false;
             }
 
+            // 2021/08/05
+            mdbAlter();
+            mdbAlter_local();   // 2021/08/06
+
             if (!IsConfigCsv(out global.csvShainPath, out global.csvGenbaPath, out global.csvBmnPath))
             {
                 MessageBox.Show("CSVマスターのパスが環境設定に登録されていません。環境設定画面で登録してください", "マスターパス未登録", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -769,12 +770,10 @@ namespace CBS_OCR
             // CSVデータをDataSetに読み込む : 2021/08/06
             global.dtShain = Utility.readCSV(global.csvShainPath, global.csvShainColumn);
             global.dtGenba = Utility.readCSV(global.csvGenbaPath, global.csvGenbaColumn);
-            global.dtBmn   = Utility.readCSV(global.csvBmnPath,   global.csvBmnColumn);
+            global.dtBmn   = Utility.readCSV(global.csvBmnPath,   global.csvBmnColumn);            
 
-            // 2021/08/05
-            mdbAlter();
-            mdbAlter_local();   // 2021/0806
-
+            // 環境設定項目よみこみ
+            Config.getConfig cnf = new Config.getConfig();
         }
 
         ///----------------------------------------------------------------------------

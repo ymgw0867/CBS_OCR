@@ -298,20 +298,28 @@ namespace CBS_OCR.OCR
 
                     g[colDate, g.Rows.Count - 1].Value = t.日付.ToShortDateString();
 
-                    // 有給休暇：2021/08/23
-                    if (t.有休区分 == global.flgOff)
+                    // 有休区分：2021/08/30
+                    if (t.Is有休区分Null())
                     {
                         g[colYukyu, g.Rows.Count - 1].Value = "";
                     }
-                    else if (t.有休区分 == global.YUKYU_ZEN)
+                    else
                     {
-                        // 有給休暇：全日
-                        g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_ZEN_MARK;
-                    }
-                    else if (t.有休区分 == global.YUKYU_HAN)
-                    {
-                        // 半休
-                        g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_HAN_MARK;
+                        // 有給休暇：2021/08/23
+                        if (t.有休区分 == global.flgOff)
+                        {
+                            g[colYukyu, g.Rows.Count - 1].Value = "";
+                        }
+                        else if (t.有休区分 == global.YUKYU_ZEN)
+                        {
+                            // 有給休暇：全日
+                            g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_ZEN_MARK;
+                        }
+                        else if (t.有休区分 == global.YUKYU_HAN)
+                        {
+                            // 半休
+                            g[colYukyu, g.Rows.Count - 1].Value = global.YUKYU_HAN_MARK;
+                        }
                     }
 
                     g[colGenbaCode, g.Rows.Count - 1].Value = t.現場コード;

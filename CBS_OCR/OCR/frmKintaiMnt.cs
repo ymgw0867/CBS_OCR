@@ -716,19 +716,27 @@ namespace CBS_OCR.OCR
 
             dateTimePicker1.Value = s.日付;
             txtSNum.Text = s.社員番号.ToString().PadLeft(global.SHAIN_CD_LENGTH, '0');
-
-            // 有給休暇：2021/08/23
-            if (s.有休区分 == global.flgOff)
+            
+            // 有休区分：2021/08/30
+            if (s.Is有休区分Null())
             {
                 cmbYukyu.SelectedIndex = 0;
             }
-            else if (s.有休区分 == global.YUKYU_ZEN)
+            else
             {
-                cmbYukyu.SelectedIndex = 1;
-            }
-            else if (s.有休区分 == global.YUKYU_HAN)
-            {
-                cmbYukyu.SelectedIndex = 2;
+                // 有給休暇：2021/08/23
+                if (s.有休区分 == global.flgOff)
+                {
+                    cmbYukyu.SelectedIndex = 0;
+                }
+                else if (s.有休区分 == global.YUKYU_ZEN)
+                {
+                    cmbYukyu.SelectedIndex = 1;
+                }
+                else if (s.有休区分 == global.YUKYU_HAN)
+                {
+                    cmbYukyu.SelectedIndex = 2;
+                }
             }
 
             cmbShubetsu.SelectedIndex = s.出勤簿区分;

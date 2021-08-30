@@ -245,14 +245,22 @@ namespace CBS_OCR.xlsData
 
                             if (dt != t.日付)
                             {
-                                if (t.有休区分 == global.YUKYU_ZEN)
+                                // 有休区分がNullのとき：2021/08/30
+                                if (t.Is有休区分Null())
                                 {
-                                    // 有休（全日）のときは「○」なし：2021/08/25
-                                    sheet.Cell(20 + r, 4).Value = "";
+                                    sheet.Cell(20 + r, 4).Value = "○";
                                 }
                                 else
                                 {
-                                    sheet.Cell(20 + r, 4).Value = "○";
+                                    if (t.有休区分 == global.YUKYU_ZEN)
+                                    {
+                                        // 有休（全日）のときは「○」なし：2021/08/25
+                                        sheet.Cell(20 + r, 4).Value = "";
+                                    }
+                                    else
+                                    {
+                                        sheet.Cell(20 + r, 4).Value = "○";
+                                    }
                                 }
                             }
                             else

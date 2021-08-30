@@ -373,7 +373,6 @@ namespace CBS_OCR.common
                 {
                     MessageBox.Show(ex.Message);
                 }
-
             }
         }
 
