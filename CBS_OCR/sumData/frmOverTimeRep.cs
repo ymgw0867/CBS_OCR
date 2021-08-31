@@ -232,7 +232,7 @@ namespace CBS_OCR.sumData
                     // 部門指定
                     if (sBmnCode != string.Empty)
                     {
-                        if (sBmnCode != t.sBmn)
+                        if (sBmnCode.PadLeft(global.BMN_CD_LENGTH, '0') != t.sBmn.PadLeft(global.BMN_CD_LENGTH, '0'))  // 2021/08/31
                         {
                             continue;
                         }
