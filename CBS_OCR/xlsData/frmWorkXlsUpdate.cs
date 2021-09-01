@@ -1147,7 +1147,7 @@ namespace CBS_OCR.xlsData
                     }
 
                     item.時間外 = 0;
-                    item.休日 = 0;
+                    item.休日 　= 0;
                     item.更新年月日 = DateTime.Now;
                 }
 
@@ -1206,7 +1206,7 @@ namespace CBS_OCR.xlsData
                     foreach (var item in dts.共通勤務票.Where(a => a.日付 >= dt && a.社員番号 == t.sNum))
                     {
                         sBumon = item.部門名; // 2019/03/23
-                        sName = item.社員名; // 2019/03/23
+                        sName  = item.社員名; // 2019/03/23
 
                         // 更新対象部門か調べる：2019/03/23
                         isSel = isSelectBumon(item.部門名);
@@ -1249,7 +1249,7 @@ namespace CBS_OCR.xlsData
                         getShainZanTm(dts, t.sNum, cs, yy, mm);
                     }
 
-                    // パートタイマー時間外労働時間計算
+                    // パートタイマー、交通誘導警備 時間外労働時間計算
                     if (shaFullPart == global.flgOn)
                     {
                         // 警備識別用に雇用区分を追加　2019/02/22
@@ -1690,9 +1690,9 @@ namespace CBS_OCR.xlsData
         ///----------------------------------------------------------------------
         private void getPartZanTm(CBSDataSet1 dts, int sNum, clsXlsShotei[] cs, int yy, int mm, int koyou)
         {
-            int weekWorkDays = 0;   // 週間勤務日数
-            int weekWorkTimes = 0;  // 週間所定時間   2018/02/14
-            bool firstFriday = true;
+            int  weekWorkDays  = 0;     // 週間勤務日数
+            int  weekWorkTimes = 0;     // 週間所定時間   2018/02/14
+            bool firstFriday   = true;
 
             DateTime startDt;
             if (!DateTime.TryParse(global.cnfYear + "/" + global.cnfMonth + "/01", out startDt))
@@ -1742,8 +1742,11 @@ namespace CBS_OCR.xlsData
                 // 2019/02/22
                 if (koyou == global.CATEGORY_YUDOKEIBI)
                 {
-                    // 警備は実働時間　2019/02/24
-                    weekWorkTimes = getLastWorkTimesZitsudou(dts, zDTS, zDTE, sNum);
+                    //// 警備は実働時間　2019/02/24// コメント化：2021/09/01
+                    //weekWorkTimes = getLastWorkTimesZitsudou(dts, zDTS, zDTE, sNum); // コメント化：2021/09/01
+
+                    // 対象となる時間は所定時間が保証されたものか否かで実働または所定となる：2021/09/01
+                    weekWorkTimes = GetLastWorkTimes202109(dts, zDTS, zDTE, sNum);
                 }
                 else
                 {
@@ -1785,7 +1788,8 @@ namespace CBS_OCR.xlsData
                 // 勤務日を加算
                 weekWorkDays++;
 
-                int shotei = 0;     // 2019/02/25
+                int shotei   = 0;   // 2019/02/25 // 一日の所定合計：2021/09/01
+                int zitsurou = 0;   // 一日の実労働合計：2021/09/01
                 int todayZan = 0;   // 2019/03/20 当日残業計
 
                 // 該当日の出勤簿データを取得する
@@ -1794,23 +1798,67 @@ namespace CBS_OCR.xlsData
                     // 当日所定時間 2018/02/14
                     //int shotei = Utility.StrtoInt(Utility.NulltoStr(ss.所定時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.所定分));
 
+                    int wt = 0;
+                    int st = 0;
                     int todayWork = 0;  // 2019/03/20                   
-                    int shotei2 = 0;    // 週加算時間 2019/03/11
+                    int shotei2   = 0;  // 週加算時間 2019/03/11 現場ごとの時間 2021/09/01
                     
                     if (koyou == global.CATEGORY_YUDOKEIBI)
                     {
-                        // 警備は当日実働時間を取得：2019/02/22 
-                        todayWork = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
+                        // 2021/09/01 コメント化
+                        //// 警備は当日実働時間を取得：2019/02/22 
+                        //todayWork = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
 
-                        // ８時間超のとき週加算時間は８時間とする(加算) : 2019/03/20
-                        if (todayWork > global.DAYLIMIT8)
+                        //// ８時間超のとき週加算時間は８時間とする(加算) : 2019/03/20
+                        //if (todayWork > global.DAYLIMIT8)
+                        //{
+                        //    shotei2 = global.DAYLIMIT8;
+                        //}
+                        //else
+                        //{
+                        //    shotei2 = shotei;
+                        //}
+
+                        // 実働時間 2021/09/01
+                        wt = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
+                        
+                        // 所定時間 2021/09/01
+                        st = Utility.StrtoInt(Utility.NulltoStr(ss.所定時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.所定分));
+
+                        // 対象となる時間は所定時間が保証されたものか否かで実働または所定となる：2021/09/01
+                        if (ss.保証有無 == global.flgOn)
                         {
-                            shotei2 = global.DAYLIMIT8;
+                            // 保証所定時間のとき
+                            if (wt < global.DAYLIMIT8)
+                            {
+                                // 実働時間を採用
+                                todayWork = wt;
+                            }
+                            else
+                            {
+                                // 保証所定時間ではないとき所定時間を採用
+                                todayWork = st;
+                            }
                         }
                         else
                         {
-                            shotei2 = shotei;
+                            // 所定時間を採用
+                            todayWork = st;
                         }
+           
+                        //// ８時間超のとき週加算時間は８時間とする(加算) : 2019/03/20
+                        //if (todayWork > global.DAYLIMIT8)
+                        //{
+                        //    shotei2 = global.DAYLIMIT8;
+                        //}
+                        //else
+                        //{
+                        //    shotei2 = shotei;
+                        //}
+
+
+                        //shotei2 = shotei; // コメント化：2021/09/01
+                        shotei2 = todayWork;    // 2021/09/01
                     }
                     else
                     {
@@ -1828,12 +1876,16 @@ namespace CBS_OCR.xlsData
                         }
                         else
                         {
-                            shotei2 = shotei;
+                            //shotei2 = shotei;  // コメント化：2021/09/01
+                            shotei2 = todayWork;    // 2021/09/01
                         }
                     }
 
-                    // 該当日の実労時間　2019/03/20
+                    // 該当日の所定時間　2021/09/01
                     shotei += todayWork;
+
+                    // 該当日の実労時間　2019/03/20
+                    zitsurou += wt;
                     
                     // 休日出勤の調査
                     if (tDt.ToString("ddd") == "金")
@@ -1877,15 +1929,17 @@ namespace CBS_OCR.xlsData
                         ss.所定時 = (toShotei / 60).ToString();
                         ss.所定分 = (toShotei % 60).ToString();
 
-                        zan = weekWorkTimes + shotei - global.WEEKLIMIT40;
+                        zan = weekWorkTimes + shotei - global.WEEKLIMIT40; // (shotei)一日の所定時間を加算：2021/09/01
                     }
                     else
                     {
                         // 一日8時間超のとき 2018/02/14
-                        if (shotei > global.DAYLIMIT8)
+                        // 一日の実労働時間 2021/09/01
+                        if (zitsurou > global.DAYLIMIT8)
                         {
                             //zan = shotei - global.DAYLIMIT8;  // 2019/03/20 コメント化
-                            zan = shotei - global.DAYLIMIT8 - todayZan; // 2019/03/20
+                            //zan = shotei - global.DAYLIMIT8 - todayZan; // 2019/03/20 // コメント化：2021/09/01
+                            zan = zitsurou - global.DAYLIMIT8 - todayZan; // 2021/09/01
                             todayZan += zan;    // 2019/03/20
                         }
                     }
@@ -1902,7 +1956,14 @@ namespace CBS_OCR.xlsData
                     ss.時間外 = zan;
                     ss.休日 = 0;
                     ss.更新年月日 = DateTime.Now;
+
+                    // debug
+                    System.Diagnostics.Debug.WriteLine(tDt.ToShortDateString() + " " + (weekWorkTimes + shotei2) + " " + shotei2 + " " + zitsurou);
+
                 }
+
+                //// debug
+                //System.Diagnostics.Debug.WriteLine(tDt.ToShortDateString() + " " + (weekWorkTimes + shotei2) + " " + shotei2);
 
                 iDX++;
             }
@@ -1952,6 +2013,52 @@ namespace CBS_OCR.xlsData
                 .Sum(a => Utility.StrtoInt(a.所定時) * 60 + Utility.StrtoInt(a.所定分));
 
             return w;
+        }
+
+        ///--------------------------------------------------------------------
+        /// <summary>
+        ///     前月最終週の勤務時間数 : 警備 2021/09/01</summary>
+        /// <param name="dts">
+        ///     CBSDataSet1</param>
+        /// <param name="_dt">
+        ///     基準日</param>
+        /// <returns>
+        ///     実働または所定時間の合計</returns>
+        ///--------------------------------------------------------------------
+        private int GetLastWorkTimes202109(CBSDataSet1 dts, DateTime _dts, DateTime _dte, int _sNum)
+        {
+            int weekWorkTime = 0;
+
+            foreach (var t in dts.共通勤務票.Where(a => a.日付 >= _dts && a.日付 <= _dte && a.社員番号 == _sNum))
+            {
+                // 実働時間
+                int wt = Utility.StrtoInt(Utility.NulltoStr(t.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(t.実働分));
+
+                // 所定時間
+                int st = Utility.StrtoInt(Utility.NulltoStr(t.所定時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(t.所定分));
+
+                if (t.保証有無 == global.flgOn)
+                {
+                    // 保証所定時間のとき
+                    if (wt < global.DAYLIMIT8)
+                    {
+                        // 実働時間を採用
+                        weekWorkTime += wt;
+                    }
+                    else
+                    {
+                        // 保証所定時間ではないとき所定時間を採用
+                        weekWorkTime += st;
+                    }
+                }
+                else
+                {
+                    // 所定時間を採用
+                    weekWorkTime += st;
+                }                
+            }
+
+            return weekWorkTime;
         }
 
         ///--------------------------------------------------------------------
