@@ -131,6 +131,7 @@
     <Compile Include="common\clsShop.cs" />
     <Compile Include="common\clsShukkinbo.cs" />
     <Compile Include="common\clsStaff.cs" />
+    <Compile Include="common\clsWeek40Item.cs" />
     <Compile Include="common\clsXlsShotei.cs" />
     <Compile Include="common\frmComSelect.cs">
       <SubType>Form</SubType>
