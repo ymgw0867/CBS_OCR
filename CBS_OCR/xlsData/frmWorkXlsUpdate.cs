@@ -74,7 +74,7 @@ namespace CBS_OCR.xlsData
                 return;
             }
 
-            Properties.Settings.Default.出勤簿シートパス = txtXlsFolder.Text;
+            Properties.Settings.Default.出勤簿シートパス       = txtXlsFolder.Text;
             Properties.Settings.Default.時間外命令書シートパス = txtXlsFolder2.Text;
 
             // リストビューへ表示
@@ -99,7 +99,7 @@ namespace CBS_OCR.xlsData
             setShoteiYudouKeibi(global.cnfYear, global.cnfMonth);
             setShoteiYudouKeibi_2(global.cnfYear, global.cnfMonth);
 
-            // 時間外労働時間計算
+            // 時間外労働時間計算：2021/09/06
             getZanTime(global.cnfYear, global.cnfMonth, cs);
 
             // 出勤簿シート更新
@@ -1146,8 +1146,8 @@ namespace CBS_OCR.xlsData
                         continue;
                     }
 
-                    item.時間外 = 0;
-                    item.休日 　= 0;
+                    item.時間外     = 0;
+                    item.休日 　    = 0;
                     item.更新年月日 = DateTime.Now;
                 }
 
@@ -1796,9 +1796,8 @@ namespace CBS_OCR.xlsData
                 {
                     // 実働時間 2021/09/01
                     int wt = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
-                    //int st = 0;
-                    int todayWork40 = 0;  // 2019/03/20     // 該当日の週40H対象時間：2021/09/02              
-                    //int shotei2     = 0;  // 週加算時間 2019/03/11 現場ごとの週40H対象時間 2021/09/01
+
+                    int todayWork40 = 0;  // 2019/03/20     // 該当日の週40H対象時間：2021/09/02  
 
                     if (koyou == global.CATEGORY_YUDOKEIBI)
                     {
@@ -1840,7 +1839,7 @@ namespace CBS_OCR.xlsData
                         if (weekWorkDays == 7 || (firstFriday && getWorkDays(dts, tDt, sNum) == 7))
                         {
                             int hl = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
-                            ss.休日 = hl;
+                            ss.休日   = hl;
                             ss.時間外 = 0;
 
                             // 所定時間を求める
@@ -1890,8 +1889,8 @@ namespace CBS_OCR.xlsData
                         weekWorkTimes = global.WEEKLIMIT40;
                     }
 
-                    ss.時間外 = zan;
-                    ss.休日 = 0;
+                    ss.時間外     = zan;
+                    ss.休日       = 0;
                     ss.更新年月日 = DateTime.Now;
 
                     // debug
@@ -1941,11 +1940,11 @@ namespace CBS_OCR.xlsData
 
                 clsWeek40Item clsitem = new clsWeek40Item
                 {
-                    dt = t.日付,
-                    saCode = t.社員番号,
-                    workTime = wt,
+                    dt         = t.日付,
+                    saCode     = t.社員番号,
+                    workTime   = wt,
                     shoteiTime = st,
-                    gCount = 0
+                    gCount     = 0
                 };
 
                 cls40.Add(clsitem);
@@ -1954,10 +1953,10 @@ namespace CBS_OCR.xlsData
             var query = cls40.GroupBy(a => a.dt)
                              .Select(b => new
                              {
-                                 date = b.Key,
-                                 worktime = b.Sum(c => c.workTime),
+                                 date       = b.Key,
+                                 worktime   = b.Sum(c => c.workTime),
                                  shoteitime = b.Sum(c => c.shoteiTime),
-                                 gcount = b.Count()
+                                 gcount     = b.Count()
                              });
 
             foreach (var t in query.OrderBy(a => a.date))
@@ -1979,7 +1978,7 @@ namespace CBS_OCR.xlsData
                         break;
                     }
 
-                    if (hosho == global.flgOn)
+                    if (hosho == global.flgOn)  // 保証ありのとき
                     {
                         // 実働時間が8時間未満のとき所定時間は保証とみなす：2021/09/01
                         if (t.worktime < global.DAYLIMIT8)
@@ -1995,7 +1994,7 @@ namespace CBS_OCR.xlsData
                     }
                     else
                     {
-                        // 所定時間を採用
+                        // 保証なしのとき所定時間を採用
                         todayWork40 = t.shoteitime;
                     }
                 }
@@ -2364,7 +2363,7 @@ namespace CBS_OCR.xlsData
 
         ///--------------------------------------------------------------------
         /// <summary>
-        ///     前月最終週の勤務時間数（所定または実働） : 警備 2021/09/01</summary>
+        ///     前月最終週の40H対象時間数（所定または実働） : 警備 2021/09/01</summary>
         /// <param name="dts">
         ///     CBSDataSet1</param>
         /// <param name="_dt">
@@ -2451,43 +2450,6 @@ namespace CBS_OCR.xlsData
                     weekWorkTime += t.shoteitime;
                 }
             }
-
-            //foreach (var t in dts.共通勤務票.Where(a => a.日付 >= _dts && a.日付 <= _dte && a.社員番号 == _sNum).OrderBy(a => a.日付))
-            //{
-            //    // 実働時間
-            //    int wt = Utility.StrtoInt(Utility.NulltoStr(t.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(t.実働分));
-
-            //    // 所定時間
-            //    int st = Utility.StrtoInt(Utility.NulltoStr(t.所定時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(t.所定分));
-
-            //    // 同日複数現場勤務のとき
-            //    if (wdt == t.日付)
-            //    {
-            //        // 所定時間を採用
-            //        weekWorkTime += st;
-            //        continue;
-            //    }
-
-            //    if (t.保証有無 == global.flgOn)
-            //    {
-            //        // 実働時間が8時間未満のとき所定時間は保証とみなす：2021/09/01
-            //        if (wt < global.DAYLIMIT8)
-            //        {
-            //            // 実働時間を採用
-            //            weekWorkTime += wt;
-            //        }
-            //        else
-            //        {
-            //            // 実働時間が8時間以上のとき所定時間は保証ではないため所定時間を採用：2021/09/01
-            //            weekWorkTime += st;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        // 所定時間を採用
-            //        weekWorkTime += st;
-            //    }
-            //}
 
             return weekWorkTime;
         }
