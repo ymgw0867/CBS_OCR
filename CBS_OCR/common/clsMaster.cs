@@ -53,7 +53,8 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-        ///     現場情報をDataTableからclsCsvData.clsCsvGenbaクラスに取得 : 2021/08/10 </summary>
+        ///     現場情報をDataTableからclsCsvData.clsCsvGenbaクラスに取得 : 2021/08/10 
+        ///     ヘッダ名称変更に対応：2021/09/17</summary>
         /// <returns>
         ///     List<clsCsvData.clsCsvGenba>クラス</returns>
         ///-----------------------------------------------------------------------------
@@ -196,7 +197,8 @@ namespace CBS_OCR.common
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-        ///     現場情報をDataTableからclsCsvData.ClsCsvGenbaクラスに取得 : 2021/08/06</summary>
+        ///     現場情報をDataTableからclsCsvData.ClsCsvGenbaクラスに取得 : 2021/08/06
+        ///     ヘッダ名称変更に対応：2021/09/17</summary>
         /// <param name="tID">
         ///     社員コード</param>
         /// <returns>
