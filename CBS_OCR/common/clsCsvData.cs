@@ -47,13 +47,13 @@ namespace CBS_OCR.common
         ///--------------------------------------------------------------
         public class ClsCsvGenba
         {
-            // プロジェクトコード
+            // 現場コード
             public string GENBA_CD { get; set; }
 
-            // プロジェクト名
+            // 現場名
             public string GENBA_NAME { get; set; }
 
-            // プロジェクト略称
+            // 現場略称
             public string GENBA_NAME_SM { get; set; }
 
             // 予定期間（開始）

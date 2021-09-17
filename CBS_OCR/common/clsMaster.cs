@@ -63,15 +63,24 @@ namespace CBS_OCR.common
 
             try
             {
-                DataRow[] rows = data.AsEnumerable().OrderBy(a => a["プロジェクトコード"].ToString()).ToArray();
+                // コメント化 2021/09/17
+                //DataRow[] rows = data.AsEnumerable().OrderBy(a => a["プロジェクトコード"].ToString()).ToArray();
+
+                // 2021/09/17
+                DataRow[] rows = data.AsEnumerable().OrderBy(a => a["現場コード"].ToString()).ToArray();
 
                 foreach (var t in rows)
                 {
                     clsCsvData.ClsCsvGenba cls = new clsCsvData.ClsCsvGenba
                     {
-                        GENBA_CD        = t["プロジェクトコード"].ToString(),
-                        GENBA_NAME      = t["プロジェクト名"].ToString(),
-                        GENBA_NAME_SM   = t["プロジェクト略称"].ToString(),
+                        // 2021/09/17 コメント化
+                        //GENBA_CD        = t["プロジェクトコード"].ToString(),
+                        //GENBA_NAME      = t["プロジェクト名"].ToString(),
+                        //GENBA_NAME_SM = t["プロジェクト略称"].ToString(),
+
+                        GENBA_CD        = t["現場コード"].ToString(),    // 2021/09/17
+                        GENBA_NAME      = t["現場名"].ToString(),        // 2021/09/17  
+                        GENBA_NAME_SM   = t["現場略称"].ToString(),      // 2021/09/17
                         START_DATE      = t["予定期間（開始）"].ToString(),
                         END_DATE        = t["予定期間（終了）"].ToString(),
                         DELIVERY_DATE   = t["引渡日"].ToString(),
@@ -207,13 +216,22 @@ namespace CBS_OCR.common
                 DELIVERY_DATE   = ""
             };
 
-            DataRow[] rows = data.AsEnumerable().Where(a => a["プロジェクトコード"].ToString().PadLeft(global.GENBA_CD_LENGTH, '0') == tID).ToArray();
+            // 2021/09/17 コメント化
+            //DataRow[] rows = data.AsEnumerable().Where(a => a["プロジェクトコード"].ToString().PadLeft(global.GENBA_CD_LENGTH, '0') == tID).ToArray();　
+            
+            // 2021/09/17
+            DataRow[] rows = data.AsEnumerable().Where(a => a["現場コード"].ToString().PadLeft(global.GENBA_CD_LENGTH, '0') == tID).ToArray();
 
             foreach (var t in rows)
             {
-                cls.GENBA_CD        = t["プロジェクトコード"].ToString();    // 現場コード
-                cls.GENBA_NAME      = t["プロジェクト名"].ToString();        // 現場名
-                cls.GENBA_NAME_SM   = t["プロジェクト略称"].ToString();    　// 現場名略称
+                // コメント化 2021/09/17
+                //cls.GENBA_CD        = t["プロジェクトコード"].ToString();    // 現場コード
+                //cls.GENBA_NAME      = t["プロジェクト名"].ToString();        // 現場名
+                //cls.GENBA_NAME_SM = t["プロジェクト略称"].ToString();    　// 現場名略称
+
+                cls.GENBA_CD        = t["現場コード"].ToString();    // 2021/09/17
+                cls.GENBA_NAME      = t["現場名"].ToString();        // 2021/09/17
+                cls.GENBA_NAME_SM   = t["現場略称"].ToString();    　// 2021/09/17
                 cls.START_DATE      = t["予定期間（開始）"].ToString();      // 開始日
                 cls.END_DATE        = t["予定期間（終了）"].ToString();      // 終了日
                 cls.COMPLETION_DATE = t["完成日"].ToString();              // 完了日

@@ -757,9 +757,10 @@ namespace CBS_OCR
                 button15.Enabled = false;
             }
 
-            // 2021/08/05
-            mdbAlter();
-            mdbAlter_local();   // 2021/08/06
+            // 2021/09/17 定義変更実施済みのためコメント化
+            //// 2021/08/05
+            //mdbAlter();
+            //mdbAlter_local();   // 2021/08/06
 
             if (!IsConfigCsv(out global.csvShainPath, out global.csvGenbaPath, out global.csvBmnPath))
             {
