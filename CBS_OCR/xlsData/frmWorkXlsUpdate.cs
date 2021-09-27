@@ -1868,7 +1868,8 @@ namespace CBS_OCR.xlsData
                         ss.所定時 = (toShotei / 60).ToString();
                         ss.所定分 = (toShotei % 60).ToString();
 
-                        zan = weekWorkTimes + shotei - global.WEEKLIMIT40; // (shotei)一日の所定時間を加算：2021/09/01
+                        //zan = weekWorkTimes + shotei - global.WEEKLIMIT40; // (shotei) 一日の所定時間を加算：2021/09/01 コメント化：2021/09/27
+                        zan = weekWorkTimes + zitsurou - global.WEEKLIMIT40; // (zitsurou) 一日の実労働時間を加算：2021/09/27
                     }
                     else
                     {
