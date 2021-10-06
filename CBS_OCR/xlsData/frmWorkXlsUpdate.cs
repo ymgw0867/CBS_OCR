@@ -363,8 +363,8 @@ namespace CBS_OCR.xlsData
                             dt = t.日付;
                         }
 
-                        // 有休日数を書き込む：2021/08/20
-                        sheet.Cell(2, 15).Value = yukyu_Totaldays;
+                        // 有休日数を書き込む：2021/08/20  コメント化：2021/10/06
+                        //sheet.Cell(2, 15).Value = yukyu_Totaldays;
 
                         // シートを開放
                         sheet.Dispose();

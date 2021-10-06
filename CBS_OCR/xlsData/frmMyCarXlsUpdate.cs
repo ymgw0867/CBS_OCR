@@ -441,13 +441,15 @@ namespace CBS_OCR.xlsData
             adp.FillByMyCar(dts.共通勤務票, yy, mm);
 
             // エクセルオブジェクト
-            Excel.Application oXls = new Excel.Application();
-            Excel.Workbook oXlsBook = null;
-            Excel.Worksheet oxlsSheet = null;
-            Excel.Range rng = null;
+            Excel.Application oXls      = new Excel.Application();
+            Excel.Workbook    oXlsBook  = null;
+            Excel.Worksheet   oxlsSheet = null;
+            Excel.Range       rng       = null;
+            Excel.Range       rng2      = null;    //2021/10/06
 
             // オブジェクト２次元配列（エクセルシートの内容を受け取る）
-            object[,] objArray = null;
+            object[,] objArray  = null;
+            object[,] objArray2 = null; // 2021/10/06
 
             listBox1.Items.Add("自家用車使用料シートの更新処理を開始します...");
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -526,30 +528,43 @@ namespace CBS_OCR.xlsData
                     oxlsSheet.Unprotect(Properties.Settings.Default.xlsSheetPassWord);  // シート保護解除
 
                     // エクセルシートの内容を２次元配列に取得する
-                    rng = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 28]];
-                    rng.Value2 = "";
-                    objArray = rng.Value2;
+                    // 2021/10/06 ガソリン単価の書き込みをしないようになったため2つのレンジを生成
+                    //rng = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 28]];
+                    rng  = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 25]]; // 日付、現場コード、現場名　2021/10/06
+                    rng2 = oxlsSheet.Range[oxlsSheet.Cells[6, 27], oxlsSheet.Cells[55, 28]]; // 走行距離、同乗人員  2021/10/06
+
+                    rng.Value2  = "";
+                    rng2.Value2 = "";   // 2021/10/06
+
+                    objArray  = rng.Value2;
+                    objArray2 = rng2.Value2;    // 2021/10/06
 
                     int i = 1;
 
                     foreach (var t in dts.共通勤務票.Where(a => a.社員番号 == fNum && a.交通手段自家用車 == global.flgOn).Take(50)
-                        .OrderBy(a => a.日付).ThenBy(a => a.ID))
+                                                   .OrderBy(a => a.日付)
+                                                   .ThenBy(a => a.ID))
                     {
                         oxlsSheet.Cells[4, 11].value = t.日付.ToShortDateString();       // 日付
                         oxlsSheet.Cells[5, 11].value = t.社員名;       // 氏名
 
-                        objArray[i, 1] = t.日付.ToShortDateString();   // 日付                         
+                        objArray[i, 1] = t.日付.ToShortDateString();  // 日付                         
                         objArray[i, 2] = t.現場コード;                 // 現場コード                         
-                        objArray[i, 3] = t.現場名;                     // 現場名       // 2018/05/31 コメント化、2021/08/24 コメント撤廃               
-                        objArray[i, 4] = global.FLGON;                 // ガソリン単価                        
-                        objArray[i, 5] = t.走行距離;                   // 走行距離                    
-                        objArray[i, 6] = t.同乗人数;                   // 同乗人数
+                        objArray[i, 3] = t.現場名;                     // 現場名       // 2018/05/31 コメント化 → 2021/08/24 コメント撤廃
+           
+                        //objArray[i, 4] = global.FLGON;              // ガソリン単価   // 2021/10/06 コメント化                       
+                        //objArray[i, 5] = t.走行距離;                 // 走行距離      // 2021/10/06 コメント化                   
+                        //objArray[i, 6] = t.同乗人数;                 // 同乗人数      // 2021/10/06 コメント化
+              
+                        objArray2[i, 1] = t.走行距離;                  // 走行距離      // 2021/10/06
+                        objArray2[i, 2] = t.同乗人数;                  // 同乗人数      // 2021/10/06
 
                         i++;
                     }
 
                     // エクセルシートに貼り付け
-                    rng.Value = objArray;
+                    rng.Value  = objArray;
+                    rng2.Value = objArray2; // 2021/10/06
 
                     // ウィンドウを非表示にする
                     oXls.Visible = false;
@@ -611,8 +626,8 @@ namespace CBS_OCR.xlsData
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(oXlsBook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(oXls);
 
-                oXls = null;
-                oXlsBook = null;
+                oXls      = null;
+                oXlsBook  = null;
                 oxlsSheet = null;
 
                 GC.Collect();
