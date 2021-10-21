@@ -1073,6 +1073,9 @@ namespace CBS_OCR.xlsData
                         }                           
                     }
 
+                    string m = t.社員番号.ToString() + " " + t.日付.ToShortDateString() + " " + t.現場名 + " " + t.開始時 + ":" + t.開始分 + " " + t.終業時 + ":" + t.終業分 + " " + t.休憩時 + ":" + t.休憩分 + " " + t.所定時 + ":" + t.所定分;
+                    Debug.WriteLine(m);
+
                     wScode = t.社員番号;
                     wdt = t.日付;
 
@@ -1795,22 +1798,31 @@ namespace CBS_OCR.xlsData
                 foreach (var ss in dts.共通勤務票.Where(a => a.社員番号 == sNum && a.日付 == tDt))
                 {
                     // 実働時間 2021/09/01
-                    int wt = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
+                    //int wt = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分)); // コメント化 2021/10/21
+                    int wt = 0; // 2021/10/21
 
                     int todayWork40 = 0;  // 2019/03/20     // 該当日の週40H対象時間：2021/09/02  
 
                     if (koyou == global.CATEGORY_YUDOKEIBI)
                     {
-                        // 日付が変わったとき実行（同日複数のときは実行しない） 2021/09/06
+                        // 日付が変わったとき実行（同日複数各々のときは実行しない） 2021/09/06
                         if (wDt != tDt)
                         {
-                            todayWork40 = GetToday40Time(dts, sNum, tDt, koyou);
+                            // 2021/10/21 1日の複数勤務を考慮して1日の実労働時間合計(wt)も取得する
+                            todayWork40 = GetToday40Time(dts, sNum, tDt, koyou, out wt);    // out wt 2021/10/21
                         }
 
                         wDt = tDt;
+
+                        // 該当日の実労時間　2021/09/01
+                        //zitsurou += wt;   // コメント化 2021/10/21
+                        zitsurou = wt;     // 2021/10/21
                     }
                     else
                     {
+                        // 実働時間 2021/09/01, 2021/10/21
+                        wt = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
+
                         // パートタイマーも当日実働時間を取得：2019/03/18
                         todayWork40 = Utility.StrtoInt(Utility.NulltoStr(ss.実働時)) * 60 + Utility.StrtoInt(Utility.NulltoStr(ss.実働分));
 
@@ -1824,13 +1836,13 @@ namespace CBS_OCR.xlsData
                             //shotei2 = shotei;  // コメント化：2021/09/01
                             //shotei2 = todayWork40;    // 2021/09/01 コメント化：2021/09/02
                         }
+
+                        // 該当日の実労時間　2021/09/01
+                        zitsurou += wt;   // コメント化 2021/10/21
                     }
 
                     // 該当日の週40H対象時間　2021/09/01
                     shotei += todayWork40;
-
-                    // 該当日の実労時間　2021/09/01
-                    zitsurou += wt;
 
                     // 休日出勤の調査
                     if (tDt.ToString("ddd") == "金")
@@ -1869,7 +1881,13 @@ namespace CBS_OCR.xlsData
                         ss.所定分 = (toShotei % 60).ToString();
 
                         //zan = weekWorkTimes + shotei - global.WEEKLIMIT40; // (shotei) 一日の所定時間を加算：2021/09/01 コメント化：2021/09/27
-                        zan = weekWorkTimes + zitsurou - global.WEEKLIMIT40; // (zitsurou) 一日の実労働時間を加算：2021/09/27
+                        //zan = weekWorkTimes + zitsurou - global.WEEKLIMIT40; // (zitsurou) 一日の実労働時間を加算：2021/09/27 コメント化：2021/10/21
+
+                        // 2021/10/21 1日の複数勤務を考慮して1日の実労働時間合計を加算して40時間超のとき
+                        if ((weekWorkTimes + zitsurou) > global.WEEKLIMIT40)
+                        {
+                            zan = weekWorkTimes + zitsurou - global.WEEKLIMIT40; // (zitsurou) 一日の実労働時間を加算：2021/09/27
+                        }
                     }
                     else
                     {
@@ -1895,7 +1913,7 @@ namespace CBS_OCR.xlsData
                     ss.更新年月日 = DateTime.Now;
 
                     // debug
-                    System.Diagnostics.Debug.WriteLine(tDt.ToShortDateString() + " " + (weekWorkTimes + todayWork40) + " " + todayWork40 + " " + zitsurou);
+                    System.Diagnostics.Debug.WriteLine(sNum + " " + tDt.ToShortDateString() + " " + weekWorkTimes + " " + todayWork40 + " " + zitsurou);
 
                 }
 
@@ -1919,13 +1937,18 @@ namespace CBS_OCR.xlsData
         ///     雇用区分</param>
         /// <returns>
         ///     週40H対象時間</returns>
+        /// <remarks>
+        ///     out zitsu  2021/10/21</remarks>
         ///---------------------------------------------------------------------------------
-        private int GetToday40Time(CBSDataSet1 dts, int sNum, DateTime tDt, int koyou)
+        private int GetToday40Time(CBSDataSet1 dts, int sNum, DateTime tDt, int koyou, out int zitsu)
         {
             int todayWork40 = 0;
+            int todayZitsu  = 0;    // 2021/10/21
+            int shoteiMax = 480;    // 2021/10/21
 
             if (koyou != global.CATEGORY_YUDOKEIBI)  // 交通誘導警備ではないとき
             {
+                zitsu = 0;
                 return 0;
             }
 
@@ -1965,8 +1988,17 @@ namespace CBS_OCR.xlsData
                 // 同日複数現場勤務のとき
                 if (t.gcount > 1)
                 {
-                    // 所定時間を採用
-                    todayWork40 = t.shoteitime;
+                    // 2021/10/21
+                    if (t.worktime < shoteiMax)　// 一日の実労働時間が8時間未満のとき
+                    {
+                        // 実労働時間を採用 2021/08/21
+                        todayWork40 = t.worktime;
+                    }
+                    else
+                    {
+                        // 所定時間を採用
+                        todayWork40 = t.shoteitime;
+                    }
                 }
                 else
                 {
@@ -1999,8 +2031,11 @@ namespace CBS_OCR.xlsData
                         todayWork40 = t.shoteitime;
                     }
                 }
+
+                todayZitsu = t.worktime; // 2021/10/21
             }
 
+            zitsu = todayZitsu; // 2021/10/21
             return todayWork40;
         }
 
