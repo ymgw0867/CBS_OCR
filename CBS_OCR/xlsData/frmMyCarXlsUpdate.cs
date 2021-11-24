@@ -530,8 +530,9 @@ namespace CBS_OCR.xlsData
                     // エクセルシートの内容を２次元配列に取得する
                     // 2021/10/06 ガソリン単価の書き込みをしないようになったため2つのレンジを生成
                     //rng = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 28]];
-                    rng  = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 25]]; // 日付、現場コード、現場名　2021/10/06
-                    rng2 = oxlsSheet.Range[oxlsSheet.Cells[6, 27], oxlsSheet.Cells[55, 28]]; // 走行距離、同乗人員  2021/10/06
+                    //rng = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 25]]; // 日付、現場コード、現場名　2021/10/06　// コメント化 2021/11/24
+                    rng  = oxlsSheet.Range[oxlsSheet.Cells[6, 23], oxlsSheet.Cells[55, 24]];    // 日付、現場コード　2021/11/24
+                    rng2 = oxlsSheet.Range[oxlsSheet.Cells[6, 27], oxlsSheet.Cells[55, 28]];    // 走行距離、同乗人員  2021/10/06
 
                     rng.Value2  = "";
                     rng2.Value2 = "";   // 2021/10/06
@@ -545,12 +546,13 @@ namespace CBS_OCR.xlsData
                                                    .OrderBy(a => a.日付)
                                                    .ThenBy(a => a.ID))
                     {
-                        oxlsSheet.Cells[4, 11].value = t.日付.ToShortDateString();       // 日付
-                        oxlsSheet.Cells[5, 11].value = t.社員名;       // 氏名
+                        // 2021/11/24 コメント化
+                        //oxlsSheet.Cells[4, 11].value = t.日付.ToShortDateString();    // 日付
+                        //oxlsSheet.Cells[5, 11].value = t.社員名;   // 氏名
 
                         objArray[i, 1] = t.日付.ToShortDateString();  // 日付                         
-                        objArray[i, 2] = t.現場コード;                 // 現場コード                         
-                        objArray[i, 3] = t.現場名;                     // 現場名       // 2018/05/31 コメント化 → 2021/08/24 コメント撤廃
+                        objArray[i, 2] = t.現場コード;                // 現場コード                         
+                        //objArray[i, 3] = t.現場名;                  // 現場名   // 2018/05/31 コメント化 → 2021/08/24 コメント撤廃 // コメント化 2021/11/24
            
                         //objArray[i, 4] = global.FLGON;              // ガソリン単価   // 2021/10/06 コメント化                       
                         //objArray[i, 5] = t.走行距離;                 // 走行距離      // 2021/10/06 コメント化                   
