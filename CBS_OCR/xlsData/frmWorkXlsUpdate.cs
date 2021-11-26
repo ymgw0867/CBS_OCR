@@ -1252,7 +1252,7 @@ namespace CBS_OCR.xlsData
                     // 社員・フルタイム時間外労働時間計算
                     if (shaFullPart == global.flgOff)
                     {
-                        getShainZanTm(dts, t.sNum, cs, yy, mm);
+                        getShainZanTm(dts, t.sNum, cs, yy, mm); // 2021/11/26
                     }
 
                     // パートタイマー、交通誘導警備 時間外労働時間計算
@@ -1260,7 +1260,7 @@ namespace CBS_OCR.xlsData
                     {
                         // 警備識別用に雇用区分を追加　2019/02/22
                         //getPartZanTm(dts, t.sNum, cs, yy, mm, koyou);     // コメント化：2021/09/06
-                        getYudoKeibiZanTm2021(dts, t.sNum, cs, yy, mm, koyou);  // 2021/09/06
+                        getYudoKeibiZanTm2021(dts, t.sNum, cs, yy, mm, koyou);  // 2021/09/06 2021/11/26
                     }
 
                     dCnt++;
@@ -1481,20 +1481,22 @@ namespace CBS_OCR.xlsData
                         // 当日所定時間
                         string sH = string.Empty;
                         string sM = string.Empty;
-                        int n = ss.shoTm - ss.wtm;
-                        if (n > 0)
-                        {
-                            if (n < 60)
-                            {
-                                sH = string.Empty;
-                            }
-                            else
-                            {
-                                sH = ((int)(n / 60)).ToString();
-                            }
 
-                            sM = (n % 60).ToString();
-                        }
+                        // 休日出勤のとき当日所定時間は存在しないらしいのでコメント化：2021/11/26
+                        //int n = ss.shoTm - ss.wtm;
+                        //if (n > 0)
+                        //{
+                        //    if (n < 60)
+                        //    {
+                        //        sH = string.Empty;
+                        //    }
+                        //    else
+                        //    {
+                        //        sH = ((int)(n / 60)).ToString();
+                        //    }
+
+                        //    sM = (n % 60).ToString();
+                        //}
 
                         //// debug
                         //if (sNum == 238735)
@@ -1854,14 +1856,18 @@ namespace CBS_OCR.xlsData
                             ss.休日   = hl;
                             ss.時間外 = 0;
 
-                            // 所定時間を求める
-                            if ((weekWorkTimes + todayWork40) > global.WEEKLIMIT40) // 2021/09/02
-                            {
-                                // 週４０時間を超過したとき 2021/09/02
-                                int toShotei = todayWork40 - (weekWorkTimes + todayWork40 - global.WEEKLIMIT40); // 2021/09/02
-                                ss.所定時 = (toShotei / 60).ToString();
-                                ss.所定分 = (toShotei % 60).ToString();
-                            }
+                            // 所定時間を求める : 2021/11/26 コメント化
+                            //if ((weekWorkTimes + todayWork40) > global.WEEKLIMIT40) // 2021/09/02
+                            //{
+                            //    // 週４０時間を超過したとき 2021/09/02
+                            //    int toShotei = todayWork40 - (weekWorkTimes + todayWork40 - global.WEEKLIMIT40); // 2021/09/02
+                            //    ss.所定時 = (toShotei / 60).ToString();
+                            //    ss.所定分 = (toShotei % 60).ToString();
+                            //}
+
+                            // 休日出勤のとき所定時間はないとのこと：2021/11/26
+                            ss.所定時 = global.FLGOFF;
+                            ss.所定分 = global.FLGOFF;
 
                             ss.更新年月日 = DateTime.Now;
                             continue;   // 金曜日で複数勤務のときに対応　2019/03/19
