@@ -261,7 +261,7 @@ namespace CBS_OCR.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("240.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("181.0")]
         public decimal hoshouKijunTime {
             get {
                 return ((decimal)(this["hoshouKijunTime"]));
